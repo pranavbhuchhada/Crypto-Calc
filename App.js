@@ -1,4 +1,6 @@
 import React from 'react';
+import { createstackNavigator } from 'react-navigation';
+//import  SymmetricAlgorithms from './components/Algorithms/SymmetricAlgorithms'
 import { StyleSheet,
   Text,
   View,
@@ -21,17 +23,18 @@ export default function App() {
       </View>
       <ScrollView style={styles.sroller}>
         <View style={styles.cRow}>
-          <Card name="Pranav Bhuchhada"/>
-          <Card name="Stavan Adhyaru"/>
+          <Card name="Symmetric Algorithms" />
+          <Card name="Asymmetric Algorithms"/>
         </View>
         <View style={styles.cRow}>
-          <Card name="Pranav Bhuchhada"/>
-          <Card name="Stavan Adhyaru"/>
+          <Card name="Hashing Algorithms"/>
+          <Card name="Other Algorithms"/>
         </View>
       </ScrollView>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
