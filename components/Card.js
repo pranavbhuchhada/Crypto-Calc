@@ -10,7 +10,7 @@ import {responsiveFontSize,
 export default class Card extends React.Component {
   constructor(props){
     super(props);
-    this.state ={
+    this.state = {
     }
     this.cardStyle = StyleSheet.create({
       card: {
@@ -22,29 +22,28 @@ export default class Card extends React.Component {
       card_text:{
         flex:1,
         width:"100%",
-        fontSize: responsiveFontSize(3),
+        fontSize: responsiveFontSize(2.5),
         textTransform:"uppercase",
-        // fontFamily:"monospace",
         textShadowColor:"black",
-        backgroundColor:"#36382e",
+        backgroundColor:"#4caf50",
         textAlign:"center",
         textAlignVertical:"center",
-        color:"#dadad9"
+        color:"#e0e0e0"
       },
       cImg:{
         flex:2,
-        backgroundColor:"#f06449",
+        backgroundColor:"#FFF",
         justifyContent:"center",
         alignItems:"center"
       },
     });
-  }
-  onPress = ()=>{
+    this.onClick = ()=>{}
+    if(this.props.onPress != undefined) this.onClick = this.props.onPress;
   }
   render() {
     return (
       <View style={{height:responsiveWidth(60),width:responsiveWidth(40),margin:responsiveWidth(5)}}>
-        <TouchableHighlight style = {this.cardStyle.card}  onPressedIn={this.onPressedIn} onPressOut={this.onPressedOut} onPress={this.onPress} activeOpacity = {0.5} underlayColor = {"#F9F9F9"}>
+        <TouchableHighlight style = {this.cardStyle.card} onPress={this.onClick} activeOpacity = {0.5} underlayColor = {"#F9F9F9"}>
           <Animated.View style={{flex:1,width:"100%"}}>
             <View style={this.cardStyle.cImg} >
               <Text style={{fontSize:25,textAlign:"center"}} >Space For Image</Text>
