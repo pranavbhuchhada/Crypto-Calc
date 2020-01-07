@@ -1,35 +1,12 @@
 import React from 'react';
-import {StyleSheet,
+import {
+  StyleSheet,
   View,
-  ScrollView,} from 'react-native';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
-// coustom Imports
+  ScrollView} from 'react-native';
 import Card from './Card';
-
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      flexDirection:"column",
-      backgroundColor: '#e0e0e0',
-    },
-    sroller:{
-      flex:0.85,
-      width:"100%"
-    },
-    cRow:{
-      flexDirection:"row",
-    }
-});
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
-    headerStyle: {
-      backgroundColor: '#087f23',
-    },
-    headerTintColor: '#e0e0e0',
-    headerTitleStyle: {
-      fontSize: responsiveFontSize(3.5),
-    },
   };
   constructor(props){
     super(props);
@@ -56,18 +33,11 @@ class SymmetricAlgorithm extends React.Component{
         </ScrollView>
       </View>
     );
-  }
+  } 
 }
 class AsymmetricAlgorithm extends React.Component{
     static navigationOptions = {
         title: 'Asymmetric Algorithm',
-        headerStyle: {
-            backgroundColor: '#087f23',
-        },
-        headerTintColor: '#e0e0e0',
-        headerTitleStyle: {
-            fontSize: responsiveFontSize(3.5),
-        },
     };
     constructor(props){
         super(props);
@@ -88,13 +58,6 @@ class AsymmetricAlgorithm extends React.Component{
 class HashingAlgorithm extends React.Component{
   static navigationOptions = {
       title: 'Hashing Algorithm',
-      headerStyle: {
-          backgroundColor: '#087f23',
-      },
-      headerTintColor: '#e0e0e0',
-      headerTitleStyle: {
-          fontSize: responsiveFontSize(3.5),
-      },
   };
   constructor(props){
       super(props);
@@ -123,13 +86,6 @@ class HashingAlgorithm extends React.Component{
 class OtherAlgorithm extends React.Component{
   static navigationOptions = {
       title: 'Other Algorithm',
-      headerStyle: {
-          backgroundColor: '#087f23',
-      },
-      headerTintColor: '#e0e0e0',
-      headerTitleStyle: {
-          fontSize: responsiveFontSize(3.5),
-      },
   };
   constructor(props){
       super(props);
@@ -159,8 +115,8 @@ class OtherAlgorithm extends React.Component{
   }
 }
 export {
-    SymmetricAlgorithm,
-    AsymmetricAlgorithm,
-    HashingAlgorithm,
-    OtherAlgorithm
+  SymmetricAlgorithm,
+  AsymmetricAlgorithm,
+  HashingAlgorithm,
+  OtherAlgorithm,
 }
