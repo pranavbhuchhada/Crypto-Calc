@@ -145,7 +145,7 @@ class MultiplicativeCipher extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      key:7,
+      Key:7,
       plaintext:"",
       ciphertext:"",
       isOnPlain:true
@@ -187,9 +187,9 @@ class MultiplicativeCipher extends React.Component{
       if (c.match(/[a-z]/i)) {
         var code = PlainText.charCodeAt(i);
         if ((code >= 65) && (code <= 90))
-          c = String.fromCharCode(((code - 65 + Key) % 26) + 65);
+          c = String.fromCharCode((((code - 65) * Key) % 26) + 65);
         else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode(((code - 97 + Key) % 26) + 97);
+          c = String.fromCharCode((((code - 97) * Key) % 26) + 97);
       }
       output += c;
     }
@@ -216,16 +216,7 @@ class MultiplicativeCipher extends React.Component{
     }
     this.setState({plaintext:output});
   }
-  onSliderChange = (Key)=>{
-    if(this.state.isOnPlain){
-      this.toPlain(this.state.ciphertext,Key);
-      this.toCipher(this.state.plaintext,Key);
-    }
-    else{
-      this.toCipher(this.state.plaintext,Key);
-      this.toPlain(this.state.ciphertext,Key);
-    }
-  }
+  
 
   render(){
       return(
@@ -238,21 +229,21 @@ class MultiplicativeCipher extends React.Component{
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
               autoFocus={true}
-              onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
+              onChangeText={PlainText => this.toCipher(PlainText,this.state.Key)}
               value={this.state.plaintext}
               onFocus={()=>this.state.isOnPlain=true}
             />
             <Picker
-              selectedValue={this.state.PickerValueHolder}
-              onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
+              selectedValue={this.state.Key}
+              onValueChange={(itemValue, itemIndex) => this.setState({Key: itemValue})} >
               <Picker.Item label="1" value={1} />
               <Picker.Item label="3" value={3} />
-              <Picker.Item label="3" value={5} />
-              <Picker.Item label="3" value={7} />
-              <Picker.Item label="3" value={9} />
-              <Picker.Item label="3" value={11} />
-              <Picker.Item label="3" value={15} />
-              <Picker.Item label="3" value={17} />
+              <Picker.Item label="5" value={5} />
+              <Picker.Item label="7" value={7} />
+              <Picker.Item label="9" value={9} />
+              <Picker.Item label="11" value={11} />
+              <Picker.Item label="15" value={15} />
+              <Picker.Item label="17" value={17} />
             </Picker>
             <Text style={{fontSize:responsiveFontSize(3),}}>Cipher Text:</Text>
             <TextInput

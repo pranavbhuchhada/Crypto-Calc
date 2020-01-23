@@ -8,15 +8,15 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-
+import {isPrime,randPrime} from './UtilityFunctions.js';
 class RSACipher extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      p:0,
-      q:0,
-      n:0,
-      phi:0,
+      p:7,
+      q:5,
+      n:35,
+      phi:24,
       e:5,
       d:5,
       plaintext:"",
@@ -90,7 +90,16 @@ class RSACipher extends React.Component{
     
   }
   generatePQ = ()=>{
-    
+    var P = randPrime();
+    var Q = randPrime();
+    while (P==Q) {
+      Q = randPrime();
+    }
+    this.setState({p:P});
+    this.setState({q:Q},()=>{
+        this.setState({n: this.state.p*this.state.q});
+        this.setState({phi: (this.state.p-1)*(this.state.q-1)});    
+    });
   }
   render(){
     return(
@@ -98,19 +107,33 @@ class RSACipher extends React.Component{
        <ScrollView>
          <View style={{flexDirection:"row"}}>
           <TextInput 
+            ref={ref => this.ptext = ref}
             style={this.styles.halfinput}
             placeholder={"Enter prime p"}
             placeholderTextColor={"#909090"}
             keyboardType={"number-pad"}
             onChangeText={ P => this.pChanged(P)}
+            value={this.state.p.toString()}
+            onBlur={()=>{if(!isPrime(this.state.p)){
+              alert("Please Enter a Prime Nuber");
+              this.ptext.focus();
+            }
+            }}
           />
           <View style={{width:responsiveWidth(2)}}></View>
           <TextInput 
+            ref={ref => this.qtext = ref}
             style={this.styles.halfinput}
             placeholder={"Enter prime q"}
             placeholderTextColor={"#909090"}
             keyboardType={"number-pad"}
             onChangeText={Q=>this.qChanged(Q)}
+            value={this.state.q.toString()}
+            onBlur={()=>{if(!isPrime(this.state.q)){
+              alert("Please Enter a Prime Nuber");
+              this.qtext.focus();
+            }
+            }}
           />
         </View>
         <TouchableHighlight style={this.styles.button} onPress={()=>{this.generatePQ()}} underlayColor = {"#0ba82f"}>
@@ -128,7 +151,11 @@ class RSACipher extends React.Component{
           style={this.styles.fullinput}
           placeholder={"Enter e"}
           placeholderTextColor={"#909090"}
-          keyboardType={"number-pad"}/>
+          keyboardType={"number-pad"}
+          onChangeText={(E)=>{
+            this.setState({e:this.filterNumber(E)});
+          }}
+          value={this.state.e.toString()}/>
         <TouchableHighlight style={this.styles.button} onPress={()=>{}} underlayColor = {"#0ba82f"}>
            <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate e</Text>
         </TouchableHighlight>
