@@ -30,10 +30,8 @@ class CeaserCipher extends React.Component{
         height: responsiveHeight(33),
         borderWidth: 1,
         borderColor: '#9E9E9E',
-        // borderRadius: 20 ,
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
-        // margin:responsiveWidth(5)
       },
       cipherout:{
         fontSize:responsiveFontSize(2.5),
