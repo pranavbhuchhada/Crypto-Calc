@@ -8,19 +8,22 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {isPrime,randPrime} from './UtilityFunctions.js';
+import {isPrime,randPrime,gcd,modInverse} from './UtilityFunctions.js';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 class RSACipher extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      p:7,
-      q:5,
-      n:35,
-      phi:24,
-      e:5,
-      d:5,
+      p:"",
+      q:"",
+      n:"",
+      phi:"",
+      e:"",
+      d:"",
       plaintext:"",
-      ciphertext:""
+      ciphertext:"",
+      isOnPlain:true
     };
     this.styles=StyleSheet.create({
       container:{
@@ -72,20 +75,38 @@ class RSACipher extends React.Component{
     }); 
   }
   filterNumber = (text)=>{
+    if(text == "")
+      return "";
     text=text.toString();
     return Number(text.replace(/[^0-9]/g, ''));
   }
   pChanged = (P)=>{
     this.setState({p: this.filterNumber(P)},()=>{
-        this.setState({n: this.state.p*this.state.q});
-        this.setState({phi: (this.state.p-1)*(this.state.q-1)});    
+        if(this.state.p == ""){
+          this.setState({n:0});
+          this.setState({phi:0});
+          this.setState({e:""});
+          this.setState({d:""})    
+        }
+        else{
+          this.setState({n: this.state.p*this.state.q});
+          this.setState({phi: (this.state.p-1)*(this.state.q-1)});    
+        }
     });
     
   }
   qChanged = (Q)=>{
     this.setState({q: this.filterNumber(Q)},()=>{
+      if(this.state.p == ""){
+        this.setState({n:0});
+        this.setState({phi:0});
+        this.setState({e:""});
+        this.setState({d:""})    
+      }
+      else{
         this.setState({n: this.state.p*this.state.q});
         this.setState({phi: (this.state.p-1)*(this.state.q-1)});
+      }
     });
     
   }
@@ -98,13 +119,50 @@ class RSACipher extends React.Component{
     this.setState({p:P});
     this.setState({q:Q},()=>{
         this.setState({n: this.state.p*this.state.q});
-        this.setState({phi: (this.state.p-1)*(this.state.q-1)});    
+        this.setState({phi: (this.state.p-1)*(this.state.q-1)});
+        this.etext.focus();    
     });
+  }
+  generateE = ()=>{
+    for(var i = 2;i<this.state.phi;i++){
+      if(gcd(i,this.state.phi) == 1){
+        this.setState({e:i},()=>{
+          this.dtext.focus();
+        });   
+        return;
+      }
+    }
+    alert("For given value of 'p' and 'q', 'e' does not exists.");
+    this.etext.focus();
+  }
+  generateD = ()=>{
+    var D = modInverse(this.state.e,this.state.phi);
+    if(D){
+      this.setState({d:D});
+    }
+    else{
+      alert("Inverse of the given 'e' does not exists.");
+      this.setState({d:""});
+    }
+  }
+  toCipher = (text)=>{
+    this.setState({plaintext:text});
+    var RSAKey = require('react-native-rsa');
+    var rsa = new RSAKey();
+    var publickey = '{"n": "' + this.state.n.toString(16) + '","e":"'+ this.state.e.toString(16) +'"}';
+    console.log(publickey);
+    rsa.setPublicString(publickey);
+    var originText = 'sample String Value';
+    var encrypted = rsa.encrypt(originText);
+    console.log(encrypted);
+  }
+  toPlain = (text)=>{
+    this.setState({ciphertext:text});
   }
   render(){
     return(
      <View style={this.styles.container}>
-       <ScrollView>
+       <ScrollView ref={ref => this.scroll = ref}>
          <View style={{flexDirection:"row"}}>
           <TextInput 
             ref={ref => this.ptext = ref}
@@ -114,8 +172,9 @@ class RSACipher extends React.Component{
             keyboardType={"number-pad"}
             onChangeText={ P => this.pChanged(P)}
             value={this.state.p.toString()}
-            onBlur={()=>{if(!isPrime(this.state.p)){
+            onBlur={()=>{if( this.state.p!="" && !isPrime(this.state.p)){
               alert("Please Enter a Prime Nuber");
+              this.setState({p:""});
               this.ptext.focus();
             }
             }}
@@ -129,8 +188,9 @@ class RSACipher extends React.Component{
             keyboardType={"number-pad"}
             onChangeText={Q=>this.qChanged(Q)}
             value={this.state.q.toString()}
-            onBlur={()=>{if(!isPrime(this.state.q)){
+            onBlur={()=>{if(this.state.q!="" && !isPrime(this.state.q)){
               alert("Please Enter a Prime Nuber");
+              this.setState({p:""});
               this.qtext.focus();
             }
             }}
@@ -148,6 +208,7 @@ class RSACipher extends React.Component{
           editable={false}
           value={"phi = "+this.state.phi.toString()}/>
         <TextInput 
+          ref={ref => this.etext = ref}
           style={this.styles.fullinput}
           placeholder={"Enter e"}
           placeholderTextColor={"#909090"}
@@ -155,16 +216,37 @@ class RSACipher extends React.Component{
           onChangeText={(E)=>{
             this.setState({e:this.filterNumber(E)});
           }}
-          value={this.state.e.toString()}/>
-        <TouchableHighlight style={this.styles.button} onPress={()=>{}} underlayColor = {"#0ba82f"}>
+          value={this.state.e.toString()}
+          onBlur={()=>{
+            if(this.state.e!="" && gcd(this.state.phi,this.state.e) != 1 || this.state.phi < this.state.e){
+              alert("Please Enter a Number which is relatively prime to phi.");
+              this.setState({e:""});
+              // this.etext.focus();
+            }
+          }}
+          />
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateE()}} underlayColor = {"#0ba82f"}>
            <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate e</Text>
         </TouchableHighlight>
-        <TextInput 
+        <TextInput
+          ref={ref => this.dtext = ref}
           style={this.styles.fullinput}
           placeholder={"Enter d"}
           placeholderTextColor={"#909090"}
-          keyboardType={"number-pad"}/>
-        <TouchableHighlight style={this.styles.button} onPress={()=>{}} underlayColor = {"#0ba82f"}>
+          keyboardType={"number-pad"}
+          onChangeText={(D)=>{
+            this.setState({d:this.filterNumber(D)});
+          }}
+          value={this.state.d.toString()}
+          onBlur={()=>{
+            if( this.state.d!="" && ((this.state.e * this.state.d)%this.state.phi != 1)){
+              alert("Please Enter a 'd' which is multiplicative inverse of 'e'");
+              this.setState({d:""});
+              // this.dtext.focus();
+            }
+          }}
+          />
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateD()}} underlayColor = {"#0ba82f"}>
            <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate d</Text>
         </TouchableHighlight>
         <Text style={{fontSize:responsiveFontSize(3)}}>Plain Text:</Text>
@@ -173,9 +255,9 @@ class RSACipher extends React.Component{
           placeholder={"Type Plain text in here"}
           placeholderTextColor={"#e0e0e0"}
           multiline={true}
-          // onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
-          // value={this.state.plaintext}
-          // onFocus={()=>this.state.isOnPlain=true}
+          onChangeText={PlainText => this.toCipher(PlainText)}
+          value={this.state.plaintext}
+          onFocus={()=>this.state.isOnPlain=true}
         />
         <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
         <TextInput
@@ -183,10 +265,11 @@ class RSACipher extends React.Component{
           placeholder={"Type Cipher text in here"}
           placeholderTextColor={"#e0e0e0"}
           multiline={true}
-          // onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
-          // value={this.state.plaintext}
-          // onFocus={()=>this.state.isOnPlain=true}
+          onChangeText={CipherText => this.toPlain(CipherText)}
+          value={this.state.ciphertext}
+          onFocus={()=>{this.state.isOnPlain=false;this.scroll.scrollToEnd({animated:true});}}
         />
+        <KeyboardSpacer/>
        </ScrollView>
      </View> 
     );

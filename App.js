@@ -53,7 +53,7 @@ class AsymmetricAlgorithm extends React.Component{
             <ScrollView style={styles.sroller}>
             <View style={styles.cRow}>
                 <Card name="Diffie Hellman Cipher" />
-                <Card name="RSA Cipher" onPress = {() => this.props.navigation.navigate('RSACipher')}/>
+                <Card name="RSA" onPress = {() => this.props.navigation.navigate('RSACipher')}/>
             </View>
             </ScrollView>
         </View>

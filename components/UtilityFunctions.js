@@ -14,13 +14,31 @@ function gcd(a,b) {
         a=b;
         b=r;
     }
-    if(a) 
-        return true;
-    else
-        return false;
-
+    return a;
+}
+function extendedGCD(a,b) {
+    var g,x,y;
+    if(a==0){
+        return [b,0,1];
+    }
+    else{
+        [g, y, x] = extendedGCD(b % a, a);
+        return [g, x - Math.floor(b / a) * y, y];
+    }
+}
+function modInverse(a, m) {
+    var g,x,y;
+    [g, x, y] = extendedGCD(a, m)
+    if (g != 1){
+        return 0;
+    }
+    else{
+        return (x % m + m)%m;
+    }
 }
 export{
     randPrime,
-    isPrime
+    isPrime,
+    gcd,
+    modInverse
 }
