@@ -8,7 +8,7 @@ import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
 import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher} from './components/AsymmetricAlgorithms'; 
-
+import {HashingAlgorithm} from './components/HashingAlgorithm';
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
@@ -59,34 +59,6 @@ class AsymmetricAlgorithm extends React.Component{
         </View>
         );
     }
-}
-class HashingAlgorithm extends React.Component{
-  static navigationOptions = {
-      title: 'Hashing Algorithm',
-  };
-  constructor(props){
-      super(props);
-  }
-  render(){
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.sroller}>
-          <View style={styles.cRow}>
-            <Card name="MD-5"/>
-            <Card name="SHA-1"/>
-          </View>
-          <View style={styles.cRow}>
-            <Card name="SHA-224"/>
-            <Card name="SHA-256"/>
-          </View>
-          <View style={styles.cRow}>
-            <Card name="SHA-384"/>
-            <Card name="SHA-512"/>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
 }
 class OtherAlgorithm extends React.Component{
   static navigationOptions = {

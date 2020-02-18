@@ -107,7 +107,7 @@ class CeaserCipher extends React.Component{
               autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
               value={this.state.plaintext}
-              onFocus={()=>this.setState({isOnPlain:false})}
+              onFocus={()=>this.setState({isOnPlain:true})}
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
             <View style={{flexDirection:"row"}}>
