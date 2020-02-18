@@ -6,7 +6,7 @@ import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
-import {CeaserCipher,MultiplicativeCipher} from './components/SymmetricAlgorithms'; 
+import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher} from './components/AsymmetricAlgorithms'; 
 
 class SymmetricAlgorithm extends React.Component{
@@ -25,11 +25,11 @@ class SymmetricAlgorithm extends React.Component{
             <Card name="Multiplicative Cipher" onPress = {() => this.props.navigation.navigate('MultiplicativeCipher')}/>
           </View>
           <View style={styles.cRow}>
-            <Card name="Affine Cipher" />
-            <Card name="AutoKey Cipher" />
+            <Card name="Affine Cipher" onPress = {() => this.props.navigation.navigate('AffineCipher')}/>
+            <Card name="AutoKey Cipher" onPress = {() => this.props.navigation.navigate('AutoKeyCipher')}/>
           </View>
           <View style={styles.cRow}>
-            <Card name="PlayFair Cipher" />
+            <Card name="PlayFair Cipher" onPress = {() => this.props.navigation.navigate('PlayfairCipher')}/>
             <Card name="Vigenere Cipher" />
           </View>
           <View style={styles.cRow}>
@@ -170,7 +170,16 @@ const root = createStackNavigator({
     },
     RSACipher:{
       screen: RSACipher,
-    }
+    },
+    AffineCipher:{
+      screen: AffineCipher,
+    },
+    AutoKeyCipher:{
+     screen: AutoKeyCipher, 
+    },
+    PlayfairCipher:{
+      screen: PlayfairCipher, 
+     }
     
 },
 {
