@@ -64,7 +64,6 @@ class CeaserCipher extends React.Component{
     this.setState({ciphertext:output});
   }
   toPlain = (CipherText,Key)=>{
-    this.scroll.scrollToEnd({animated:true});
     this.setState({ciphertext: CipherText});
     this.setState({key: Key});
     if (Key < 0)
@@ -108,7 +107,7 @@ class CeaserCipher extends React.Component{
               autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
               value={this.state.plaintext}
-              onFocus={()=>this.state.isOnPlain=true}
+              onFocus={()=>this.setState({isOnPlain:false})}
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
             <View style={{flexDirection:"row"}}>
@@ -132,7 +131,7 @@ class CeaserCipher extends React.Component{
               multiline={true}
               onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
               value={this.state.ciphertext}
-              onFocus={()=>this.state.isOnPlain=false}
+              onFocus={()=>{this.setState({isOnPlain:false});this.scroll.scrollToEnd({animated:true});}}
             />
             <KeyboardSpacer/>
           </View>
@@ -257,7 +256,7 @@ class MultiplicativeCipher extends React.Component{
               autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.Key)}
               value={this.state.plaintext}
-              onFocus={()=>this.state.isOnPlain=true}
+              onFocus={()=>this.setState({isOnPlain:true})}
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
             <Picker
@@ -280,7 +279,7 @@ class MultiplicativeCipher extends React.Component{
               multiline={true}
               onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
               value={this.state.ciphertext}
-              onFocus={()=>this.state.isOnPlain=false}
+              onFocus={()=>this.setState({isOnPlain:false})}
             />
             <KeyboardSpacer/>
           </View>
