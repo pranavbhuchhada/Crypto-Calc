@@ -9,6 +9,7 @@ import Card from './components/Card'; // Card Class import
 import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
+import {GCD} from './components/OtherAlgorithms';
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
@@ -62,7 +63,7 @@ class AsymmetricAlgorithm extends React.Component{
 }
 class OtherAlgorithm extends React.Component{
   static navigationOptions = {
-      title: 'Other Algorithm',
+      title: 'Other Algorithms',
   };
   constructor(props){
       super(props);
@@ -72,11 +73,11 @@ class OtherAlgorithm extends React.Component{
       <View style={styles.container}>
         <ScrollView style={styles.sroller}>
           <View style={styles.cRow}>
-            <Card name="GCD Euclidean"/>
-            <Card name="Modulus"/>
+            <Card name="GCD (Greatest common divisor)" onPress = {() => this.props.navigation.navigate('GCD')}/>
+            <Card name="Modulus Operator"/>
           </View>
           <View style={styles.cRow}>
-            <Card name="Prime Number"/>
+            <Card name="Prime Number Checker"/>
             <Card name="Multiplicative Inverse"/>
           </View>
           <View style={styles.cRow}>
@@ -85,6 +86,7 @@ class OtherAlgorithm extends React.Component{
           </View>
           <View style={styles.cRow}>
             <Card name="Square and Multiply"/>
+            <Card name="Primitive Root"/>
           </View>
         </ScrollView>
       </View>
@@ -151,7 +153,10 @@ const root = createStackNavigator({
     },
     PlayfairCipher:{
       screen: PlayfairCipher, 
-     }
+    },
+    GCD:{
+      screen: GCD,
+    }
     
 },
 {
