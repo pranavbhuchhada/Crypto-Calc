@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {gcd} from './UtilityFunctions.js';
+import {gcd,isPrime} from './UtilityFunctions.js';
 
 class GCD extends React.Component{
   constructor(props){
@@ -93,6 +93,150 @@ class GCD extends React.Component{
   }
 }
 
+class Modulas extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      Num1:"",
+      Num2:"",
+      output:""
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      button:{
+        backgroundColor:"#087f23",
+        padding:responsiveWidth(3),
+        marginTop:responsiveWidth(8),
+        marginBottom:responsiveWidth(2),
+        alignSelf:"center",
+        borderRadius:5,
+        justifyContent:"center",
+      },
+      fullinput:{
+        textAlign:"left",
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:0.5,
+        borderRadius:5,
+        borderColor:"#000",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
+      },
+    });
+  }
+  filterNumber = (text)=>{
+    if(text == "" || text == "-")
+      return text;
+    text=text.toString();
+    return Number(text.replace(/[^0-9-]/g, ''));
+  }
+  calculateMOD = ()=>{
+    this.setState({output:this.filterNumber((this.state.Num1%this.state.Num2 + this.state.Num2)%this.state.Num2)});
+  }
+  render(){
+      return(
+        <ScrollView ref={ref => this.scroll = ref}>
+          <View style={this.styles.container}>
+            <TextInput 
+              style={this.styles.fullinput}
+              placeholder={"Dividend"}
+              keyboardType={"numeric"}
+              value={this.state.Num1.toString()}
+              onChangeText={N=>this.setState({Num1:this.filterNumber(N)})}/>
+            <Text style={{alignSelf:"center",fontSize:responsiveFontSize(4),padding:responsiveWidth(5)}}>MOD</Text>
+            <TextInput 
+              style={this.styles.fullinput}
+              placeholder={"Divider"}
+              keyboardType={"numeric"}
+              value={this.state.Num2.toString()}
+              onChangeText={N=>this.setState({Num2:this.filterNumber(N)})}/>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateMOD()}} underlayColor = {"#0ba82f"}>
+                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
+            </TouchableHighlight>
+            <Text style={{
+                color:"blue",
+                fontSize:responsiveFontSize(4),
+                textAlign:"center",
+                marginTop:responsiveHeight(5),
+            }}>Remainder = {this.state.output.toString()}</Text>
+          </View>
+        </ScrollView>
+      );
+  }
+}
+
+class PrimeTest extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      Num:"",
+      output:""
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5),
+      },
+      button:{
+        backgroundColor:"#087f23",
+        padding:responsiveWidth(3),
+        marginTop:responsiveWidth(8),
+        marginBottom:responsiveWidth(2),
+        alignSelf:"center",
+        borderRadius:5,
+        justifyContent:"center",
+      },
+      fullinput:{
+        textAlign:"left",
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:0.5,
+        borderRadius:5,
+        borderColor:"#000",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
+      },
+    });
+  }
+  filterNumber = (text)=>{
+    if(text == "")
+      return text;
+    text=text.toString();
+    return Number(text.replace(/[^0-9]/g, ''));
+  }
+  checkPrime = ()=>{
+    this.setState({output:isPrime(this.state.Num)});
+  }
+  render(){
+    return(
+      <ScrollView ref={ref => this.scroll = ref}>
+        <View style={this.styles.container}>
+          <TextInput 
+            style={this.styles.fullinput}
+            placeholder={"Enter a positive interger"}
+            keyboardType={"numeric"}
+            value={this.state.Num.toString()}
+            onChangeText={N=>this.setState({Num:this.filterNumber(N)},()=>{this.checkPrime();})}/>
+          <Text style={{
+              color:"blue",
+              fontSize:responsiveFontSize(4),
+              textAlign:"center",
+              marginTop:responsiveHeight(5),
+            }}>{this.state.Num == 0?"":(this.state.output?"Prime":"Composite")}</Text>
+        </View>
+      </ScrollView>
+    );
+  }
+}
 export{
-    GCD
+    GCD,
+    Modulas,
+    PrimeTest
 }
