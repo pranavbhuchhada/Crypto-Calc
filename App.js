@@ -6,7 +6,7 @@ import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
-import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher} from './components/SymmetricAlgorithms'; 
+import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher,VigenereCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
 import {GCD,Modulas,PrimeTest} from './components/OtherAlgorithms';
@@ -31,7 +31,7 @@ class SymmetricAlgorithm extends React.Component{
           </View>
           <View style={styles.cRow}>
             <Card name="PlayFair Cipher" onPress = {() => this.props.navigation.navigate('PlayfairCipher')}/>
-            <Card name="Vigenere Cipher" />
+            <Card name="Vigenere Cipher" onPress = {() => this.props.navigation.navigate('VigenereCipher')}/>
           </View>
           <View style={styles.cRow}>
             <Card name="Hill Cipher" />
@@ -81,7 +81,7 @@ class OtherAlgorithm extends React.Component{
             <Card name="Multiplicative Inverse"/>
           </View>
           <View style={styles.cRow}>
-            <Card name="Miller Rabin Algorithm"/>
+            <Card name="Miller Rabin Algorithm" />
             <Card name="Chinese Remainder Theorem"/>
           </View>
           <View style={styles.cRow}>
@@ -154,6 +154,9 @@ const root = createStackNavigator({
     PlayfairCipher:{
       screen: PlayfairCipher, 
     },
+    VigenereCipher:{
+      screen: VigenereCipher, 
+    },
     GCD:{
       screen: GCD,
     },
@@ -163,7 +166,6 @@ const root = createStackNavigator({
     PrimeTest:{
       screen:PrimeTest,
     },
-    
 },
 {
   initialRouteName: 'Home',

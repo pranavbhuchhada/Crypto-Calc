@@ -235,8 +235,9 @@ class PrimeTest extends React.Component{
     );
   }
 }
+
 export{
-    GCD,
-    Modulas,
-    PrimeTest
+  GCD,
+  Modulas,
+  PrimeTest
 }

@@ -605,6 +605,8 @@ class PlayfairCipher extends React.Component{
     super(props);
     this.state={
       key:"",
+      keyword:"",
+      MainKey:"",
       plaintext:"",
       ciphertext:"",
       isOnPlain:true
@@ -642,44 +644,52 @@ class PlayfairCipher extends React.Component{
     });
   }
   toCipher = (PlainText,Key)=>{
+    this.scroll.scrollToEnd({animated:true});
     this.setState({plaintext: PlainText});
     this.setState({key: Key});
-    if (Key < 0)
-      return caesarShift(PlainText, Key + 26);
-    var output = '';
-    for (var i = 0; i < PlainText.length; i ++) {
-      var c = PlainText[i];
-      if (c.match(/[a-z]/i)) {
-        var code = PlainText.charCodeAt(i);
-        if ((code >= 65) && (code <= 90))
-          c = String.fromCharCode(((code - 65 + Key) % 26) + 65);
-        else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode(((code - 97 + Key) % 26) + 97);
+    var k_adjust ="";
+    var flag = false;
+    k_adjust = k_adjust + key[0];
+    for(var i=0;i<key.length;i++){
+      for(var j=0;j<k_adjust.length;j++){
+        if(key[i]==k_adjust[j]){
+          flag = true;
+        }
       }
-      output += c;
+      if(flag == false){
+        k_adjust = k_adjust + key[i];
+      }
+      flag = false;
     }
-    this.setState({ciphertext:output});
+    this.state.keyword=k_adjust;
+
+    flag=true;
+    var current="";
+    this.state.MainKey=this.state.keyword;
+    for(var i=0;i<26;i++){
+      current = fromCharCode(i+97);
+      if(current=="j"){
+        continue;
+      }
+      for( var j=0;j<this.state.keyword.length;j++){
+        if(current == this.state.keyword[j]){
+          flag = false;
+          break;
+        }
+      }
+      if(flag){
+        this.state.MainKey = this.state.MainKey+current; 
+      }
+      flag=true;
+    }
+
+    
+
   }
   toPlain = (CipherText,Key)=>{
     this.scroll.scrollToEnd({animated:true});
     this.setState({ciphertext: CipherText});
     this.setState({key: Key});
-    if (Key < 0)
-      return caesarShift(CipherText, Key + 26);
-    var output = '';
-    for (var i = 0; i < CipherText.length; i ++) {
-      var c = CipherText[i];
-      if (c.match(/[a-z]/i)) {
-        var code = CipherText.charCodeAt(i);
-        if ((code >= 65) && (code <= 90)){
-          c = String.fromCharCode((((code - 65 - Key) % 26)+26)%26 + 65);
-        }
-        else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode((((code - 97 - Key) % 26)+26)%26 + 97);
-      }
-      output += c;
-    }
-    this.setState({plaintext:output});
   }
   onSliderChange = (Key)=>{
     if(this.state.isOnPlain){
@@ -709,12 +719,9 @@ class PlayfairCipher extends React.Component{
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
             <TextInput
-              style = {this.styles.keyinput}
-              placeholderTextColor={"#e0e0e0"}
-              autoFocus={true}
-              onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
-              onFocus={()=>this.state.isOnPlain=true}
-              value={this.state.key}
+            style={this.styles.keyinput}
+            multiline={true}
+            onChangeText={(key)=>this.toCipher(this.state.plaintext,key)}
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>Cipher Text:</Text>
             <TextInput
@@ -732,10 +739,171 @@ class PlayfairCipher extends React.Component{
       );
   }
 }
+class VigenereCipher extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      key:"",
+      plaintext:"",
+      ciphertext:"",
+      isOnPlain:true
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      textarea:{
+        textAlign:"center",
+        height: responsiveHeight(33),
+        borderWidth: 1,
+        borderColor: '#9E9E9E',
+        backgroundColor : "#FFFFFF",
+        fontSize:responsiveFontSize(2.5)
+      },
+      cipherout:{
+        fontSize:responsiveFontSize(2.5),
+        color:"#909090"
+      },
+      keyinput:{
+        textAlign:"left",
+        height: responsiveHeight(5),
+        borderWidth: 1,
+        borderColor: '#9E9E9E',
+        backgroundColor : "#FFFFFF",
+        fontSize:responsiveFontSize(2.5)
+      },
+      slider:{
+        marginTop:responsiveHeight(2.5),
+        marginBottom:responsiveHeight(2.5),
+        width:responsiveWidth(85)
+      }
+    });
+  }
+  toCipher = (PlainText,key)=>{
+    this.scroll.scrollToEnd({animated:true});
+    this.setState({plaintext: PlainText});
+    this.setState({key: key});
+    var output = "";
+    for (var i = 0, j = 0; i < PlainText.length; i++) {
+      if (PlainText[i].match(/[a-z]/i)){
+      var c = PlainText.charCodeAt(i);
+      var temp=j%(key.length);
+   
+      if ((c >= 65) && (c <= 90)) {        
+        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
+        output += String.fromCharCode((c - 65 + key.charCodeAt(temp)-65) % 26 + 65);
+        }
+        else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
+          output += String.fromCharCode((c - 65 + key.charCodeAt(temp)-97) % 26 + 65);
+        }
+        j++;
+      } else if ((c >= 97) && (c <= 122)) {
+        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
+          output += String.fromCharCode((c - 97 + key.charCodeAt(temp)-65) % 26 + 97);
+          }
+          else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
+            output += String.fromCharCode((c - 97 + key.charCodeAt(temp)-97) % 26 +97);
+          }
+          j++;
+      } else {
+        output += input.charAt(i);
+      }
+    }
+  }
+    this.setState({ciphertext:output});
+
+  }
+  toPlain = (CipherText,key)=>{
+    this.scroll.scrollToEnd({animated:true});
+    this.setState({ciphertext: CipherText});
+    this.setState({key: key});
+    var output = "";
+    for (var i = 0, j = 0; i < CipherText.length; i++) {
+      if (CipherText[i].match(/[a-z]/i)){
+      var c = CipherText.charCodeAt(i);
+      var temp=j%(key.length);
+      if ((c >= 65) && (c <= 90)) {        
+        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
+        output += String.fromCharCode((c - 65 - key.charCodeAt(temp)) % 26 + 65);
+        }
+        else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
+          output += String.fromCharCode((c - 65 - key.charCodeAt(temp)) % 26 + 65);
+        }
+        j++;
+      } else if ((c >= 97) && (c <= 122)) {
+        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
+          output += String.fromCharCode((c - 97 - key.charCodeAt(temp)) % 26 + 97);
+          }
+          else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
+            output += String.fromCharCode((c - 97 - key.charCodeAt(temp)) % 26 +97);
+          }
+          j++;
+      } else {
+        output += input.charAt(i);
+      }
+    }
+    else{
+      output +=CipherText[i];
+    }
+  }
+    this.setState({plaintext:output});
+
+  }
+  onSliderChange = (Key)=>{
+    if(this.state.isOnPlain){
+      // this.toPlain(this.state.ciphertext,Key);
+      this.toCipher(this.state.plaintext,Key);
+    }
+    else{
+      // this.toCipher(this.state.plaintext,Key);
+      this.toPlain(this.state.ciphertext,Key);
+    }
+  }
+
+
+  render(){
+      return(
+        <ScrollView ref={ref => this.scroll = ref}>
+          <View style={this.styles.container}>
+            <Text style={{fontSize:responsiveFontSize(3)}}>Plain Text:</Text>
+            <TextInput
+              style={this.styles.textarea}
+              placeholder={"Type Plain text in here"}
+              placeholderTextColor={"#e0e0e0"}
+              multiline={true}
+              autoFocus={true}
+              onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
+              value={this.state.plaintext}
+              onFocus={()=>{this.setState({isOnPlain:true});}}
+            />
+            <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
+            <TextInput
+            style={this.styles.keyinput}
+            multiline={true}
+            onChangeText={(key)=>this.toCipher(this.state.plaintext,key)}
+            />
+            <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
+            <TextInput
+              style={this.styles.textarea}
+              placeholder={"Type Cipher text in here"}
+              placeholderTextColor={"#e0e0e0"}
+              multiline={true}
+              onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
+              value={this.state.ciphertext}
+              onFocus={()=>{this.setState({isOnPlain:false});}}
+            />
+            <KeyboardSpacer/>
+          </View>
+        </ScrollView>
+      );
+  }
+}
 export{
     CeaserCipher,
     MultiplicativeCipher,
     AffineCipher,
     AutoKeyCipher,
-    PlayfairCipher
+    PlayfairCipher,
+    VigenereCipher
 }
