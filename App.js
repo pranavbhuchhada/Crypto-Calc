@@ -9,7 +9,7 @@ import Card from './components/Card'; // Card Class import
 import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
-import {GCD,Modulas,PrimeTest} from './components/OtherAlgorithms';
+import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots} from './components/OtherAlgorithms';
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
@@ -78,15 +78,15 @@ class OtherAlgorithm extends React.Component{
           </View>
           <View style={styles.cRow}>
             <Card name="Prime Test" onPress = {() => this.props.navigation.navigate('PrimeTest')}/>
-            <Card name="Multiplicative Inverse"/>
+            <Card name="Modular Inverse" onPress = {() => this.props.navigation.navigate('ModularInverse')}/>
           </View>
           <View style={styles.cRow}>
-            <Card name="Miller Rabin Algorithm"/>
+            <Card name="Primitive Root" onPress = {() => this.props.navigation.navigate('PrimitiveRoots')}/>
             <Card name="Chinese Remainder Theorem"/>
           </View>
           <View style={styles.cRow}>
             <Card name="Square and Multiply"/>
-            <Card name="Primitive Root"/>
+            
           </View>
         </ScrollView>
       </View>
@@ -163,7 +163,12 @@ const root = createStackNavigator({
     PrimeTest:{
       screen:PrimeTest,
     },
-    
+    ModularInverse:{
+      screen:ModularInverse,
+    },
+    PrimitiveRoots:{
+      screen:PrimitiveRoots,
+    },
 },
 {
   initialRouteName: 'Home',

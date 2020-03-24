@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {gcd,isPrime} from './UtilityFunctions.js';
+import {gcd,isPrime,modInverse} from './UtilityFunctions.js';
 
 class GCD extends React.Component{
   constructor(props){
@@ -169,7 +169,86 @@ class Modulas extends React.Component{
       );
   }
 }
-
+class ModularInverse extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      domain:"",
+      num:"",
+      output:""
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      button:{
+        backgroundColor:"#087f23",
+        padding:responsiveWidth(3),
+        marginTop:responsiveWidth(8),
+        marginBottom:responsiveWidth(2),
+        alignSelf:"center",
+        borderRadius:5,
+        justifyContent:"center",
+      },
+      fullinput:{
+        textAlign:"left",
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:0.5,
+        borderRadius:5,
+        borderColor:"#000",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
+      },
+    });
+  }
+  filterNumber = (text)=>{
+    if(text == "" || text == "-")
+      return text;
+    text=text.toString();
+    return Number(text.replace(/[^0-9-]/g, ''));
+  }
+  calculateInverse = ()=>{
+    let x = modInverse(this.state.num,this.state.domain);
+    if(x){
+      this.setState({output:this.filterNumber(x)});
+    }else{
+      this.setState({output:"Not Possible"});
+    }
+  }
+  render(){
+      return(
+        <ScrollView ref={ref => this.scroll = ref}>
+          <View style={this.styles.container}>
+            <TextInput 
+              style={this.styles.fullinput}
+              placeholder={"Domain"}
+              keyboardType={"numeric"}
+              value={this.state.domain.toString()}
+              onChangeText={N=>this.setState({domain:this.filterNumber(N)})}/>
+            <TextInput 
+              style={this.styles.fullinput}
+              placeholder={"Number"}
+              keyboardType={"numeric"}
+              value={this.state.num.toString()}
+              onChangeText={N=>this.setState({num:this.filterNumber(N)})}/>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateInverse()}} underlayColor = {"#0ba82f"}>
+                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
+            </TouchableHighlight>
+            <Text style={{
+                color:"blue",
+                fontSize:responsiveFontSize(4),
+                textAlign:"center",
+                marginTop:responsiveHeight(5),
+            }}>Modular Inverse = {this.state.output.toString()}</Text>
+          </View>
+        </ScrollView>
+      );
+  }
+}
 class PrimeTest extends React.Component{
   constructor(props){
     super(props);
@@ -235,8 +314,83 @@ class PrimeTest extends React.Component{
     );
   }
 }
+class PrimitiveRoots extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      num:"",
+      output:""
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      button:{
+        backgroundColor:"#087f23",
+        padding:responsiveWidth(3),
+        marginTop:responsiveWidth(8),
+        marginBottom:responsiveWidth(2),
+        alignSelf:"center",
+        borderRadius:5,
+        justifyContent:"center",
+      },
+      fullinput:{
+        textAlign:"left",
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:0.5,
+        borderRadius:5,
+        borderColor:"#000",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
+      },
+    });
+  }
+  filterNumber = (text)=>{
+    if(text == "" || text == "-")
+      return text;
+    text=text.toString();
+    return Number(text.replace(/[^0-9-]/g, ''));
+  }
+  calculateRoot = ()=>{
+    if(isPrime(this.state.num)){
+      
+    }else{
+      alert("Please enter a prime number");
+    }
+  }
+  render(){
+      return(
+        <ScrollView>
+          <View style={this.styles.container}>
+            <TextInput 
+              style={this.styles.fullinput}
+              placeholder={"Number"}
+              keyboardType={"numeric"}
+              value={this.state.num.toString()}
+              autoFocus={true}
+              onChangeText={N=>this.setState({num:this.filterNumber(N)})}/>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateRoot()}} underlayColor = {"#0ba82f"}>
+                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
+            </TouchableHighlight>
+            <Text style={{
+                color:"blue",
+                fontSize:responsiveFontSize(4),
+                textAlign:"center",
+                marginTop:responsiveHeight(5),
+            }}>{this.state.output.toString()}</Text>
+          </View>
+        </ScrollView>
+      );
+  }
+}
 export{
     GCD,
     Modulas,
-    PrimeTest
+    PrimeTest,
+    ModularInverse,
+    PrimitiveRoots
 }
