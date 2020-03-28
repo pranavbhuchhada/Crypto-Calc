@@ -36,9 +36,44 @@ function modInverse(a, m) {
         return (x % m + m)%m;
     }
 }
+function powerMod(base, exponent, modulus) {
+    if (modulus === 1) return 0;
+    var result = 1;
+    base = base % modulus;
+    while (exponent > 0) {
+        if (exponent % 2 === 1)  //odd number
+            result = (result * base) % modulus;
+        exponent = exponent >> 1; //divide by 2
+        base = (base * base) % modulus;
+    }
+    return result;
+}
+function eqSet(as, bs) {
+    if (as.size !== bs.size) return false;
+    for (var a of as) if (!bs.has(a)) return false;
+    return true;
+}
+function primitiveRoots(modulo){
+    var required_set = new Set();
+    var primitive_set = new Set();
+    for (let i = 1; i < modulo; i++) {
+        required_set.add(i);
+    }
+    for(let g =2; g < modulo ; g++){
+        actual_set = new Set();
+        for(let power = 1 ; power < modulo ; power++){
+            actual_set.add(powerMod(g,power,modulo));
+        }
+        if(eqSet(required_set,actual_set)){
+            primitive_set.add(g);
+        }
+    }
+    return Array.from(primitive_set);
+}
 export{
     randPrime,
     isPrime,
     gcd,
-    modInverse
+    modInverse,
+    primitiveRoots
 }

@@ -81,11 +81,8 @@ class OtherAlgorithm extends React.Component{
             <Card name="Modular Inverse" onPress = {() => this.props.navigation.navigate('ModularInverse')}/>
           </View>
           <View style={styles.cRow}>
-<<<<<<< HEAD
             <Card name="Primitive Root" onPress = {() => this.props.navigation.navigate('PrimitiveRoots')}/>
-=======
             <Card name="Miller Rabin Algorithm" />
->>>>>>> 74d0f5bf6ac3d82d8bf18199511bf0289b7b27bc
             <Card name="Chinese Remainder Theorem"/>
           </View>
           <View style={styles.cRow}>
@@ -170,15 +167,12 @@ const root = createStackNavigator({
     PrimeTest:{
       screen:PrimeTest,
     },
-<<<<<<< HEAD
     ModularInverse:{
       screen:ModularInverse,
     },
     PrimitiveRoots:{
       screen:PrimitiveRoots,
     },
-=======
->>>>>>> 74d0f5bf6ac3d82d8bf18199511bf0289b7b27bc
 },
 {
   initialRouteName: 'Home',

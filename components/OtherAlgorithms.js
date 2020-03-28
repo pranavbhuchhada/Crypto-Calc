@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {gcd,isPrime,modInverse} from './UtilityFunctions.js';
+import {gcd,isPrime,modInverse,primitiveRoots} from './UtilityFunctions.js';
 
 class GCD extends React.Component{
   constructor(props){
@@ -357,8 +357,10 @@ class PrimitiveRoots extends React.Component{
   }
   calculateRoot = ()=>{
     if(isPrime(this.state.num)){
+      this.setState({output:("Primitive root(s) of " + this.state.num + " are :\n\n" + primitiveRoots(this.state.num))});
       
     }else{
+      this.setState({output:""});
       alert("Please enter a prime number");
     }
   }
