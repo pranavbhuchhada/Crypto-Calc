@@ -53,7 +53,7 @@ class RSACipher extends React.Component{
         padding:responsiveWidth(2),
       },
       button:{
-        backgroundColor:"#087f23",
+        backgroundColor:"#1e3d59",
         height:responsiveHeight(7),
         width:responsiveWidth(90),
         marginTop:responsiveWidth(1),

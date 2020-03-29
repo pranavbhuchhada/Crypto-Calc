@@ -25,7 +25,7 @@ export default class Card extends React.Component {
         fontSize: responsiveFontSize(2.5),
         textTransform:"uppercase",
         textShadowColor:"black",
-        backgroundColor:"#4caf50",
+        backgroundColor:"#1e3d59",
         textAlign:"center",
         textAlignVertical:"center",
         color:"#e0e0e0"
@@ -45,9 +45,9 @@ export default class Card extends React.Component {
       <View style={{height:responsiveWidth(60),width:responsiveWidth(40),margin:responsiveWidth(5)}}>
         <TouchableHighlight style = {this.cardStyle.card} onPress={this.onClick} activeOpacity = {0.5} underlayColor = {"#F9F9F9"}>
           <Animated.View style={{flex:1,width:"100%"}}>
-            <View style={this.cardStyle.cImg} >
+            {/* <View style={this.cardStyle.cImg} >
               <Text style={{fontSize:25,textAlign:"center"}} >Space For Image</Text>
-            </View>
+            </View> */}
             <Text style={this.cardStyle.card_text}>{this.props.name}</Text>
           </Animated.View>
         </TouchableHighlight>

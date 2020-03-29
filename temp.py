@@ -1,18 +1,22 @@
+from functools import reduce
+def mul_inv(a, b):
+    b0= b
+    x0, x1= 0,1
+    if b== 1: return 1
+    while a>1 :
+        q=a// b
+        a, b= b, a%b
+        x0, x1=x1 -q *x0, x0
+    if x1<0 : x1+= b0
+    return x1
+def chinese_remainder(n, a):
+    sum=0
+    prod=reduce(lambda a, b: a*b, n)
+    for n_i, a_i in zip(n,a):
+        p=prod/n_i
+        sum += a_i* mul_inv(p, n_i)*p
+    return sum % prod
 
-def gcd(a,b):
-    while a != b:
-        if a > b:
-            a = a - b
-        else:
-            b = b - a
-    return a
-def primitive_root(modulo):
-    primitiveroot = []
-    required_set = set(num for num in range (1, modulo))
-    for g in range(2, modulo):
-        actual_set = set(pow(g, powers) % modulo for powers in range (1, modulo))
-        if required_set == actual_set:
-            primitiveroot.append(g)
-    return primitiveroot
-
-print(primitive_root(int(input())))
+a=[2,3]
+n=[5,7]
+print(chinese_remainder(n,a))

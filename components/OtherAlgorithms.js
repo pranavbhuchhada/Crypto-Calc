@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {gcd,isPrime,modInverse,primitiveRoots} from './UtilityFunctions.js';
+import {gcd,isPrime,modInverse,primitiveRoots,cal_CRT} from './UtilityFunctions.js';
 
 class GCD extends React.Component{
   constructor(props){
@@ -33,7 +33,7 @@ class GCD extends React.Component{
         fontSize:responsiveFontSize(2.5)
       },
       button:{
-        backgroundColor:"#087f23",
+        backgroundColor:"#1e3d59",
         padding:responsiveWidth(3),
         marginTop:responsiveWidth(2),
         marginBottom:responsiveWidth(2),
@@ -92,7 +92,6 @@ class GCD extends React.Component{
       );
   }
 }
-
 class Modulas extends React.Component{
   constructor(props){
     super(props);
@@ -107,7 +106,7 @@ class Modulas extends React.Component{
         margin:responsiveWidth(5)
       },
       button:{
-        backgroundColor:"#087f23",
+        backgroundColor:"#1e3d59",
         padding:responsiveWidth(3),
         marginTop:responsiveWidth(8),
         marginBottom:responsiveWidth(2),
@@ -183,7 +182,7 @@ class ModularInverse extends React.Component{
         margin:responsiveWidth(5)
       },
       button:{
-        backgroundColor:"#087f23",
+        backgroundColor:"#1e3d59",
         padding:responsiveWidth(3),
         marginTop:responsiveWidth(8),
         marginBottom:responsiveWidth(2),
@@ -262,7 +261,7 @@ class PrimeTest extends React.Component{
         margin:responsiveWidth(5),
       },
       button:{
-        backgroundColor:"#087f23",
+        backgroundColor:"#1e3d59",
         padding:responsiveWidth(3),
         marginTop:responsiveWidth(8),
         marginBottom:responsiveWidth(2),
@@ -327,7 +326,7 @@ class PrimitiveRoots extends React.Component{
         margin:responsiveWidth(5)
       },
       button:{
-        backgroundColor:"#087f23",
+        backgroundColor:"#1e3d59",
         padding:responsiveWidth(3),
         marginTop:responsiveWidth(8),
         marginBottom:responsiveWidth(2),
@@ -389,10 +388,160 @@ class PrimitiveRoots extends React.Component{
       );
   }
 }
+class CRT extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      N:2,
+      n_arr:{},
+      a_arr:{},
+      output:[],
+      ele_arr:[],
+      temp:"",
+      n1:"",
+      n2:"",
+      a1:"",
+      a2:"",
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      button:{
+        backgroundColor:"#1e3d59",
+        padding:responsiveWidth(3),
+        marginTop:responsiveWidth(8),
+        marginLeft:responsiveWidth(8),
+        marginBottom:responsiveWidth(2),
+        alignSelf:"center",
+        borderRadius:5,
+        justifyContent:"center",
+      },
+      boxinput:{
+        textAlign:"center",
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(8),
+        width:responsiveHeight(8),
+        borderWidth:0.5,
+        borderRadius:5,
+        borderColor:"#000",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
+      },
+    });
+  }
+  getEle = (N)=>{
+    return(
+      <View key={"crt_"+N.toString()} style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+        <Text style={{fontSize:responsiveFontSize(4)}}>x ≅ </Text>
+        <TextInput 
+          style={this.styles.boxinput}
+          placeholder={"a"+N.toString()}
+          keyboardType={"numeric"}
+          onChangeText={(V)=>{this.state["a"+N.toString()] = V}}
+          maxLength={3}
+          />
+        <Text style={{fontSize:responsiveFontSize(3)}}> (mod) </Text>
+        <TextInput 
+          style={this.styles.boxinput}
+          placeholder={"n"+N.toString()}
+          keyboardType={"numeric"}
+          onChangeText={(V)=>{this.state["n"+N.toString()] = V}}
+          maxLength={3}
+          />
+      </View>
+    );
+  }
+  addEle = ()=>{
+    let N = this.state.N;
+    N = N+1;
+    if(N<6){
+    this.setState({N:N},()=>{
+      this.state["n"+N.toString()] = "";
+      this.state["a"+N.toString()] = "";
+      let my_arr = this.state.ele_arr;
+      my_arr.push(this.getEle(N));
+      this.setState({ele_arr:my_arr});
+    });
+  }else{
+    alert("Maximum 5 Equtions can be solved.")
+  }
+  }
+  delEle = ()=>{
+    let N = this.state.N;
+    if(N>2){
+      N = N-1;
+      this.setState({N:N},()=>{
+        let my_arr = this.state.ele_arr;
+        my_arr.pop()
+        this.setState({ele_arr:my_arr});
+      });
+    }else{
+      alert("Minimum 2 Equtions are require.")
+    }
+  }
+  checkNumber = (text)=>{
+    if(text.toString().match(/([^0-9])/g,)) return false;
+    if(text.toString() == "") return false;
+    return true;
+  }
+  calculateCRT = ()=>{
+    let a =[]
+    let n =[]
+    for (let i = 1; i <= this.state.N; i++) {
+      let _a = this.state["a"+i];
+      let _n = this.state["n"+i];
+      if(this.checkNumber(_a) && this.checkNumber(_n)){
+        a.push(Number(this.state["a"+i]))
+        n.push(Number(this.state["n"+i]))
+      }else{
+        alert("Enter a valid positive number.");
+        return;
+      }
+
+    }
+    this.setState({output:cal_CRT(a,n)});
+  }
+  render(){
+    let Arr = this.state.ele_arr.map((a) => {
+      return a;
+    });
+    return(
+      <ScrollView>
+        <View style={this.styles.container}>
+          {this.getEle(1)}
+          {this.getEle(2)}
+          {Arr}
+          <View style={{flexDirection:"row",justifyContent:"center"}}>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.addEle()}} underlayColor = {"#0ba82f"}>
+              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Add</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.delEle()}} underlayColor = {"#0ba82f"}>
+              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Remove</Text>
+          </TouchableHighlight>
+          </View>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateCRT()}} underlayColor = {"#0ba82f"}>
+              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
+          </TouchableHighlight>
+          <Text style={{
+              color:"blue",
+              fontSize:responsiveFontSize(4),
+              textAlign:"center",
+              marginTop:responsiveHeight(5),
+          }}>{this.state.output.toString()}</Text>
+        </View>
+      </ScrollView>
+    );
+  }
+}
+
 export{
     GCD,
     Modulas,
     PrimeTest,
     ModularInverse,
-    PrimitiveRoots
+    PrimitiveRoots,
+    CRT
 }

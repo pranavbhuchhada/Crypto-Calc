@@ -70,10 +70,23 @@ function primitiveRoots(modulo){
     }
     return Array.from(primitive_set);
 }
+function cal_CRT(a,n){
+    let sum = 0
+    let prod = 1
+    n.forEach(element => {
+        prod *= element
+    });
+    for (let i = 0; i < n.length; i++) {
+        p = prod/n[i]
+        sum += a[i] * modInverse(p,n[i])*p
+    }
+    return sum % prod
+}
 export{
     randPrime,
     isPrime,
     gcd,
     modInverse,
-    primitiveRoots
+    primitiveRoots,
+    cal_CRT
 }

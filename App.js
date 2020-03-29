@@ -9,7 +9,7 @@ import Card from './components/Card'; // Card Class import
 import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher,VigenereCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
-import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots} from './components/OtherAlgorithms';
+import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots,CRT} from './components/OtherAlgorithms';
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
@@ -82,12 +82,7 @@ class OtherAlgorithm extends React.Component{
           </View>
           <View style={styles.cRow}>
             <Card name="Primitive Root" onPress = {() => this.props.navigation.navigate('PrimitiveRoots')}/>
-            <Card name="Miller Rabin Algorithm" />
-            <Card name="Chinese Remainder Theorem"/>
-          </View>
-          <View style={styles.cRow}>
-            <Card name="Square and Multiply"/>
-            
+            <Card name="Chinese Remainder Theorem" onPress = {() => this.props.navigation.navigate('chineseRemainderTheorem')}/>
           </View>
         </ScrollView>
       </View>
@@ -173,12 +168,15 @@ const root = createStackNavigator({
     PrimitiveRoots:{
       screen:PrimitiveRoots,
     },
+    chineseRemainderTheorem:{
+      screen:CRT,
+    },
 },
 {
   initialRouteName: 'Home',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#087f23',
+      backgroundColor: '#1e3d59',
     },
     headerTintColor: '#e0e0e0',
     headerTitleStyle: {
@@ -195,7 +193,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:"column",
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#f5f0e1',
   },
   sroller:{
     flex:0.85,
