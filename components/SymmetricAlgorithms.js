@@ -6,9 +6,11 @@ import {
     ScrollView,
     TextInput,
     Slider,
-    Picker
+    Picker,
+    Alert
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 
 class CeaserCipher extends React.Component{
@@ -31,6 +33,7 @@ class CeaserCipher extends React.Component{
         borderWidth: 1,
         borderColor: '#9E9E9E',
         backgroundColor : "#FFFFFF",
+        borderRadius:5,
         fontSize:responsiveFontSize(2.5)
       },
       cipherout:{
@@ -158,7 +161,7 @@ class MultiplicativeCipher extends React.Component{
         height: responsiveHeight(33),
         borderWidth: 1,
         borderColor: '#9E9E9E',
-        // borderRadius: 20 ,
+        borderRadius: 5 ,
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
         // margin:responsiveWidth(5)
@@ -307,6 +310,7 @@ class AffineCipher extends React.Component{
         height: responsiveHeight(33),
         borderWidth: 1,
         borderColor: '#9E9E9E',
+        borderRadius:5,
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
       },
@@ -449,6 +453,7 @@ class AutoKeyCipher extends React.Component{
         textAlign:"center",
         height: responsiveHeight(33),
         borderWidth: 1,
+        borderRadius:5,
         borderColor: '#9E9E9E',
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
@@ -603,105 +608,221 @@ class AutoKeyCipher extends React.Component{
 class PlayfairCipher extends React.Component{
   constructor(props){
     super(props);
+    Alert.alert("Discalimer","1. 'J' is replaced with 'I' to fit 5x5 square\n2. 'X' is used as substitution in case you need to fill second letter in the digram, or split two identical letters")
     this.state={
       key:"",
-      keyword:"",
-      MainKey:"",
       plaintext:"",
       ciphertext:"",
-      isOnPlain:true
+      isOnPlain:true,
+      playfair: [
+        ['A','B','C','D','E'],
+        ['F','G','H','I','K'],
+        ['L','M','N','O','P'],
+        ['Q','R','S','T','U'],
+        ['V','W','X','Y','Z'],
+      ],
+      playfairLookup:{        
+        "A":{"column": 0,"row": 0,},
+        "B":{"column": 1,"row": 0,},
+        "C":{"column": 2,"row": 0,},
+        "D":{"column": 3,"row": 0,},
+        "E":{"column": 4,"row": 0,},
+        "F":{"column": 0,"row": 1,},
+        "G":{"column": 1,"row": 1,},
+        "H":{"column": 2,"row": 1,},
+        "I":{"column": 3,"row": 1,},
+        "K":{"column": 4,"row": 1,},
+        "L":{"column": 0,"row": 2,},
+        "M":{"column": 1,"row": 2,},
+        "N":{"column": 2,"row": 2,},
+        "O":{"column": 3,"row": 2,},
+        "P":{"column": 4,"row": 2,},
+        "Q":{"column": 0,"row": 3,},
+        "R":{"column": 1,"row": 3,},
+        "S":{"column": 2,"row": 3,},
+        "T":{"column": 3,"row": 3,},
+        "U":{"column": 4,"row": 3,},
+        "V":{"column": 0,"row": 4,},
+        "W":{"column": 1,"row": 4,},
+        "X":{"column": 2,"row": 4,},
+        "Y":{"column": 3,"row": 4,},
+        "Z":{"column": 4,"row": 4,}
+      },
     };
     this.styles = StyleSheet.create({
       container:{
         flex:1,
-        margin:responsiveWidth(5)
+        margin:responsiveWidth(5),
       },
       textarea:{
         textAlign:"center",
         height: responsiveHeight(33),
         borderWidth: 1,
         borderColor: '#9E9E9E',
+        borderRadius:5,
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
       },
-      keyinput:{
-        textAlign:"left",
-        height: responsiveHeight(5),
-        borderWidth: 1,
+      fullinput:{
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:1,
+        borderRadius:5,
         borderColor: '#9E9E9E',
         backgroundColor : "#FFFFFF",
-        fontSize:responsiveFontSize(2.5)
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
       },
-      cipherout:{
-        fontSize:responsiveFontSize(2.5),
-        color:"#909090"
+      tcell:{
+        color:"#555",
+        textAlign:"center",
+        fontSize:responsiveFontSize(3),
+        fontStyle:"italic"
       },
-      slider:{
-        marginTop:responsiveHeight(2.5),
-        marginBottom:responsiveHeight(2.5),
-        width:responsiveWidth(85)
+      table:{
+        marginLeft:responsiveWidth(8),
+        marginRight:responsiveWidth(8),
+        marginTop:responsiveWidth(4),
+        marginBottom:responsiveWidth(4),
       }
     });
   }
-  toCipher = (PlainText,Key)=>{
-    this.scroll.scrollToEnd({animated:true});
-    this.setState({plaintext: PlainText});
-    this.setState({key: Key});
-    var k_adjust ="";
-    var flag = false;
-    k_adjust = k_adjust + key[0];
-    for(var i=0;i<key.length;i++){
-      for(var j=0;j<k_adjust.length;j++){
-        if(key[i]==k_adjust[j]){
-          flag = true;
-        }
-      }
-      if(flag == false){
-        k_adjust = k_adjust + key[i];
-      }
-      flag = false;
+  pushSquare = (letter)=> {
+    if (!letter.match(/[a-z]/i))
+        return;
+    var uLetter = letter.toUpperCase();
+    if (uLetter == 'J') uLetter = 'I';
+    if (playfairLookup[uLetter])
+        return;
+    if (column == 5) {
+        playfair.push([]);
+        column = 0;
     }
-    this.state.keyword=k_adjust;
-
-    flag=true;
-    var current="";
-    this.state.MainKey=this.state.keyword;
-    for(var i=0;i<26;i++){
-      current = fromCharCode(i+97);
-      if(current=="j"){
-        continue;
+    playfair[playfair.length-1].push(uLetter);
+    column++;
+    playfairLookup[uLetter] = { row: playfair.length-1, column: playfair[playfair.length-1].length-1 };
+  }
+  generatePlaySquare=(key)=>{
+    var playfair = [];
+    var playfairLookup = {};
+    var column = 5;
+    var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    key.split('').forEach(letter => {
+      if (!letter.match(/[a-z]/i))
+          return;
+      var uLetter = letter.toUpperCase();
+      if (uLetter == 'J') uLetter = 'I';
+      if (playfairLookup[uLetter])
+          return;
+      if (column == 5) {
+          playfair.push([]);
+          column = 0;
       }
-      for( var j=0;j<this.state.keyword.length;j++){
-        if(current == this.state.keyword[j]){
-          flag = false;
-          break;
-        }
+      playfair[playfair.length-1].push(uLetter);
+      column++;
+      playfairLookup[uLetter] = { row: playfair.length-1, column: playfair[playfair.length-1].length-1 };
+    });
+    alphabet.split('').forEach(letter => {
+      if (!letter.match(/[a-z]/i))
+          return;
+      var uLetter = letter.toUpperCase();
+      if (uLetter == 'J') uLetter = 'I';
+      if (playfairLookup[uLetter])
+          return;
+      if (column == 5) {
+          playfair.push([]);
+          column = 0;
       }
-      if(flag){
-        this.state.MainKey = this.state.MainKey+current; 
-      }
-      flag=true;
+      playfair[playfair.length-1].push(uLetter);
+      column++;
+      playfairLookup[uLetter] = { row: playfair.length-1, column: playfair[playfair.length-1].length-1 };
+    });
+    this.setState({playfair:playfair,playfairLookup:playfairLookup});
+    console.log(playfairLookup);
+  }
+  keyChanged = (text)=>{
+    this.setState({key:text},()=>{
+      this.generatePlaySquare(this.state.key);
+      if(this.state.isOnPlain)
+        this.toCipher(this.state.plaintext);
+      else
+        this.toPlain(this.state.ciphertext)
+    });
+  }
+  EncryptBigramm = (first, second, square) => {
+    var playfairLookup = this.state.playfairLookup;
+    var transform = '';
+    var posFirst = playfairLookup[first];
+    var posSecond = playfairLookup[second];
+    if (posFirst.row == posSecond.row) {
+        transform += square[posFirst.row][posFirst.column == 4 ? 0 : posFirst.column+1];
+        transform += square[posSecond.row][posSecond.column == 4 ? 0 : posSecond.column+1];
+    } else if (posFirst.column == posSecond.column) {
+        transform += square[posFirst.row == 4 ? 0 : posFirst.row+1][posFirst.column];
+        transform += square[posSecond.row == 4 ? 0 : posSecond.row+1][posSecond.column];
+    } else {
+        transform += square[posFirst.row][posSecond.column];
+        transform += square[posSecond.row][posFirst.column];
     }
-
-    
-
+    return transform;
   }
-  toPlain = (CipherText,Key)=>{
-    this.scroll.scrollToEnd({animated:true});
-    this.setState({ciphertext: CipherText});
-    this.setState({key: Key});
+  DecryptBigramm=(first, second, square) => {
+    var playfairLookup = this.state.playfairLookup;
+    var transform = '';
+    var posFirst = playfairLookup[first];
+    var posSecond = playfairLookup[second];
+    if (posFirst.row == posSecond.row) {
+        transform += square[posFirst.row][posFirst.column == 0 ? 4 : posFirst.column-1];
+        transform += square[posSecond.row][posSecond.column == 0 ? 4 : posSecond.column-1];
+    } else if (posFirst.column == posSecond.column) {
+        transform += square[posFirst.row == 0 ? 4 : posFirst.row-1][posFirst.column];
+        transform += square[posSecond.row == 0 ? 4 : posSecond.row-1][posSecond.column];
+    } else {
+        transform += square[posFirst.row][posSecond.column];
+        transform += square[posSecond.row][posFirst.column];
+    }
+    return transform;
   }
-  onSliderChange = (Key)=>{
+  toCipher = (text)=>{
+    // this.scroll.scrollToEnd({animated:true});
+    this.setState({plaintext:text});
     if(this.state.isOnPlain){
-      // this.toPlain(this.state.ciphertext,Key);
-      this.toCipher(this.state.plaintext,Key);
-    }
-    else{
-      // this.toCipher(this.state.plaintext,Key);
-      this.toPlain(this.state.ciphertext,Key);
+      var letters = text.toUpperCase().split('').filter(function(item){ return item.match(/[a-z]/i);}).map(function(item){ return item == 'J' ? 'I' : item; });
+      var transformed = '';
+      var playfair = this.state.playfair;
+      for(var i = 0; i < letters.length; i += 2) {
+          var first = letters[i];
+          var second = (i + 1) >= letters.length ? 'X' : letters[i+1];
+          if (first == second) {
+              second = 'X';
+              i--; //start from second
+          }
+          transformed += this.EncryptBigramm(first, second, playfair);     
+      }
+      this.setState({ciphertext:transformed});
     }
   }
-
+  toPlain = (text)=>{
+    // this.scroll.scrollToEnd({animated:true});
+    this.setState({ciphertext:text});
+    if(!this.state.isOnPlain){
+      var letters = text.toUpperCase().split('').filter(function(item){ return item.match(/[a-z]/i);}).map(function(item){ return item == 'J' ? 'I' : item; });
+      var transformed = '';
+      var playfair = this.state.playfair;
+      for(var i = 0; i < letters.length; i += 2) {
+          var first = letters[i];
+          var second = (i + 1) >= letters.length ? 'X' : letters[i+1];
+          if (first == second) {
+              second = 'X';
+              i--; //start from second
+          }
+          transformed += this.DecryptBigramm(first, second, playfair);     
+      }
+      this.setState({plaintext:transformed});
+    }
+  }
   render(){
       return(
         <ScrollView ref={ref => this.scroll = ref}>
@@ -712,24 +833,29 @@ class PlayfairCipher extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
-              onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
+              onChangeText={(text) => this.toCipher(text,this.state.key)}
               value={this.state.plaintext}
               onFocus={()=>this.state.isOnPlain=true}
             />
-            <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
+            <Text style={{fontSize:responsiveFontSize(3),}}>Key:</Text>
             <TextInput
-            style={this.styles.keyinput}
-            multiline={true}
-            onChangeText={(key)=>this.toCipher(this.state.plaintext,key)}
-            />
+              style={this.styles.fullinput}
+              placeholderTextColor={"#e0e0e0"}
+              placeholder={"Enter Playfair Keyword"}
+              textAlign={"center"}            
+              onChangeText={(key)=>this.keyChanged(key)}
+              value={this.state.key} />
+            <Text style={{fontSize:responsiveFontSize(3),}}>Playfair Square:</Text>
+            <Table style={this.styles.table}>
+              <Rows data={this.state.playfair} textStyle={this.styles.tcell}/>
+            </Table>
             <Text style={{fontSize:responsiveFontSize(3),}}>Cipher Text:</Text>
             <TextInput
               style={this.styles.textarea}
               placeholder={"Type Cipher text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
+              onChangeText={text => this.toPlain(text,this.state.key)}
               value={this.state.ciphertext}
               onFocus={()=>this.state.isOnPlain=false}
             />

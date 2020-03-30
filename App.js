@@ -186,14 +186,11 @@ const root = createStackNavigator({
   },
 }
 );
- 
-export default createAppContainer(root);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:"column",
-    backgroundColor: '#f5f0e1',
+    backgroundColor: '#FFF',
   },
   sroller:{
     flex:0.85,
@@ -203,3 +200,4 @@ const styles = StyleSheet.create({
     flexDirection:"row",
   },
 });
+export default createAppContainer(root);
