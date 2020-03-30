@@ -5,8 +5,10 @@ import {
     StyleSheet,
     ScrollView,
     TextInput,
-    Picker
+    Picker,
+    Clipboard
 } from 'react-native';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 var hash = require('hash.js');
 var md5 = require('md5');
@@ -69,6 +71,9 @@ class HashingAlgorithm extends React.Component{
         }
       });
   }
+  temp = ()=>{
+    alert("Hello");
+  }
   render(){
       return(
         <ScrollView ref={ref => this.scroll = ref}>
@@ -97,7 +102,10 @@ class HashingAlgorithm extends React.Component{
                     <Picker.Item label="SHA-512" value={6} />
                 </Picker>
             </View>
-            <Text style={{fontSize:responsiveFontSize(3),}}>Hashed Output:</Text>
+            <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
+              <Text style={{fontSize:responsiveFontSize(3),}}>Hashed Output:</Text>
+              <TouchableHighlight onPress={()=>{alert("Copied to clipboard");Clipboard.setString(this.state.hashtext);}} underlayColor = {"#FFF"}><Text>Copy to clipboard</Text></TouchableHighlight>
+            </View>
             <TextInput
               style={this.styles.cipherout}
               placeholder={"Hashed output appears here."}

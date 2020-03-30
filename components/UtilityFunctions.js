@@ -88,5 +88,6 @@ export{
     gcd,
     modInverse,
     primitiveRoots,
-    cal_CRT
+    cal_CRT,
+    powerMod
 }

@@ -4,16 +4,18 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {isPrime,randPrime,gcd,modInverse} from './UtilityFunctions.js';
+import {isPrime,randPrime,gcd,modInverse,powerMod} from './UtilityFunctions.js';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class RSACipher extends React.Component{
   constructor(props){
     super(props);
+    Alert.alert("Disclaimer","This is not actual implementation of RSA. This for demo purpose only.");
     this.state = {
       p:"",
       q:"",
@@ -146,18 +148,29 @@ class RSACipher extends React.Component{
     }
   }
   toCipher = (text)=>{
-    this.setState({plaintext:text});
-    var RSAKey = require('react-native-rsa');
-    var rsa = new RSAKey();
-    var publickey = '{"n": "' + this.state.n.toString(16) + '","e":"'+ this.state.e.toString(16) +'"}';
-    console.log(publickey);
-    rsa.setPublicString(publickey);
-    var originText = 'sample String Value';
-    var encrypted = rsa.encrypt(originText);
-    console.log(encrypted);
+    if(this.state.n=="" || this.state.n==0 || this.state.e == "" || this.state.e == 0){
+      alert("Enter valid n and e.");
+      return;
+    }
+    this.setState({plaintext:text},()=>{
+      text = text.charCodeAt(0);
+      let output = powerMod(text,this.state.e,this.state.n);
+      this.setState({ciphertext:output.toString()})
+    });
   }
   toPlain = (text)=>{
-    this.setState({ciphertext:text});
+    text = this.filterNumber(text);
+    if(this.state.n=="" || this.state.n==0 || this.state.d == "" || this.state.d == 0){
+      alert("Enter valid n and d.");
+      return;
+    }
+    this.setState({ciphertext:text},()=>{
+      if(text == "") return;
+      let output = powerMod(text,this.state.d,this.state.n);
+      output = String.fromCharCode(output);
+      console.log(output);
+      this.setState({plaintext:output});
+    });
   }
   render(){
     return(
@@ -196,7 +209,7 @@ class RSACipher extends React.Component{
             }}
           />
         </View>
-        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generatePQ()}} underlayColor = {"#0ba82f"}>
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generatePQ()}} underlayColor = {"#3c5a78"}>
            <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate p and q</Text>
         </TouchableHighlight>
         <TextInput 
@@ -225,7 +238,7 @@ class RSACipher extends React.Component{
             }
           }}
           />
-        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateE()}} underlayColor = {"#0ba82f"}>
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateE()}} underlayColor = {"#3c5a78"}>
            <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate e</Text>
         </TouchableHighlight>
         <TextInput
@@ -242,31 +255,32 @@ class RSACipher extends React.Component{
             if( this.state.d!="" && ((this.state.e * this.state.d)%this.state.phi != 1)){
               alert("Please Enter a 'd' which is multiplicative inverse of 'e'");
               this.setState({d:""});
-              // this.dtext.focus();
             }
           }}
           />
-        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateD()}} underlayColor = {"#0ba82f"}>
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateD()}} underlayColor = {"#3c5a78"}>
            <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate d</Text>
         </TouchableHighlight>
         <Text style={{fontSize:responsiveFontSize(3)}}>Plain Text:</Text>
         <TextInput
-          style={this.styles.textarea}
-          placeholder={"Type Plain text in here"}
+          style={this.styles.fullinput}
+          placeholder={"Type single character"}
           placeholderTextColor={"#e0e0e0"}
-          multiline={true}
+          textAlign={"center"}
           onChangeText={PlainText => this.toCipher(PlainText)}
-          value={this.state.plaintext}
+          value={this.state.plaintext.toString()}
+          maxLength={1}
           onFocus={()=>this.state.isOnPlain=true}
         />
         <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
         <TextInput
-          style={this.styles.textarea}
+          style={this.styles.fullinput}
+          textAlign={"center"}
           placeholder={"Type Cipher text in here"}
           placeholderTextColor={"#e0e0e0"}
-          multiline={true}
+          keyboardType={"numeric"}
           onChangeText={CipherText => this.toPlain(CipherText)}
-          value={this.state.ciphertext}
+          value={this.state.ciphertext.toString()}
           onFocus={()=>{this.state.isOnPlain=false;this.scroll.scrollToEnd({animated:true});}}
         />
         <KeyboardSpacer/>
