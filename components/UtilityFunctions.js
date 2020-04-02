@@ -2,6 +2,9 @@ function randPrime(){
     const primes =  require('./myprime.json');
     return primes[Math.floor(Math.random() * 1229) + 1];
 }
+function randNum(num = 9999){
+    return Math.floor(Math.random() * num) + 1;
+}
 function isPrime (num) {
     for(let i = 2, s = Math.sqrt(num); i <= s; i++)
         if(num % i === 0) return false; 
@@ -53,6 +56,20 @@ function eqSet(as, bs) {
     for (var a of as) if (!bs.has(a)) return false;
     return true;
 }
+function checkPrimitive(num,modulo){
+    var required_set = new Set();
+    for (let i = 1; i < modulo; i++) {
+        required_set.add(i);
+    }
+    let actual_set = new Set();
+    for(let power = 1 ; power < modulo ; power++){
+        actual_set.add(powerMod(num,power,modulo));
+    }
+    if(eqSet(required_set,actual_set)){
+        return true;
+    }
+    return false;
+}
 function primitiveRoots(modulo){
     var required_set = new Set();
     var primitive_set = new Set();
@@ -60,7 +77,7 @@ function primitiveRoots(modulo){
         required_set.add(i);
     }
     for(let g =2; g < modulo ; g++){
-        actual_set = new Set();
+        let actual_set = new Set();
         for(let power = 1 ; power < modulo ; power++){
             actual_set.add(powerMod(g,power,modulo));
         }
@@ -69,6 +86,21 @@ function primitiveRoots(modulo){
         }
     }
     return Array.from(primitive_set);
+}
+function primitiveRoot(modulo){
+    var required_set = new Set();
+    for (let i = 1; i < modulo; i++) {
+        required_set.add(i);
+    }
+    for(let g =modulo; g > 1 ; g--){
+        let actual_set = new Set();
+        for(let power = 1 ; power < modulo ; power++){
+            actual_set.add(powerMod(g,power,modulo));
+        }
+        if(eqSet(required_set,actual_set)){
+            return g;
+        }
+    }
 }
 function cal_CRT(a,n){
     let sum = 0
@@ -89,5 +121,8 @@ export{
     modInverse,
     primitiveRoots,
     cal_CRT,
-    powerMod
+    powerMod,
+    randNum,
+    primitiveRoot,
+    checkPrimitive
 }

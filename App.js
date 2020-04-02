@@ -7,7 +7,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
 import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher,VigenereCipher} from './components/SymmetricAlgorithms'; 
-import {RSACipher} from './components/AsymmetricAlgorithms'; 
+import {RSACipher,DiffieHellmanCipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
 import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots,CRT} from './components/OtherAlgorithms';
 class SymmetricAlgorithm extends React.Component{
@@ -53,7 +53,7 @@ class AsymmetricAlgorithm extends React.Component{
         <View style={styles.container}>
             <ScrollView style={styles.sroller}>
             <View style={styles.cRow}>
-                <Card name="Diffie Hellman Cipher" />
+                <Card name="Diffie Hellman Key Exchange" onPress = {() => this.props.navigation.navigate('DiffieHellman')}/>
                 <Card name="RSA" onPress = {() => this.props.navigation.navigate('RSACipher')}/>
             </View>
             </ScrollView>
@@ -170,6 +170,9 @@ const root = createStackNavigator({
     },
     chineseRemainderTheorem:{
       screen:CRT,
+    },
+    DiffieHellman:{
+      screen:DiffieHellmanCipher,
     },
 },
 {

@@ -884,6 +884,7 @@ class VigenereCipher extends React.Component{
         height: responsiveHeight(33),
         borderWidth: 1,
         borderColor: '#9E9E9E',
+        borderRadius:5,
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
       },
@@ -891,13 +892,17 @@ class VigenereCipher extends React.Component{
         fontSize:responsiveFontSize(2.5),
         color:"#909090"
       },
-      keyinput:{
-        textAlign:"left",
-        height: responsiveHeight(5),
-        borderWidth: 1,
+      fullinput:{
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:1,
+        borderRadius:5,
         borderColor: '#9E9E9E',
         backgroundColor : "#FFFFFF",
-        fontSize:responsiveFontSize(2.5)
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
       },
       slider:{
         marginTop:responsiveHeight(2.5),
@@ -907,7 +912,6 @@ class VigenereCipher extends React.Component{
     });
   }
   toCipher = (PlainText,key)=>{
-    this.scroll.scrollToEnd({animated:true});
     this.setState({plaintext: PlainText});
     this.setState({key: key});
     var output = "";
@@ -951,18 +955,18 @@ class VigenereCipher extends React.Component{
       var temp=j%(key.length);
       if ((c >= 65) && (c <= 90)) {        
         if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
-        output += String.fromCharCode((c - 65 - key.charCodeAt(temp)) % 26 + 65);
+        output += String.fromCharCode((c - 65 - key.charCodeAt(temp)+65) % 26 + 65);
         }
         else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
-          output += String.fromCharCode((c - 65 - key.charCodeAt(temp)) % 26 + 65);
+          output += String.fromCharCode((c - 65 - key.charCodeAt(temp)+97) % 26 + 65);
         }
         j++;
       } else if ((c >= 97) && (c <= 122)) {
         if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
-          output += String.fromCharCode((c - 97 - key.charCodeAt(temp)) % 26 + 97);
+          output += String.fromCharCode((c - 97 - key.charCodeAt(temp)+65) % 26 + 97);
           }
           else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
-            output += String.fromCharCode((c - 97 - key.charCodeAt(temp)) % 26 +97);
+            output += String.fromCharCode((c - 97 - key.charCodeAt(temp)+97) % 26 +97);
           }
           j++;
       } else {
@@ -973,21 +977,8 @@ class VigenereCipher extends React.Component{
       output +=CipherText[i];
     }
   }
-    this.setState({plaintext:output});
-
+  this.setState({plaintext:output});
   }
-  onSliderChange = (Key)=>{
-    if(this.state.isOnPlain){
-      // this.toPlain(this.state.ciphertext,Key);
-      this.toCipher(this.state.plaintext,Key);
-    }
-    else{
-      // this.toCipher(this.state.plaintext,Key);
-      this.toPlain(this.state.ciphertext,Key);
-    }
-  }
-
-
   render(){
       return(
         <ScrollView ref={ref => this.scroll = ref}>
@@ -1003,12 +994,11 @@ class VigenereCipher extends React.Component{
               value={this.state.plaintext}
               onFocus={()=>{this.setState({isOnPlain:true});}}
             />
-            <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
+            <Text style={{fontSize:responsiveFontSize(3),}}>Key:</Text>
             <TextInput
-            style={this.styles.keyinput}
-            multiline={true}
-            onChangeText={(key)=>this.toCipher(this.state.plaintext,key)}
-            />
+              style={this.styles.fullinput}
+              onChangeText={(key)=>this.toCipher(this.state.plaintext,key)}
+              placeholder={"Enter a key"}/>
             <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
             <TextInput
               style={this.styles.textarea}

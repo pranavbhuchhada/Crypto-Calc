@@ -44,9 +44,8 @@ class GCD extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "")
+    if(text.match(/^[^0-9]/g)||text=="")
       return "";
-    text=text.toString();
     return String(text.replace(/[^0-9 ,]/g, ''));
   }
   calculateGCD = ()=>{
@@ -129,9 +128,8 @@ class Modulas extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || text == "-")
+    if(text == "" || ttext.match(/^[^0-9]/g)||text=="")
       return text;
-    text=text.toString();
     return Number(text.replace(/[^0-9-]/g, ''));
   }
   calculateMOD = ()=>{
@@ -205,9 +203,8 @@ class ModularInverse extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || text == "-")
+    if(text == "" || ttext.match(/^[^0-9]/g)||text=="")
       return text;
-    text=text.toString();
     return Number(text.replace(/[^0-9-]/g, ''));
   }
   calculateInverse = ()=>{
@@ -284,9 +281,8 @@ class PrimeTest extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "")
+    if(text.match(/^[^0-9]/g)||text=="")
       return text;
-    text=text.toString();
     return Number(text.replace(/[^0-9]/g, ''));
   }
   checkPrime = ()=>{
@@ -349,9 +345,8 @@ class PrimitiveRoots extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || text == "-")
+    if(text == "" || ttext.match(/^[^0-9]/g)||text=="")
       return text;
-    text=text.toString();
     return Number(text.replace(/[^0-9-]/g, ''));
   }
   calculateRoot = ()=>{

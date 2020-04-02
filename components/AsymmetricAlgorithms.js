@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {isPrime,randPrime,gcd,modInverse,powerMod} from './UtilityFunctions.js';
+import {isPrime,randPrime,gcd,modInverse,powerMod,randNum,primitiveRoot, primitiveRoots, checkPrimitive} from './UtilityFunctions.js';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class RSACipher extends React.Component{
@@ -77,9 +77,8 @@ class RSACipher extends React.Component{
     }); 
   }
   filterNumber = (text)=>{
-    if(text == "")
+    if(text.match(/^[^0-9]/g)||text=="")
       return "";
-    text=text.toString();
     return Number(text.replace(/[^0-9]/g, ''));
   }
   pChanged = (P)=>{
@@ -203,7 +202,7 @@ class RSACipher extends React.Component{
             value={this.state.q.toString()}
             onBlur={()=>{if(this.state.q!="" && !isPrime(this.state.q)){
               alert("Please Enter a Prime Nuber");
-              this.setState({p:""});
+              this.setState({q:""});
               this.qtext.focus();
             }
             }}
@@ -289,6 +288,227 @@ class RSACipher extends React.Component{
     );
   }
 }
+class DiffieHellmanCipher extends React.Component{
+  constructor(props){
+    super(props);
+    Alert.alert("Discalimer","Diffie–Hellman key exchange is a method of securely exchanging cryptographic keys over a public channel and was one of the first public-key protocols as conceived by Ralph Merkle and named after Whitfield Diffie and Martin Hellman. Here Diffie hellman is explained as key exchange between 2 parties Bob and Alice.");
+    this.state = {
+      g:"",
+      n:"",
+      x:"",
+      y:"",
+      a:"",
+      b:"",
+      keya:"",
+      keyb:"",
+      plaintext:"",
+      ciphertext:"",
+      isOnPlain:true
+    };
+    this.styles=StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      halfinput:{
+        textAlign:"left",
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(35),
+        borderWidth:0.5,
+        borderRadius:5,
+        borderColor:"#000",
+        padding:responsiveWidth(2)
+      },
+      label:{
+        textAlign:"left",
+        fontSize:responsiveFontSize(2.5),
+        textAlignVertical:"center",
+        height:responsiveHeight(7),
+        width:responsiveWidth(9),
+      },
+      button:{
+        backgroundColor:"#1e3d59",
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        alignSelf:"center",
+        borderRadius:5,
+        justifyContent:"center",
+      }
+    }); 
+  }
+  filterNumber = (text)=>{
+    if( text.match(/^[^0-9]/g) ||text=="")
+      return "";
+    return Number(text.replace(/[^0-9]/g, ''));
+  }
+  xChanged = (X)=>{
+    if(X == ""){
+      this.setState({x:"",a:""});
+      return;
+    };
+    this.setState({x:this.filterNumber(X)},()=>{
+      if(this.state.n != "" && this.state.g!=""){
+        this.setState({a:powerMod(this.state.g,this.state.x,this.state.n)});
+      }
+    })
+  }
+  yChanged = (Y)=>{
+    if(Y == "") {
+      this.setState({y:"",b:""});
+      return;
+    };
+    this.setState({y:this.filterNumber(Y)},()=>{
+      if(this.state.n != "" && this.state.g!=""){
+        this.setState({b:powerMod(this.state.g,this.state.y,this.state.n)});
+      }
+    })
+  }
+  calKeys = ()=>{
+    if(this.state.a == "" || this.state.b == ""){
+      this.setState({keya:"",keyb:""});
+      return;
+    }
+    this.setState({keya:powerMod(this.state.a,this.state.y,this.state.n),keyb:powerMod(this.state.b,this.state.x,this.state.n)});
+  }
+  render(){
+    return(
+     <View style={this.styles.container}>
+      <ScrollView ref={ref => this.scroll = ref}>
+        <Text style={{fontSize:responsiveFontSize(3),}}>Public Keys:</Text>
+        <View style={{flexDirection:"row"}}>
+          <Text style={this.styles.label}>N = </Text>
+          <TextInput 
+            ref={ref => this.ntext = ref}
+            style={this.styles.halfinput}
+            placeholder={"Enter prime N"}
+            placeholderTextColor={"#909090"}
+            keyboardType={"number-pad"}
+            onChangeText={ (N) => {this.setState({n:this.filterNumber(N)});this.setState({g:""})}}
+            value={this.state.n.toString()}
+            onBlur={()=>{
+                if(this.state.n!="" && !isPrime(this.state.n)){
+                  alert("Please Enter a Prime Nuber");
+                  this.setState({n:""});
+                  this.ntext.focus();
+                }
+              }}/>
+          <View style={{width:responsiveWidth(2)}}></View>
+          <Text style={this.styles.label}>G = </Text>
+          <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Enter Number G"}
+            placeholderTextColor={"#909090"}
+            keyboardType={"number-pad"}
+            onChangeText={ G => this.setState({g:this.filterNumber(G)})}
+            value={this.state.g.toString()}
+            onFocus={()=>{
+              if(this.state.n=="" || this.state.n==0){
+                alert("Please select a valid N first.");
+                this.ntext.focus();
+              }
+            }}
+            onBlur={()=>{
+              if(!checkPrimitive(this.state.g,this.state.n)){
+                alert("Enter a G which is a primitive root of N");
+                this.setState({g:""});
+              }
+            }}
+          />
+        </View>
+        <TouchableHighlight style={this.styles.button} onPress={()=>{
+          this.setState({n:randPrime()},()=>{
+            this.setState({g:primitiveRoot(this.state.n)});
+          });
+        }} underlayColor = {"#3c5a78"}>
+           <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate N and G</Text>
+        </TouchableHighlight>
+        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+          <Text style={{fontSize:responsiveFontSize(3),}}>Bob's Side</Text>
+          <Text style={{fontSize:responsiveFontSize(3),}}>|</Text>
+          <Text style={{fontSize:responsiveFontSize(3),}}>Alice's Side</Text>
+        </View>
+        <View style={{flexDirection:"row"}}>
+        <Text style={this.styles.label}>X = </Text>
+         <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Bob's X Value"}
+            placeholderTextColor={"#909090"}
+            keyboardType={"number-pad"}
+            onChangeText={ (X) => this.xChanged(X)}
+            value={this.state.x.toString()} />
+          <View style={{width:responsiveWidth(2)}}></View>
+          <Text style={this.styles.label}>Y = </Text>
+          <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Alice's Y Value"}
+            placeholderTextColor={"#909090"}
+            keyboardType={"number-pad"}
+            onChangeText={ (Y) => this.yChanged(Y)}
+            value={this.state.y.toString()} />
+        </View>
+        <View style={{height:responsiveWidth(2)}}></View>
+        <View style={{flexDirection:"row"}}>
+          <Text style={this.styles.label}>A = </Text>
+          <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Bob's A Value"}
+            placeholderTextColor={"#909090"}
+            onChangeText={ (X) => {this.setState({x:this.filterNumber(X)});}}
+            editable={false}
+            value={this.state.a.toString()} />
+          <View style={{width:responsiveWidth(2)}}></View>
+          <Text style={this.styles.label}>B = </Text>
+          <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Alice's B Value"}
+            placeholderTextColor={"#909090"}
+            onChangeText={ (X) => {this.setState({y:this.filterNumber(X)});}}
+            editable={false}
+            value={this.state.b.toString()} />
+        </View>
+        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+          <Text style={{fontSize:responsiveFontSize(3),}}>A = G^x mod N</Text>
+          <Text style={{fontSize:responsiveFontSize(3),}}>|</Text>
+          <Text style={{fontSize:responsiveFontSize(3),}}>B = G^y mod N</Text>
+        </View>
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.xChanged(randNum(99).toString());this.yChanged(randNum(99).toString());}} underlayColor = {"#3c5a78"}>
+          <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate X and Y</Text>
+        </TouchableHighlight>
+        <View style={{flexDirection:"row"}}>
+          <Text style={this.styles.label}>K1=</Text>
+          <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Bob's Key"}
+            placeholderTextColor={"#909090"}
+            editable={false}
+            value={this.state.keyb.toString()} />
+          <View style={{width:responsiveWidth(2)}}></View>
+          <Text style={this.styles.label}>K2=</Text>
+          <TextInput 
+            style={this.styles.halfinput}
+            placeholder={"Alice's Key"}
+            placeholderTextColor={"#909090"}
+            editable={false}
+            value={this.state.keya.toString()} />
+        </View>
+        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+          <Text style={{fontSize:responsiveFontSize(3),}}>K1=B^x mod N</Text>
+          <Text style={{fontSize:responsiveFontSize(3),}}>|</Text>
+          <Text style={{fontSize:responsiveFontSize(3),}}>K2=A^y mod N</Text>
+        </View>
+        <TouchableHighlight style={this.styles.button} onPress={()=>{this.calKeys()}} underlayColor = {"#3c5a78"}>
+          <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate Keys</Text>
+        </TouchableHighlight>
+        <KeyboardSpacer/>
+      </ScrollView>
+     </View> 
+    );
+  }
+}
 export {
-    RSACipher
+    RSACipher,
+    DiffieHellmanCipher
 }

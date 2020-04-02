@@ -1,436 +1,405 @@
-<!doctype html><html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/style/min/planetcalc_common_3579.css">
-<script>
-	var googletag = googletag || {};
-googletag.cmd = googletag.cmd || [];
-(function() {
-var gads = document.createElement('script');
-gads.async = true;
-gads.type = 'text/javascript';
-var useSSL = 'https:' == document.location.protocol;
-gads.src = (useSSL ? 'https:' : 'http:') + 
-'//www.googletagservices.com/tag/js/gpt.js';
-var node = document.getElementsByTagName('script')[0];
-node.parentNode.insertBefore(gads, node);
-})();
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+
+    <title>diffie</title>
+         <script src="/jquery.min.js" type="text/javascript"></script>
+            <link href="/Content/bootstrap.min.css" rel="stylesheet" media="screen" />
+ 
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
-<script>if (googletag) {googletag.cmd.push(function() {
-googletag.pubads().setRequestNonPersonalizedAds(0);var mapping0  = googletag.sizeMapping().addSize([1500,200],  [970,90]).addSize([768,200],  [728,90]).addSize([480,200],  [468,60]).addSize([0,0],  [320,250]).build();googletag.defineSlot('/13440450/v7.en.A.B.top', [[970,90],[728,90],[468,60],[320,250]], 'div-gpt-ad-1585587902-1').defineSizeMapping(mapping0).setCollapseEmptyDiv(true).addService(googletag.pubads());
-var mapping1  = googletag.sizeMapping().addSize([768,200],  [728,90]).addSize([480,200],  [468,60]).addSize([0,0],  [320,250]).build();googletag.defineSlot('/13440450/v7.en.A.B.bottom', [[728,90],[468,60],[320,250]], 'div-gpt-ad-1585587902-2').defineSizeMapping(mapping1).setCollapseEmptyDiv(true).addService(googletag.pubads());
-var mapping2  = googletag.sizeMapping().addSize([0,0],  [320,250]).build();googletag.defineSlot('/13440450/v7.en.A.B.right', [[320,250]], 'div-gpt-ad-1585587902-3').defineSizeMapping(mapping2).setCollapseEmptyDiv(true).addService(googletag.pubads());
-var mapping3  = googletag.sizeMapping().addSize([768,400],  [320,250]).build();googletag.defineSlot('/13440450/v7.en.A.B.sticker', [[320,250]], 'div-gpt-ad-1585587902-4').defineSizeMapping(mapping3).setCollapseEmptyDiv(true).addService(googletag.pubads());
-googletag.pubads().enableSingleRequest();
-googletag.enableServices();
-});
-}</script>		
+
+            <script src="/Content/bootstrap.min.js" type="text/javascript"></script>
+    
+     <script src="/Scripts/MicrosoftAjax.debug.js" 
+    type="text/javascript"></script>  
+
+      
+
+     <link href="/Content/Site.css" rel="stylesheet" type="text/css" /> 
+    <link href="/Content/1.css" rel="stylesheet" type="text/css" />
 
 
-<meta name="keywords" content="#cipher, #playfair, cipher, ciphertext, Computers, cryptography, encryption, Playfair, text, Wheatstone, Wheatstone-Playfair"/><meta name="description" content="Online calculator. This online calculator encrypts and decrypts a message given Playfair cipher keyword. Non-alphabetic symbols (digits, whitespaces, etc.) are ignored."/><meta name="author" content="Timur : planetcalc member"/><meta name="generator" content="Planetcalc"/><style media="all">
-.social-float {
-	position: absolute;
-	margin-left: auto;
-	margin-right: auto;
-	left: 0;
-	right: 0;
-	width: 350px;
-    	height: 400px;
-    	background: white;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5);
-	z-index: 100;
-}
-td.comment_created {
-    border-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-td.message {
-	padding-top:0 !important;
-}
-
-#main_div { padding:0 }
-.f_ {
-	margin-top:0;
-}
-
-	#request_status { width:900px; }
-	.modal-body {  max-height: 800px;}
-.sofia {
-	margin:8px auto;
-	text-align:center;
-}
-.right-ads { margin:16px 0; }
-.v5 {
-	background-color:#fafafa;
-}
-.card-authors { padding:0 1.5em 1.5em 1.5em; }
-
-.author-date {
-	padding:16px 0;
-}
-.author-date i {
-	padding-right:8px;
-}
-.author-date a {
-	padding-right:32px;
-}
-#comments {
-	margin-top:32px;
-}
-#comments .t9 {
-	margin-top:0;
-}
-.ads-inline {
-    text-align: center;
-}
-.embed-form {
-	margin-bottom:16px;
-}
-
-div.social a.oc { margin-right:16px }
-div.social { margin: 16px 0; }
-div.social h4 { margin-bottom:16px }
-#share_data_msg.k8 { color:red !important; }
-.similar-calc ul {  padding:0; }
-.similar-calc ul li { padding:0 0 16px 16px; display: inline-block; }
-</style>
-<title>Online calculator: Playfair cipher</title>
 </head>
-<body id="ui_viewer" class="y1 viewer">
-<div id="main_menu" class="nc w0 g1" tabindex="-1"><ul class="z0"  role="menu" aria-hidden="true"><li class="a1" role="menuitem" tabindex="0" onclick="BSAttractShare(false);; return BSPreventDefaultAction(event);"><span class="y0"><i class="material-icons">share</i></span><span class="b1">Share</span></li><li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/all/';"><span class="y0"><i class="material-icons">apps</i></span><span class="b1">All online calculators</span></li><li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/personal/requests/new/';"><span class="y0"><i class="material-icons">lightbulb_outline</i></span><span class="b1">Request a calculator</span></li><li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/todo/translationtask/?id[]=7751&from=en';"><span class="y0"><i class="material-icons">language</i></span><span class="b1">Translation</span></li></ul></div><div class="m1 q7 kb"><div class="q1"><div class="r1 s1 mdc-toolbar__section--shrink-to-fit" ><a class="material-icons n1" id="btn_main_menu" href="#">menu</a><a href="/" class="u1 nb" title="Online calculators"><h2 class="u1">PLANETCALC <span class="cc kc">Online calculators</span></h2></a></div><div class="r1 t1" ><a id="btn_change_language_menu" class="material-icons cc n1" href="#">language</a><a class="material-icons n1" href="/search/">search</a><a href="/personal/" class="cc ob c2 g2" id="planetcalc_login">Login</a></div></div><div style="min-height:0;"><div id="change_language_menu" class="nc w0 g1" tabindex="0"><ul class="z0"  role="menu" aria-hidden="true"><li><ul class="c1"><li id="change_language_en" class="a1 f1" role="menuitem" tabindex="0" onclick="; return BSPreventDefaultAction(event);"><span class="e1"><i class="material-icons">check</i></span><span class="b1">English</span></li><li id="change_language_es" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://es.planetcalc.com/7751/?language_select=es';"><span class="e1"><i class="material-icons">check</i></span><span class="b1">Español</span></li><li id="change_language_fr" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://fr.planetcalc.com/7751/?language_select=fr';"><span class="e1"><i class="material-icons">check</i></span><span class="b1">Français</span></li><li id="change_language_ru" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://planetcalc.ru/7751/?language_select=ru';"><span class="e1"><i class="material-icons">check</i></span><span class="b1">Русский</span></li></ul></li></ul></div></div></div><div id="main_div" class="jb">  
-	<div class="v_"> 
-	<div class="w_"> 
-<div class="main-column x_ g0" id="left-block"><div class="qb"><a class="material-icons" href="/">home</a><i class="material-icons">chevron_right</i><a href="/search/?tag=1459">Professional</a><i class="material-icons">chevron_right</i><a href="/search/?tag=1462">Computers</a></div><header><h1>Playfair cipher</h1><p class="f_">This online calculator encrypts and decrypts a message given Playfair cipher keyword. Non-alphabetic symbols (digits, whitespaces, etc.) are ignored.</p><div><div class="qb author-date v"><i class="material-icons">person_outline</i><a href="/7751/?thanks=1">Timur</a><i class="material-icons">schedule</i><span class="nav-created">2018-03-02 16:14:19</span></div></div></header><script>
-document.addEventListener("DOMContentLoaded",function() {
-	var f = new FormatterTimeSpan();
-	$('.nav-created').text(function ( i,t ) { return f.Format(t);});
-});
+
+
+<body >
+<div id="page-wrap">
+    
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
 </script>
-<div class="article"><div class="article_body"><p>The <strong>Playfair cipher</strong> or <strong>Playfair square</strong> or <strong>Wheatstone-Playfair cipher</strong> is a manual symmetric encryption technique and was the first literal digram substitution cipher. The scheme was invented in 1854 by Charles Wheatstone, but bears the name of Lord Playfair for promoting its use.<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>
-<p>You can read about encoding and decoding rules at the wikipedia link referred above. Below you can find the calculator for encryption and decryption to play with. It uses most common rules for Playfair cipher:</p>
-<ol>
-<li>'J' is replaced with 'I' to fit 5x5 square</li>
-<li>'X' is used as substitution in case you need to fill second letter in the digram, or split two identical letters</li>
-<li>Playfair square is filled row-by-row, starting with the keyword.</li>
-</ol>
-<p></p>
-<a id="calculator7750"></a><div class="ads-inline"><div id="div-gpt-ad-1585587902-1"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1585587902-1");});</script></div></div><div class="pc-article-part"><div class="u5"><div class="w_ f8"  id="dialogv5e7324da38432"><div class="x_ j0"><div class="s8 t8"><a class="t_" target="_blank" href="https://planetcalc.com/7750/?license=1"><img src="/img/32x32i.png" alt="PLANETCALC, Playfair cipher"></a><h4 class="y9">Playfair cipher</h4></div></div><div class="x_ j0"><div class="j4 m4 g8 "><textarea class="l4"  value="Attack at dawn" name="text" id="dialogv5e7324da38432_text" rows="5" cols="60">Attack at dawn</textarea>
-<div class="c3 k3"><div class="e3"></div><div class="f3"><label class="h3 i3" for="dialogv5e7324da38432_text">Text</label></div><div class="g3"></div></div></div><div class="n4"><div id="hlp_dialogv5e7324da38432_text" class="e4 c4"></div></div></div><div class="x_ a0"><div class="j4 g8"><input class="l4" type="text" value="Gravity Falls"  value="Gravity Falls" name="keyword" id="dialogv5e7324da38432_keyword"/><label class="h3 i3" for="dialogv5e7324da38432_keyword">Playfair keyword</label><div class="_3"></div></div><div class="n4"><div id="hlp_dialogv5e7324da38432_keyword" class="e4 c4"></div></div></div><div class="x_ a0"><div class="s3 _ h8"><i class="w3"></i><label class="h3 i3 h8" for="dialogv5e7324da38432_action">Action</label><select class="t3"  value="encrypt" name="action" id="dialogv5e7324da38432_action"><option selected="selected"  value="encrypt">Encrypt</option>
-<option  value="decrypt">Decrypt</option>
-</select><div class="_3"></div></div><div class="n4"><div id="hlp_dialogv5e7324da38432_action" class="e4 c4"></div></div></div><div class="x_ a0"><div class="r8"><button type="button" id="dialogv5e7324da38432_calculate" class="c2 g2 s_ pc-btn-calc"><span id="dialogv5e7324da38432_button_text">Calculate</span></button></div></div><div class="x_ j0"><div class="e8"><div id="dialogv5e7324da38432__progress_" role="progressbar" class="c8 m0 t0"><div class="p0"></div><div class="q0"></div><div class="n0 r0"><span class="o0"></span></div><div class="n0 s0"><span class="o0"></span></div></div></div></div><div class="x_ a0"><div class="o8">Playfair square</div><div class="pc-output-value l9" id="dialogv5e7324da38432_square">&nbsp;</div></div><div class="x_ f0"><div class="o8">Transformed text</div><div class="pc-output-value q8" id="dialogv5e7324da38432_text2">&nbsp;</div></div><div class="x_ j0"><div class="b2"><div class="pc-calc-footer"><div class="ba u8"></div></div></div></div></div><script>function Dialogv5e7324da38432() {var me = this;me.id = "dialogv5e7324da38432";me.GetElement = function () { return document.getElementById( me.id ); };me.GetEventHandlerName = function () { return "dialoghandlerv5e7324da38432"; };this.dialog_controls = [new DialogInput("text", this, 0,new ElementAccessorText()),new DialogInput("keyword", this, 0,new ElementAccessorText()),new DialogInput("action", this, 0,new ElementAccessorSelect()),new DialogInput("calculate", this, 0,new ElementAccessorOperation()),new DialogInput("_progress_", this, 0,new ElementAccessorDefault()),new DialogInput("square", this, 0,new ElementAccessorDefault()),new DialogInput("text2", this, 0,new ElementAccessorOutput())];me.dialog_controls._all ={};me.dialog_controls.forEach( function( e ) { if (me[e.id]===undefined) me[e.id] = e; me.dialog_controls._all[e.id] = e;} );this.addHandler = function ( handler ) {this.dialog_controls.forEach(function(c) { c.addHandler( handler);});};this.SetValues = function ( values ) {this.dialog_controls.forEach(function(c) {if ( values[c.id]!==undefined ) { c.SetValue( values[c.id] ); }});};this.Clear = function ( ) {this.dialog_controls.forEach(function( c) { c.ResetValue();});};this.SetDefaultValues = function () { this.Clear();};this.GetValues = function () {var ret = {}; this.dialog_controls.forEach(function( c) { ret[c.id] = c.GetValue();});return ret;};this.Validate = function ( ) {for(var i=0;i<me.dialog_controls.length;++i) if (!me.dialog_controls[i].Validate()) return false; return true;};this.layout = function ( ) {}};document.addEventListener("DOMContentLoaded", function(event) {var dlg = new Dialogv5e7324da38432();
-var hd = new CalculatorHandler(new function () {
-var me = this;
-me.id = 7750;
-me.global = 1;
-var outputs = {};
-me.sinks={change:[],done:[]};
-me.startOnLoad = 1;
-me.infinite = 0;
-var inputs = {};
-var renderers = {};
-var recordsets = {};
-var diagrams = {};
-var handler, dialog, refreshTimer;
-var worker; var proxies; var stubs;
-var outer = this;
-var Planetcalc = new function() { 
-var inner = this; var Planetcalc = inner; var cpcData = new CalcProgressData();var Calculate7750_cpc = new CalcProgressControl(cpcData);inner.Calculate7750 = function( ___inp___ ) {
-var progressControl = Calculate7750_cpc;
-var Calculate7750_result={};function  __impl__( __inp__ ) {
 
-var text = __inp__["text"]===undefined?"Attack at dawn":__inp__["text"];
-var keyword = __inp__["keyword"]===undefined?"Gravity Falls":__inp__["keyword"];
-var action = __inp__["action"]===undefined?"encrypt":__inp__["action"];
-var square = { "SetValue": function( v ) { Calculate7750_result["square"]=v; } };
-var text2 = { "SetValue": function( v ) { Calculate7750_result["text2"]=v; } };var alphabet = 'abcdefghijklmnopqrstuvwxyz';
-var playfair = [];
-var column = 5;
 
-var playfairLookup = {}
 
-function pushSquare(letter) {
-    if (!letter.match(/[a-z]/i))
-        return;
-    var uLetter = letter.toUpperCase();
-    if (uLetter == 'J') uLetter = 'I';
-    if (playfairLookup[uLetter])
-        return;
-    if (column == 5) {
-        playfair.push([]);
-        column = 0;
-    }
-    playfair[playfair.length-1].push(uLetter);
-    column++;
-    playfairLookup[uLetter] = { row: playfair.length-1, column: playfair[playfair.length-1].length-1 };
+    <div class="w3-container">
+
+        <div id="header" class="row" >
+            <div id="title"></div>
+            <div id="logindisplay">
+                
+
+
+
+    [ <a href="https://asecuritysite.com/account/logon">Log On</a> ]
+
+
+
+
+
+
+
+          
+
+
+
+            </div>
+
+            <div id="tabs_container">
+
+
+            <div class="invertedshiftdown">
+                <ul>
+                    <li ><a href="https://asecuritysite.com">Home</a></li>
+                    <li ><a href="/tests">Tst</a></li>
+                    <li ><a href="/challenges">Cha</a></li>
+                    <li class=current><a href="/encryption">Enc</a></li>
+                    <li ><a href="/coding">Code</a></li>
+                    <li ><a href="/ip">IP</a></li>
+
+                    <li ><a href="/fun">Fun</a></li>
+                    <li ><a href="/information">Sub</a></li>
+
+                    <li ><a href="/forensics">DigF</a></li>
+                    <li ><a href="/Cisco">Cis</a></li>
+                    
+                    <li ><a href="/comms">Com</a></li>
+
+                    <li ><a href="/database1">Db</a></li>
+
+                    <li ><a href="/Home/About">About</a></li>
+                    <li ><a href="/networksims">Netsim</a></li>
+                    <li ><a href="/bigdata">Big Data</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+            <p></p>
+        <div id="main" class="row">
+
+            
+<script src="/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.validate.js" type="text/javascript"></script>
+<!--  -->
+
+   <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="whitesmoke">
+
+<tr> 
+        <td valign="top" colspan="2">
+        <h1 id="logo">Diffie-Hellman Example</h1>
+          <p>[<a href="javascript:history.go(-1)">Back</a>] Diffie-Hellman is a standard method of Alice and Bob being able to communicate, 
+              and end up with the same secret encryption key. It is used in many applications, and uses two numbers (G and N) for the first part of the calculation (of which N must be a prime number):</p>
+            [<a href="https://www.youtube.com/watch?v=jISbQarmt6s" target="_blank">Related Lecture</a>] 
+             [<a href="/public/diffie_examples.pdf" target="_blank" >Tutorial</a>]
+             [<a href="http://buchananweb.co.uk/2011_tut_encryption.pdf" target="_blank" >Software Tutorial</a>][<a href="https://youtu.be/iw2bJs3pi-w" target="_blank">Software Lecture</a>]
+              [<a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank" >Theory</a>][<a href="https://www.linkedin.com/pulse/ghost-john-napier-hail-mr-diffie-hellman-william-buchanan" target="_blank">Blog</a>]
+            [<a href="/encryption/pickg" target="_blank">Picking G value</a>]             
+
+ <div id="PartialViewGN">
+ 
+
+
+              <table style="width:100%">
+
+                  <tr><td>G:</td> <td> <input id="Gvalue" name="Gvalue" style="width:80%" type="text" value="" /></td></tr>
+                  <tr><td>N:</td> <td> <input id="Nvalue" name="Nvalue" style="width:80%" type="text" value="" /></td></tr>     
+                               
+ </table>
+
+</div>
+
+                  
+<form action="/encryption/diffie" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#PartialViewGN" id="form0" method="post"> <input type="submit" value="Generate G and N" name="button1" class="defaultbutton red" />
+</form>
+
+
+ <div id="PartialViewXY">
+ 
+
+<p> Next Bob and Alice will generate two random numbers (X and Y), calculate an X value and a Y value, respectively:</p>
+
+ <table style="width: 100%">
+            <tr> 
+              <td style="width: 30%"> <strong>Bob's X Value</strong></td>
+              <td> <input id="Xvalue" name="Xvalue" rows="1" style="width:20%" type="text" value="" /></td>
+              <td style="width: 30%"> <strong>Alice's Y value</strong></td>
+              <td> <input id="Yvalue" name="Yvalue" rows="1" style="width:20%" type="text" value="" /></td>
+            </tr>
+                        <tr> 
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"> Bob's random value</td>
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"> Alice's random value</td>
+            </tr>
+
+            <tr> 
+              <td style="width: 30%"> <strong>Bob's A value</strong></td>
+              <td> <input id="Avalue" name="Avalue" rows="1" style="width:20%" type="text" value="" /></td>
+              <td style="width: 30%"> <strong>Alice's B value</strong></td>
+              <td> <input id="Bvalue" name="Bvalue" rows="1" style="width:20%" type="text" value="" /></td>
+            </tr>
+            <tr> 
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"> A=G^x mod N</td>
+             
+
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"> B=G^y mod N</td>
+              
+            </tr>
+            <tr> 
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"></td>
+             
+
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"></td>
+              
+            </tr>
+
+
+          </table>
+
+
+</div>
+
+<form action="/encryption/diffie" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#PartialViewXY" id="form1" method="post"> <input type="submit" value="Generate X and Y" name="button2"  class="defaultbutton red" />
+</form>
+    
+          <div id="PartialViewGenK">
+ 
+ <p> and Bob will send his A value to Alice, and Alice will send her 
+            B value to Bob, and they now re-calculate the values to generate the <b>same shared key</b>:</p>
+          <p> </p>
+          <table style="width: 100%">
+            <tr> 
+              <td style="width: 30%"> </td>
+              <td style="width: 20%"> </td>
+              <td style="width: 30%"> </td>
+              <td style="width: 20%"> </td>
+            </tr>
+
+            <tr> 
+              <td style="width: 30%"> <strong>Bob's Key</strong></td>
+              <td> <input id="BobKey" name="BobKey" style="width:80%" type="text" value="" /></td>
+              <td style="width: 20%"> Alice's Key</td>
+              <td> <input id="AliceKey" name="AliceKey" style="width:80%" type="text" value="" /></td>
+            </tr>
+            <tr> 
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;">Key=B^x mod N</td>
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;">Key=A^y mod N</td>
+            </tr>
+            <tr> 
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"></td>
+             
+
+              <td style="width: 30%; height: 47px;"> </td>
+              <td style="width: 20%; height: 47px;"></td>
+              
+            </tr>
+            </table>
+
+            <p></p>
+</div>   
+              
+<form action="/encryption/diffie" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#PartialViewGenK" id="form2" method="post"> <input type="submit" value="Generate Keys" name="button3" class="defaultbutton red" />
+</form>
+
+         
+         </td></tr> </table>
+            <h2>Try an example</h2>                 <ul>
+  
+          <li><strong>x=3, y=4, G=4 and N=7</strong>. <a href="/encryption/diffie?val=3%2C4%2C7%2C4">Try</a></li>
+      <li><strong>x=6, y=15, G=5 and N=23</strong>. <a href="/encryption/diffie?val=6%2C15%2C23%2C5">Try</a> <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank">Refer</a></li>
+  
+                   <li><strong>x=5, y=7, G=10 and N=541</strong>. <a href="/encryption/diffie?val=5%2C7%2C541%2C10">Try</a> <a href="http://www.irongeek.com/diffie-hellman.php" target="_blank">Refer</a></li>
+     <li><strong>x=6, y=15, G=5 and N=23. Share=2</strong>. <a href="/encryption/diffie?val=6%2C15%2C23%2C5">Try</a> <a href="https://www.cs.utexas.edu/~byoung/cs361/lecture52.pdf" target="_blank">Refer</a></li>
+ 
+                  <li><strong>x=7, y=7, G=5 and N=11</strong>. <a href="/encryption/diffie?val=7%2C7%2C11%2C5">Try</a> </li>
+     <li><strong>x=7, y=9, G=8 and N=13</strong>. <a href="/encryption/diffie?val=7%2C9%2C13%2C8">Try</a> </li>
+                 <li><strong>x=5, y=4, G=2969 and N=9929. Share=8106</strong>. <a href="/encryption/diffie?val=5%2C4%2C9929%2C2969">Try</a> </li>
+
+                 <li><strong>x=6, y=5, G=3881 and N=125. Share=792</strong>. <a href="/encryption/diffie?val=6%2C5%2C1861%2C3881">Try</a> </li>
+ 
+          <li><strong>x=3, y=4, G=3623 and N=1153. Share=939</strong>. <a href="/encryption/diffie?val=3%2C4%2C1153%2C3623">Try</a> </li>
+  
+          
+  
+      </ul>
+<h2>Outline</h2>
+<p>In Diffie-Hellman, Bob and Alice agree on G (a generator) and N (a prime number), and then Bob picks a random value of x, and Alice picks a random value of y:</p>
+<table>
+<tr><td>Bob (x)</td><td>Alice (y)</td></tr>
+<tr><td>\(b=G^x \mod N\)</td><td>\(a=G^y \mod N\)</td></tr>
+<tr><td>Bob sends Alice the value of <i>b</i></td><td>Alice sends Bob the value of <i>a</i></td></tr>
+<tr><td>\(Key=a^x \mod N\)</td><td>\(Key=b^y \mod N\)</td></tr>
+</table>
+<h2>Presention</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wyNPhNAsmJ0?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-TjSuch3VGU?rel=0" frameborder="0" allowfullscreen></iframe>
+         <h2>Code Used</h2>
+<!-- code formatted by http://manoli.net/csharpformat/ -->
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: Consolas, "Courier New", Courier, Monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
 }
 
-keyword.split('').forEach(pushSquare);
-alphabet.split('').forEach(pushSquare);
-square.SetValue(playfair);
+.csharpcode pre { margin: 0em; }
 
-function EncryptBigramm(first, second, square) {
-    var transform = '';
-    var posFirst = playfairLookup[first];
-    var posSecond = playfairLookup[second];
-    if (posFirst.row == posSecond.row) {
-        transform += square[posFirst.row][posFirst.column == 4 ? 0 : posFirst.column+1];
-        transform += square[posSecond.row][posSecond.column == 4 ? 0 : posSecond.column+1];
-    } else if (posFirst.column == posSecond.column) {
-        transform += square[posFirst.row == 4 ? 0 : posFirst.row+1][posFirst.column];
-        transform += square[posSecond.row == 4 ? 0 : posSecond.row+1][posSecond.column];
-    } else {
-        transform += square[posFirst.row][posSecond.column];
-        transform += square[posSecond.row][posFirst.column];
-    }
-    return transform;
-}
+.csharpcode .rem { color: #008000; }
 
-function DecryptBigramm(first, second, square) {
-    var transform = '';
-    var posFirst = playfairLookup[first];
-    var posSecond = playfairLookup[second];
-    if (posFirst.row == posSecond.row) {
-        transform += square[posFirst.row][posFirst.column == 0 ? 4 : posFirst.column-1];
-        transform += square[posSecond.row][posSecond.column == 0 ? 4 : posSecond.column-1];
-    } else if (posFirst.column == posSecond.column) {
-        transform += square[posFirst.row == 0 ? 4 : posFirst.row-1][posFirst.column];
-        transform += square[posSecond.row == 0 ? 4 : posSecond.row-1][posSecond.column];
-    } else {
-        transform += square[posFirst.row][posSecond.column];
-        transform += square[posSecond.row][posFirst.column];
-    }
-    return transform;
+.csharpcode .kwrd { color: #0000ff; }
+
+.csharpcode .str { color: #a31515; }
+
+.csharpcode .op { color: #0000c0; }
+
+.csharpcode .preproc { color: #cc6633; }
+
+.csharpcode .asp { background-color: #ffff00; }
+
+.csharpcode .html { color: #800000; }
+
+.csharpcode .attr { color: #ff0000; }
+
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
 }
 
-var letters = text.toUpperCase().split('').filter(function(item){ return item.match(/[a-z]/i);}).map(function(item){ return item == 'J' ? 'I' : item; });
-var transformed = '';
-for(var i = 0; i < letters.length; i += 2) {
-    var first = letters[i];
-    var second = (i + 1) >= letters.length ? 'X' : letters[i+1];
-    if (first == second) {
-        second = 'X';
-        i--; //start from second
-    }
-    if (action == 'encrypt')
-        transformed += EncryptBigramm(first, second, playfair);
-    else 
-        transformed += DecryptBigramm(first, second, playfair);
-}
-text2.SetValue(transformed);
-};
- __impl__(___inp___); if ( progressControl.completed() ) { progressControl.context = null; } return Calculate7750_result;};inner.main=inner.Calculate7750;inner.progressControl = Calculate7750_cpc; inner.init = function(){inner.progressControl.onDataReady();};};me.adapter = null;function startLoad() {
-me.progressControl.addEventListener("ready",handler.onReady);
-Planetcalc.init(); }
-me.timeout = 1500;
-me.auto = 1;
-me.init = function ( h, dlg ) { var o; handler=h;dialog =dlg;me.progressControl = Planetcalc.progressControl;var n; var fn;n='text';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='keyword';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='action';if ( dlg[n] ) { inputs[n] = dlg[n]; }o = dlg.square; outputs[o.id] =o; o.formatter =new FormatterMatrix( 0,0,0,"R" );o = dlg.text2; outputs[o.id] =o; o.formatter =new FormatterSame( );startLoad();};
-me.stop = function() {
-	if (worker) worker.postMessage({type:"stop"}); 
-	else Planetcalc.progressControl.stop();
-};
-me.start = function() {
-	handler.onStart();
-	if (worker) {
-		me.changeDisplayOptions();
-		worker.postMessage({type:"start",inputs:proxies(dialog.GetValues())});
-	} else {
-inputValues = {"text":inputs.text.GetValue(), "keyword":inputs.keyword.GetValue(), "action":inputs.action.GetValue()};	Planetcalc.progressControl.clear();
-		me.result = null;
-		me.refresh();
-	}
-};me.getInputs = function() {
-	return inputs;
-};
-function objectValues( a, o ) {
-	for(var n in o) {
-		a.push( o[n] );
-	}
-}
-me.getOutputs = function() {
-	var ret = [];
-	objectValues( ret, outputs );
-	objectValues( ret, diagrams );
-	objectValues( ret, renderers );
-	return ret;
-};me.refresh = function ( ) {me.doit();};
-me.setResult = function( res, done ) {outputs.square.SetValue(res.square);outputs.text2.SetValue(res.text2);if (done) { handler.onStop();if ( PCF.requestFormulaUpdate( false ) ) { var mjx = window.MathJax; mjx.Hub.Queue(["Typeset",mjx.Hub]);};}};
-function preprocess( p, cb ) {cb(p,true);}var inputValues = null;me.doit = function ( ) {preprocess(inputValues, function( p, sync, cont ) {if ( cont ) me.progressControl.repeat();try {me.changeDisplayOptions();
-var res = Planetcalc.Calculate7750(p);if ( res ) { if ( me.result ) { for( var n in res ) me.result[n] = res[n]; } else me.result = res; }if ( me.result ) me.setResult( me.result, true );} catch( e ) {
-	handler.onStop(e);
-}});};me.changeDisplayOptions = function () {me.calculateDisplay(new DisplayWrapperInput(inputs.text), new DisplayWrapperInput(inputs.keyword), new DisplayWrapperOpt(inputs.action), new DisplayWrapper(outputs.square), new DisplayWrapper(outputs.text2));dialog.layout();
-}
-me.calculateDisplay = function ( text, keyword, action, square, text2 )
- {
-};
-},{calculate:"Calculate", stop:"Stop"});;
-hd.initdialog(dlg);dlg.addHandler(hd);window.dialoghandlerv5e7324da38432 = hd;});</script><div id="user_data_7750"><div class="tc" id="ud_note7750"><button class="c2 pc-btn-new"><i class="material-icons">save</i> Save</button>  <button type="button" class="c2 pc-btn-embed-wol"><i class="material-icons">extension</i> Widget</button></div><script>document.addEventListener("DOMContentLoaded", function(event) { window.udh_7750=new PCUserDataHandler( { calcid:7750,id:"user_data_7750"});});</script></div></div></div><div class="ads-inline"><div id="div-gpt-ad-1585587902-2"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1585587902-2");});</script></div></div>
-<p></p>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn:1">
-<p><a href="https://en.wikipedia.org/wiki/Playfair_cipher"  rel="nofollow">Playfair cipher</a>&#160;<a href="#fnref1:1" rev="footnote" class="footnote-backref">&#8617;</a></p>
-</li>
-</ol>
-</div></div></div><div class="social social-share ee"><a class="pc-social-share oc pc" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplanetcalc.com%2F7751%2F" rel="noopener nofollow" data-origin="pc"><img src="/img/social/facebook24x24.png" alt="facebook"></a><a class="pc-social-share oc qc" target="_blank" href="https://twitter.com/intent/tweet?text=Online%20calculator%3A%20Playfair%20cipher&url=https%3A%2F%2Fplanetcalc.com%2F7751%2F" rel="noopener nofollow" data-origin="qc"><img src="/img/social/twitter24x24.png" alt="twitter"></a><a class="pc-social-share oc r_" href="mailto:?subject=Online%20calculator%3A%20Playfair%20cipher&body=https%3A%2F%2Fplanetcalc.com%2F7751%2F" rel="noopener nofollow" data-origin="r_"><img src="/img/social/email24x24.png" alt="email"></a><div><div class="t9 share-switch"><div class="x6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" id="share_data_md"/></div></div></div> <label for="share_data_md">&nbsp;share my calculation</label></div><div class="f_"></div></div></div><div class="similar-calc"><h4>Similar calculators</h4><ul><li>&bull; <a href="/7984/" title="Substitution Cipher Tool">Substitution Cipher Tool</a></li><li>&bull; <a href="/1434/" title="Caesar cipher">Caesar cipher</a></li><li>&bull; <a href="/2468/" title="Vigenère cipher">Vigenère cipher</a></li><li>&bull; <a href="/3327/" title="Hill cipher">Hill cipher</a></li><li>&bull; <a href="/8567/" title="Automated Vigenère cipher decoder">Automated Vigenère cipher decoder</a></li><li>&bull; <a href="/search/?section=1462" class="vc">Computers section ( 24 calculators )</a></li></ul></div><div class="b"><i class="material-icons">local_offer</i>&nbsp;<a class="vc yb" href="/search/?tag=4430" >#cipher</a> <a class="vc xb" href="/search/?tag=5331" >#playfair</a> <a class="vc zb" href="/search/?tag=1205" >cipher</a> <a class="vc xb" href="/search/?tag=1212" >ciphertext</a> <a class="vc _c" href="/search/?tag=1462" >Computers</a> <a class="vc zb" href="/search/?tag=1204" >cryptography</a> <a class="vc yb" href="/search/?tag=1207" >encryption</a> <a class="vc xb" href="/search/?tag=5330" >Playfair</a> <a class="vc bc" href="/search/?tag=1203" >text</a> <a class="vc xb" href="/search/?tag=5333" >Wheatstone</a> <a class="vc xb" href="/search/?tag=5332" >Wheatstone-Playfair</a> </div><div class="b2"><span class="u8"><a href="https://planetcalc.com/7751/?license=1" target=_blank><img src="/img/lic/by-sa_s.png" alt="Creative Commons Attribution/Share-Alike License 3.0 (Unported)"/></a></span> PLANETCALC, Playfair cipher<div class="ba u8"></div></div>		<script>
-		function showAvInitials( i ) {
-			i.style.display="none";
-			var d = i.parentNode;
-			var bg = d.getAttribute("data-bg");
-			d.style.backgroundColor = bg;
-			var e = d.getElementsByClassName("tb");
-			if ( e.length ) {
-				e[0].style.display="inline";
-			}
-		}
-		function CommentAvatarFormatter( formatter ) {
-			var colors = [ "#D32F2F", "#C2185B", "#7B1FA2", "#512DA8", "#303F9F", "#1976D2", "#0288D1", "#0097A7", "#00796B", "#388E3C", "#689F38", "#AFB42B", "#FBC02D", "#FFA000", "#F57C00", "#E64A19", "#5D4037", "#455A64"];
-	this.Format = function ( colname, record ) {
-		var ret = '<div class="' + "sb" + '"';
-			var name = record.nickname;
-			if ( !name ) name = 'Unknown'; else name = name.toString();
-			var hash = 0;
-			for(var i =0 ;i<name.length;++i) {
-				hash+=name.charCodeAt(i);
-			}
-			var color = colors[ hash%colors.length];
-			var namearr = name.split(' ');
-			var abbr ='';
-			for(var i=0;i<namearr.length && i<2 ;++i) {
-				if ( namearr[i].length) {
-					abbr+=namearr[i].substr(0,1);
-				}
-			}
-		if ( record.photo ) {
-			ret+='data-bg="' + color + '"><img src="' + record.photo + '" alt="' + (record.nickname && record.nickname.replace?record.nickname.replace('"',"'"):'') + '" onerror="showAvInitials(this);">';
-		} else {
-			ret+=' style="background-color:' + color + '">';
-		}
-		ret+='<span class="' + "tb" + '"' + (record.photo?' style="display:none;"':'') + '>' + abbr.toUpperCase()  + '</span>';
-		ret+='</div>';
-		return ret;
-	}
-}</script>
-<div id="comments"><div class="w_ f8"  id="dialogv5e8226beb2108"><div class="x_ j0"><div class="s8"><h4 class="y9">Comments</h4></div></div><div class="x_ _0"><div id="dialogv5e8226beb2108_group_sofia"  class="placeholder"></div></div><div class="x_ g0"><div class="w_ f8"  id="dialogv5e8226beb2108_group_comments"><div class="x_ j0"><div class="j4 m4 g8 "><textarea class="l4"  value="" id="dialogv5e8226beb2108_message" rows="5" cols="80"></textarea>
-<div class="c3"><div class="e3"></div><div class="f3"><label class="h3" for="dialogv5e8226beb2108_message">Your message</label></div><div class="g3"></div></div></div><div class="n4"><div id="hlp_dialogv5e8226beb2108_message" class="e4 c4"></div></div></div><div class="x_ j0"><div class="t9"><div class="x6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" id="dialogv5e8226beb2108_notify"/></div></div></div><label for="dialogv5e8226beb2108_notify"> Subscribe to comments notifications</label></div><div class="n4"><div id="hlp_dialogv5e8226beb2108_notify" class="e4 c4"></div></div></div></div></div><div class="x_ j0"><div class="e8"><div id="dialogv5e8226beb2108_progress" role="progressbar" class="c8 m0 t0"><div class="p0"></div><div class="q0"></div><div class="n0 r0"><span class="o0"></span></div><div class="n0 s0"><span class="o0"></span></div></div></div></div><div class="r8 x_ j0"><button class="c2 g2" type="button" id="dialogv5e8226beb2108_send"><span class="f2 ">Send</span></button>
-</div><div class="x_ j0"><div id="dialogv5e8226beb2108_comments"  class="placeholder"></div></div><input type="hidden" value="8177" id="dialogv5e8226beb2108_messagebox"/></div><script>function Dialogv5e8226beb2108() {var me = this;me.id = "dialogv5e8226beb2108";me.GetElement = function () { return document.getElementById( me.id ); };me.GetEventHandlerName = function () { return "dialoghandlerv5e8226beb2108"; };this.dialog_controls = [new DialogInput("group_sofia", this, 0,new ElementAccessorDefault()),new DialogInput("group_comments", this, 0,new ElementAccessorDefault()),new DialogInput("message", this, new ValidatorTextSize( 0,5000 ),new ElementAccessorText()),new DialogInput("notify", this, 0,new ElementAccessorCheckbox()),new DialogInput("messagebox", this, 0,new ElementAccessorText()),new DialogInput("progress", this, 0,new ElementAccessorDefault()),new DialogInput("send", this, 0,new ElementAccessorOperation()),new DialogInput("comments", this, 0,new ElementAccessorDefault())];me.dialog_controls._all ={};me.dialog_controls.forEach( function( e ) { if (me[e.id]===undefined) me[e.id] = e; me.dialog_controls._all[e.id] = e;} );this.addHandler = function ( handler ) {this.dialog_controls.forEach(function(c) { c.addHandler( handler);});};this.SetValues = function ( values ) {this.dialog_controls.forEach(function(c) {if ( values[c.id]!==undefined ) { c.SetValue( values[c.id] ); }});};this.Clear = function ( ) {this.dialog_controls.forEach(function( c) { c.ResetValue();});};this.SetDefaultValues = function () { this.Clear();};this.GetValues = function () {var ret = {}; this.dialog_controls.forEach(function( c) { ret[c.id] = c.GetValue();});return ret;};this.Validate = function ( ) {for(var i=0;i<me.dialog_controls.length;++i) if (!me.dialog_controls[i].Validate()) return false; return true;};this.layout = function ( ) {}};document.addEventListener("DOMContentLoaded", function(event) {var dlg = new Dialogv5e8226beb2108();
-var hd = function() {var dialogv5e8226beb2108_comments_init_data="";var dialogv5e8226beb2108_comments=new AjaxSetMessages(dialogv5e8226beb2108_comments_init_data, "/service/comments/", "dialogv5e8226beb2108_comments", "Loading...");dialogv5e8226beb2108_comments.Renderer.AddColumn("posted","Created",new RecordFieldFormatter( new FormatterTimeSpan() ));dialogv5e8226beb2108_comments.Renderer.AddColumn("avatar","",new CommentAvatarFormatter());dialogv5e8226beb2108_comments.Renderer.AddColumn("created","",new RecordFieldFormatter( new FormatterPrefix("Registered: ", new FormatterDateOnly()) ));dialogv5e8226beb2108_comments.Renderer.AddColumn("posts","",new RecordFieldFormatter( new FormatterPrefix("Posts: ", null) ));dialogv5e8226beb2108_comments.Render();dialogv5e8226beb2108_comments.qc.messagebox=8177;dialogv5e8226beb2108_comments.qc.language="en";dialogv5e8226beb2108_comments.qc.parent=0; var ch= new CommentFormHandler("https://planetcalc.com/7751/?loginrequirednow=1&language_select=en",false);ch.setTable(dialogv5e8226beb2108_comments); return ch;}();;
-hd.initdialog(dlg);dlg.addHandler(hd);});</script></div></div><div class="x_ _0"><div id="top-right-card" class="right_fix"></div><div class="cc right-ads"><div id="div-gpt-ad-1585587902-3"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1585587902-3");});</script></div></div><div id="bottom-right-anchor" ></div><div id="bottom-right-card" ><div class="social social-share ce"><h4 class="share-title">Share <span class="share-subject">this page</span></h4><a class="pc-social-share oc pc" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplanetcalc.com%2F7751%2F" rel="noopener nofollow" data-origin="pc"><img src="/img/social/facebook24x24.png" alt="facebook"></a><a class="pc-social-share oc qc" target="_blank" href="https://twitter.com/intent/tweet?text=Online%20calculator%3A%20Playfair%20cipher&url=https%3A%2F%2Fplanetcalc.com%2F7751%2F" rel="noopener nofollow" data-origin="qc"><img src="/img/social/twitter24x24.png" alt="twitter"></a><a class="pc-social-share oc r_" href="mailto:?subject=Online%20calculator%3A%20Playfair%20cipher&body=https%3A%2F%2Fplanetcalc.com%2F7751%2F" rel="noopener nofollow" data-origin="r_"><img src="/img/social/email24x24.png" alt="email"></a><div><div class="t9 share-switch"><div class="x6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" id="share_data"/></div></div></div> <label for="share_data">&nbsp;share my calculation</label></div><div class="f_"></div></div></div></div><div class="ads-sticker right-ads"><div id="div-gpt-ad-1585587902-4"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1585587902-4");});</script></div></div></div></div></div><script>
-var shiftMax = 0;
-document.addEventListener('DOMContentLoaded', function(){ 
-	shiftMax = $('#left-block').offset().top-$('#bottom-right-anchor').offset().top+$('#left-block').height()-$('#bottom-right-card').height();
-	$(window).scroll(sticky_update);
-	sticky_update();
-	showStoreRef();
-	
-var sharer = new PSS.Sharer("my calculation",'Calculation data size is %1. To share your calculation please <a class="save_data_link" href="#">save the calculation data</a> to our server storage.');});
+.csharpcode .lnum { color: #606060; }
+</style>
+<pre class="csharpcode">
+        <span class="kwrd">public</span> ActionResult diffie(hashing h, <span class="kwrd">string</span> button1, <span class="kwrd">string</span> button2, <span class="kwrd">string</span> button3)
+        {
+            <span class="kwrd">if</span> (button1 != <span class="kwrd">null</span>)
+            {
 
-function sticky_update() {
-	var window_top = $(window).scrollTop();
-	var off = $('#bottom-right-anchor').offset();
-	var shift = window_top+56 - off.top;
-	if (shift>0 && off.left>400 && shiftMax>0) {
-		$('#bottom-right-anchor').height(shift<shiftMax?shift:shiftMax);
-	} else {
-		$('#bottom-right-anchor').height(0);
-	}
-}
+                SecureRandom random = <span class="kwrd">new</span> SecureRandom();
+                <span class="kwrd">int</span> x = Global.random(20) + 2;
+                <span class="kwrd">int</span> y = Global.random(20) + 2;
 
-function getMobileOperatingSystem() {
-	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-	if (/android/i.test(userAgent)) {
-		return "Android";
-    }
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-    }
-    return "unknown";
-}
-function showStoreRef() {
-	if ( $(".wb").length && !$(".wb").is(":visible") ) {
-	switch( getMobileOperatingSystem()) {
-	case 'Android':{
-		$(".pc-storeref-android").removeClass("cc");
-	} break;
-	case 'iOS':{
-		$(".pc-storeref-ios").removeClass("cc");
-	} break;
-	}	
-}
-var savedData = [];function forEachCalc( func ) {
-	if ( window.CurrentPageCalculators ) {
-		for( var i =0;i<window.CurrentPageCalculators.length;++i ) {
-			func( window.CurrentPageCalculators[i] );
-		}
-	}
-}
+                <span class="kwrd">int</span> G = getPrime();
+                <span class="kwrd">int</span> N = getPrime();
 
-forEachCalc( function ( calc ) {
-	var sd = savedData[calc.CalculatorID ];
-	if ( sd ) {
-		calc.setProfile(sd,false);
-}});
+                BigInteger g = <span class="kwrd">new</span> BigInteger(Convert.ToString(G));
+                BigInteger n = <span class="kwrd">new</span> BigInteger(Convert.ToString(N));
 
-}
-</script>
-</div><!-- container-->
-	<div class="horizontal_divider"></div>
-	<footer class="t7">
-	<ol >
-		<li><h4>About</h4></li>
-		<li><a href="/about/">The project</a></li>
-		<li><a class="inline" href="//twitter.com/planetcalc" rel="nofollow" ><img src="/img/social/twitter24x24.png" alt="Twitter"/>
-		</a>
-		</li>
-	</ol>
 
-	<ol >
-		<li><h4>Terms</h4></li>
-		<li><a href="/terms/">Terms of usage</a></li>  
-		<li><a href="/privacy/">Privacy Policy</a></li>
-	</ol>
-	<ol >
-		<li><h4>Calculators</h4></li>
-		<li><a href="/all/">All online calculators</a></li>
-	</ol>
-	<ol >
-		<li><h4>Community</h4></li>
-		<li><a href="/comments/">All discussions</a></li>
-		<li><a href="/allrequests/">All requests</a></li>
-		<li><a href="/sofia/">Sofia's gallery</a></li>
-		<li><a href="/dev/">For developers</a></li>
-	</ol>
-	<ol >
-		<li><h4>Language</h4></li>
-<li><a href="#" onclick="document.location.href='https://planetcalc.com/7751/?language_select=en'" title="English">English</a></li><li><a href="#" onclick="document.location.href='https://es.planetcalc.com/7751/?language_select=es'" title="Español">Español</a></li><li><a href="#" onclick="document.location.href='https://fr.planetcalc.com/7751/?language_select=fr'" title="Français">Français</a></li><li><a href="#" onclick="document.location.href='https://planetcalc.ru/7751/?language_select=ru'" title="Русский">Русский</a></li>	</ol>
-	<ol >
-		<li><h4>Personal section</h4></li>
-		<li><a href="/personal/">
-Login</a>
-</li>
-	</ol>
-	<div class="pb">Copyright &copy; PlanetCalc Version:
-	3.0.3596.0	</div>
-</footer>
-<script>if ( PCL===undefined ) {var PCL = {};}
-PCL.minutes_ago_one="%1 minute ago";PCL.minutes_ago_other="%1 minutes ago";PCL.hours_ago_one="%1 hour ago";PCL.hours_ago_other="%1 hours ago";PCL.days_ago_one="%1 day ago";PCL.days_ago_other="%1 days ago";PCL.months_ago_one="%1 month ago";PCL.months_ago_other="%1 months ago";PCL.years_ago_one="%1 year ago";PCL.years_ago_other="%1 years ago";PCL.x_of_y="%1 of %2";PCL.items_per_page="Items per page";PCL.next_page="Next page";PCL.prev_page="Previous page";PCL.err_data_too_long="Calculation data size is %1. Your calculation data is too large. We allow %2 only.";PCL.userdata="The caclulation has been saved %2 by <a href=\"/personal/authorinfo/?id=%3\" rel=\"nofollow\">%1</a>";	PCL.yes="yes";PCL.no="no";	PCL.err_must_be_at_least_x_chars_long="Must be at least %1 characters long.";PCL.err_must_be_less_or_equal_x_chars="Must be fewer than %1 characters long.";		PCL.pluralCodes = ['zero','one','two','few','many'];
-	PCL.ordinalIR = function( n ) {
-		var i = n, w=0,f=0,t=0,v=0;
-		if ((n%10)==1 && (n%100)!=11) return PCL.pluralCodes[1];if ((n%10)==2 && (n%100)!=12) return PCL.pluralCodes[2];if ((n%10)==3 && (n%100)!=13) return PCL.pluralCodes[3];return "other";	}
-	PCL.cardinalIR = function( n ) {
-		var i = n, w=0,f=0,t=0,v=0;
-		if (v==0 && i==1) return PCL.pluralCodes[1];return "other";	}
-	PCL.getOrdinal = function(n){
-		return PCL['ordinal_' + PCL.ordinalIR( n )];
-	}
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="/lib/min/3595/pla_0_3595.js"></script><script>
-PLANETCALC.init();
-</script>
+                BigInteger A = g.Pow(x).Mod(n);
+                BigInteger B = g.Pow(y).Mod(n);
+
+                ViewData[<span class="str">"GValue"</span>] = g.ToString();
+                ViewData[<span class="str">"Nvalue"</span>] = n.ToString();
+                ViewData[<span class="str">"XValue"</span>] = Convert.ToString(x);
+                ViewData[<span class="str">"Yvalue"</span>] = Convert.ToString(y);
+
+
+                BigInteger k1 = B.Pow(x).Mod(n);
+                BigInteger k2 = A.Pow(y).Mod(n);
+
+
+                ViewData[<span class="str">"Avalue"</span>] = A.ToString();
+                ViewData[<span class="str">"Bvalue"</span>] = B.ToString();
+
+                ViewData[<span class="str">"BobKey"</span>] = k1.ToString();
+                ViewData[<span class="str">"AliceKey"</span>] = k2.ToString();
+
+
+
+
+
+
+                Session[<span class="str">"GValue"</span>] = ViewData[<span class="str">"GValue"</span>];
+                Session[<span class="str">"Nvalue"</span>] = ViewData[<span class="str">"NValue"</span>];
+                Session[<span class="str">"XValue"</span>] = ViewData[<span class="str">"XValue"</span>];
+                Session[<span class="str">"Yvalue"</span>] = ViewData[<span class="str">"YValue"</span>];
+                Session[<span class="str">"AValue"</span>] = ViewData[<span class="str">"AValue"</span>];
+                Session[<span class="str">"Bvalue"</span>] = ViewData[<span class="str">"BValue"</span>];
+                Session[<span class="str">"BobKey"</span>] = ViewData[<span class="str">"BobKey"</span>];
+                Session[<span class="str">"AliceKey"</span>] = ViewData[<span class="str">"AliceKey"</span>];
+
+
+                <span class="kwrd">if</span> (k1.ToString() == k2.ToString()) h.message = <span class="str">"Success ... the keys match!!!"</span>;
+                <span class="kwrd">else</span> h.message = <span class="str">"Failed ... probably due to math overload"</span>;
+
+                Session[<span class="str">"Message"</span>] = h.message;
+
+                <span class="kwrd">return</span> PartialView(<span class="str">"PartialViewGN"</span>);
+            }
+
+            <span class="kwrd">if</span> (button2 != <span class="kwrd">null</span>)
+            {
+
+                ViewData[<span class="str">"GValue"</span>] = Session[<span class="str">"GValue"</span>];
+                ViewData[<span class="str">"Nvalue"</span>] = Session[<span class="str">"NValue"</span>];
+                ViewData[<span class="str">"XValue"</span>] = Session[<span class="str">"XValue"</span>];
+                ViewData[<span class="str">"Yvalue"</span>] = Session[<span class="str">"YValue"</span>];
+                ViewData[<span class="str">"AValue"</span>] = Session[<span class="str">"AValue"</span>];
+                ViewData[<span class="str">"Bvalue"</span>] = Session[<span class="str">"BValue"</span>];
+                <span class="kwrd">return</span> PartialView(<span class="str">"PartialViewXY"</span>);
+            }
+            <span class="kwrd">if</span> (button3 != <span class="kwrd">null</span>)
+            {
+
+                ViewData[<span class="str">"GValue"</span>] = Session[<span class="str">"GValue"</span>];
+                ViewData[<span class="str">"Nvalue"</span>] = Session[<span class="str">"NValue"</span>];
+                ViewData[<span class="str">"XValue"</span>] = Session[<span class="str">"XValue"</span>];
+                ViewData[<span class="str">"Yvalue"</span>] = Session[<span class="str">"YValue"</span>];
+                ViewData[<span class="str">"AValue"</span>] = Session[<span class="str">"AValue"</span>];
+                ViewData[<span class="str">"Bvalue"</span>] = Session[<span class="str">"BValue"</span>];
+                ViewData[<span class="str">"BobKey"</span>] = Session[<span class="str">"BobKey"</span>];
+                ViewData[<span class="str">"AliceKey"</span>] = Session[<span class="str">"AliceKey"</span>];
+                ViewBag.Message = Session[<span class="str">"Message"</span>];
+                <span class="kwrd">return</span> PartialView(<span class="str">"PartialViewGenK"</span>);
+
+            }
+
+            <span class="kwrd">return</span> View();
+
+
+        }</pre>
+       <table><tr><td>
+        <h2>Diagram</h2>
+<p><img src="/content/dh.png" align="left" alt="Pigpen" class="has-border" /> </p>
+</td></tr></table>
+        </div>
+
+  <!-- end post-entry -->
+        </div>
+
+ </div>
+  </div> 
 </body>
 </html>
