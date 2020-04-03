@@ -10,8 +10,9 @@ import {
     Alert
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { Table, Rows} from 'react-native-table-component';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
+import {MatrixSolver} from './UtilityFunctions';
 
 class CeaserCipher extends React.Component{
   constructor(props){
@@ -740,7 +741,7 @@ class PlayfairCipher extends React.Component{
       playfairLookup[uLetter] = { row: playfair.length-1, column: playfair[playfair.length-1].length-1 };
     });
     this.setState({playfair:playfair,playfairLookup:playfairLookup});
-    console.log(playfairLookup);
+
   }
   keyChanged = (text)=>{
     this.setState({key:text},()=>{
@@ -1015,11 +1016,231 @@ class VigenereCipher extends React.Component{
       );
   }
 }
+class HillCipher extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      key:"best hill cipher",
+      plaintext:"",
+      ciphertext:"",
+      alphabet:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.",
+      isOnPlain:true
+    };
+    this.styles = StyleSheet.create({
+      container:{
+        flex:1,
+        margin:responsiveWidth(5)
+      },
+      textarea:{
+        textAlign:"center",
+        height: responsiveHeight(33),
+        borderWidth: 1,
+        borderColor: '#9E9E9E',
+        borderRadius:5,
+        backgroundColor : "#FFFFFF",
+        fontSize:responsiveFontSize(2.5)
+      },
+      cipherout:{
+        fontSize:responsiveFontSize(2.5),
+        color:"#909090"
+      },
+      fullinput:{
+        fontSize:responsiveFontSize(2.5),
+        height:responsiveHeight(7),
+        width:responsiveWidth(90),
+        borderWidth:1,
+        borderRadius:5,
+        borderColor: '#9E9E9E',
+        backgroundColor : "#FFFFFF",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
+      }
+    });
+  }
+  transform = (part, key_matrix) => {
+    let solver = new MatrixSolver;
+    let alphabet = this.state.alphabet;
+    try {
+      var res = solver.calcMultiplication(key_matrix, part);
+      var s = "";
+      for (var i = 0; i < res.length; ++i)
+      s += alphabet[res[i] % alphabet.length];
+      return s;
+    }
+    catch (err) {
+      if (err == solver.c_nonsquare)
+        alert("Wrong key. Key matrix should be square");
+      else if (err == solver.c_singular)
+        alert("Wrong key. Key has degenerate matrix");
+      else
+        alert(err);
+    }
+
+  }
+  toCipher = (text)=>{
+    let key = this.state.key;
+    let alphabet = this.state.alphabet;
+    if (!(Math.sqrt(key.length) % 1 === 0)){
+      alert("Wrong key. Key length should be square of integer.");
+      return;
+    }
+    var patt = new RegExp("[^" + alphabet + "]");
+    if (patt.test(key)){
+      alert("Wrong key. Key should contain only alphabet symbols.");
+      return;
+    }
+    if (patt.test(text)){
+      alert("Wrong text. Text should contain only alphabet symbols.");
+      return;
+    }
+    this.setState({plaintext:text});
+    var alphabet_digital = {};
+    for (var i = 0; i < alphabet.length; ++i) {
+      alphabet_digital[alphabet[i]] = i;
+    }
+    var key_size = Math.sqrt(key.length);
+    var key_digital = new Array();
+    for (var i = 0; i < key_size; ++i) {
+      var inner = new Array();
+      for (var j = 0; j < key_size; ++j) {
+        inner.push(alphabet_digital[key[i * 3 + j]]);
+      }
+      key_digital.push(inner);
+    }
+    var transformed_text = "";
+    var vector = new Array();
+    while (vector.length < key_size) vector.push(new Array());
+    for (var t = 0; t < text.length; ++t) {
+      if (t > 0 && t % key_size == 0) {
+        transformed_text += this.transform(vector, key_digital);
+        vector = new Array();
+        while (vector.length < key_size) vector.push(new Array());
+      }
+      vector[t % key_size].push(alphabet_digital[text[t]]);
+    }
+    if (vector[0].length > 0) {
+      for (var i = 0; i < key_size; ++i)
+        if (vector[i].length == 0) vector[i].push(alphabet_digital[" "]);
+      transformed_text += this.transform(vector, key_digital);
+    }
+    this.setState({ciphertext:transformed_text});
+  }
+  toPlain = (text)=>{
+    let key = this.state.key;
+    let alphabet = this.state.alphabet;
+    if (!(Math.sqrt(key.length) % 1 === 0)){
+      alert("Wrong key. Key length should be square of integer.");
+      return;
+    }
+    var patt = new RegExp("[^" + alphabet + "]");
+    if (patt.test(key)){
+      alert("Wrong key. Key should contain only alphabet symbols.");
+      return;
+    }
+    if (patt.test(text)){
+      alert("Wrong text. Text should contain only alphabet symbols.");
+      return;
+    }
+    this.setState({ciphertext:text});
+    var alphabet_digital = {};
+    for (var i = 0; i < alphabet.length; ++i) {
+      alphabet_digital[alphabet[i]] = i;
+    }
+    var key_size = Math.sqrt(key.length);
+    var key_digital = new Array();
+    for (var i = 0; i < key_size; ++i) {
+      var inner = new Array();
+      for (var j = 0; j < key_size; ++j) {
+        inner.push(alphabet_digital[key[i * 3 + j]]);
+      }
+      key_digital.push(inner);
+    }
+    var transformed_text = "";
+    var solver = new MatrixSolver();
+    try{
+      key_digital = solver.calcInverseMod(key_digital, alphabet.length);
+    }catch(err){
+      if(err == solver.c_singular){
+        alert("Wrong key, Key inverse not possible.")
+      }else{
+        alert("Error : " + err )
+      }
+      return;
+    }
+    var vector = new Array();
+    while (vector.length < key_size) vector.push(new Array());
+    for (var t = 0; t < text.length; ++t) {
+      if (t > 0 && t % key_size == 0) {
+        transformed_text += this.transform(vector, key_digital);
+        vector = new Array();
+        while (vector.length < key_size) vector.push(new Array());
+      }
+      vector[t % key_size].push(alphabet_digital[text[t]]);
+    }
+    if (vector[0].length > 0) {
+      for (var i = 0; i < key_size; ++i)
+        if (vector[i].length == 0) vector[i].push(alphabet_digital[" "]);
+      transformed_text += this.transform(vector, key_digital);
+    }
+    this.setState({plaintext:transformed_text});
+  }
+  render(){
+      return(
+        <ScrollView ref={ref => this.scroll = ref}>
+          <View style={this.styles.container}>
+            <Text style={{fontSize:responsiveFontSize(3)}}>Plain Text:</Text>
+            <TextInput
+              style={this.styles.textarea}
+              placeholder={"Type Plain text in here"}
+              placeholderTextColor={"#e0e0e0"}
+              multiline={true}
+              onChangeText={text => this.toCipher(text)}
+              value={this.state.plaintext}
+              onFocus={()=>{this.setState({isOnPlain:true});}}
+            />
+            <Text style={{fontSize:responsiveFontSize(3),}}>alphabet:</Text>
+            <TextInput
+              style={this.styles.fullinput}
+              onChangeText={A => this.setState({alphabet:A})}
+              placeholder={"Alaphabets"}
+              value={this.state.alphabet}/>
+            <Text style={{fontSize:responsiveFontSize(3),}}>Key:</Text>
+            <TextInput
+              style={this.styles.fullinput}
+              onChangeText={K => {
+                this.setState({key:K},()=>{
+                  if(this.state.isOnPlain){
+                    this.toCipher(this.state.plaintext);
+                  }else{
+                    this.toPlain(this.state.ciphertext);
+                  }
+                });
+              }}
+              placeholder={"Enter a key"}
+              value={this.state.key}/>
+            <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
+            <TextInput
+              style={this.styles.textarea}
+              placeholder={"Type Cipher text in here"}
+              placeholderTextColor={"#e0e0e0"}
+              multiline={true}
+              onChangeText={text => this.toPlain(text)}
+              value={this.state.ciphertext}
+              onFocus={()=>{this.setState({isOnPlain:false});}} />
+            <KeyboardSpacer/>
+          </View>
+        </ScrollView>
+      );
+  }
+}
+
 export{
     CeaserCipher,
     MultiplicativeCipher,
     AffineCipher,
     AutoKeyCipher,
     PlayfairCipher,
-    VigenereCipher
+    VigenereCipher,
+    HillCipher
 }

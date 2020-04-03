@@ -6,7 +6,7 @@ import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
-import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher,VigenereCipher} from './components/SymmetricAlgorithms'; 
+import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, PlayfairCipher,VigenereCipher, HillCipher} from './components/SymmetricAlgorithms'; 
 import {RSACipher,DiffieHellmanCipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
 import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots,CRT} from './components/OtherAlgorithms';
@@ -34,7 +34,7 @@ class SymmetricAlgorithm extends React.Component{
             <Card name="Vigenere Cipher" onPress = {() => this.props.navigation.navigate('VigenereCipher')}/>
           </View>
           <View style={styles.cRow}>
-            <Card name="Hill Cipher" />
+            <Card name="Hill Cipher" onPress = {() => this.props.navigation.navigate('HillCipher')}/>
           </View>
         </ScrollView>
       </View>
@@ -174,6 +174,9 @@ const root = createStackNavigator({
     DiffieHellman:{
       screen:DiffieHellmanCipher,
     },
+    HillCipher:{
+      screen:HillCipher,
+    }
 },
 {
   initialRouteName: 'Home',

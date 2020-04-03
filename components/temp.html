@@ -1,405 +1,1169 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/style/min/planetcalc_common_3579.css">
+  <script>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  </script>
 
 
-    <title>diffie</title>
-         <script src="/jquery.min.js" type="text/javascript"></script>
-            <link href="/Content/bootstrap.min.css" rel="stylesheet" media="screen" />
- 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+  <script>if (googletag) {
+      googletag.cmd.push(function () {
+        googletag.pubads().setRequestNonPersonalizedAds(0); var mapping0 = googletag.sizeMapping().addSize([1500, 200], [970, 90]).addSize([768, 200], [728, 90]).addSize([480, 200], [468, 60]).addSize([0, 0], [320, 250]).build(); googletag.defineSlot('/13440450/v7.en.B.A.A.top', [[970, 90], [728, 90], [468, 60], [320, 250]], 'div-gpt-ad-1585824130-1').defineSizeMapping(mapping0).setCollapseEmptyDiv(true).addService(googletag.pubads());
+        var mapping1 = googletag.sizeMapping().addSize([768, 200], [728, 90]).addSize([480, 200], [468, 60]).addSize([0, 0], [320, 250]).build(); googletag.defineSlot('/13440450/v7.en.B.A.A.bottom', [[728, 90], [468, 60], [320, 250]], 'div-gpt-ad-1585824130-2').defineSizeMapping(mapping1).setCollapseEmptyDiv(true).addService(googletag.pubads());
+        var mapping2 = googletag.sizeMapping().addSize([0, 0], [320, 250]).build(); googletag.defineSlot('/13440450/v7.en.B.A.A.right', [[320, 250]], 'div-gpt-ad-1585824130-3').defineSizeMapping(mapping2).setCollapseEmptyDiv(true).addService(googletag.pubads());
+        var mapping3 = googletag.sizeMapping().addSize([768, 400], [320, 250]).build(); googletag.defineSlot('/13440450/v7.en.B.A.A.sticker', [[320, 250]], 'div-gpt-ad-1585824130-4').defineSizeMapping(mapping3).setCollapseEmptyDiv(true).addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    }</script>
 
 
+  <meta name="keywords"
+    content="Algebra, cipher, Computers, cryptography, decryption, encryption, Hill, Hill cipher, matrix, text" />
+  <meta name="description"
+    content="Online calculator. This calculator uses Hill cipher to encrypt/decrypt a block of text" />
+  <meta name="author" content="Timur : planetcalc member" />
+  <meta name="generator" content="Planetcalc" />
+  <style media="all">
+    .social-float {
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      width: 350px;
+      height: 400px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+    }
 
-            <script src="/Content/bootstrap.min.js" type="text/javascript"></script>
-    
-     <script src="/Scripts/MicrosoftAjax.debug.js" 
-    type="text/javascript"></script>  
+    td.comment_created {
+      border-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
 
-      
+    td.message {
+      padding-top: 0 !important;
+    }
 
-     <link href="/Content/Site.css" rel="stylesheet" type="text/css" /> 
-    <link href="/Content/1.css" rel="stylesheet" type="text/css" />
+    #main_div {
+      padding: 0
+    }
 
+    .f_ {
+      margin-top: 0;
+    }
 
+    #request_status {
+      width: 900px;
+    }
+
+    .modal-body {
+      max-height: 800px;
+    }
+
+    .sofia {
+      margin: 8px auto;
+      text-align: center;
+    }
+
+    .right-ads {
+      margin: 16px 0;
+    }
+
+    .v5 {
+      background-color: #fafafa;
+    }
+
+    .card-authors {
+      padding: 0 1.5em 1.5em 1.5em;
+    }
+
+    .author-date {
+      padding: 16px 0;
+    }
+
+    .author-date i {
+      padding-right: 8px;
+    }
+
+    .author-date a {
+      padding-right: 32px;
+    }
+
+    #comments {
+      margin-top: 32px;
+    }
+
+    #comments .t9 {
+      margin-top: 0;
+    }
+
+    .ads-inline {
+      text-align: center;
+    }
+
+    .embed-form {
+      margin-bottom: 16px;
+    }
+
+    div.social a.oc {
+      margin-right: 16px
+    }
+
+    div.social {
+      margin: 16px 0;
+    }
+
+    div.social h4 {
+      margin-bottom: 16px
+    }
+
+    #share_data_msg.k8 {
+      color: red !important;
+    }
+
+    .similar-calc ul {
+      padding: 0;
+    }
+
+    .similar-calc ul li {
+      padding: 0 0 16px 16px;
+      display: inline-block;
+    }
+  </style>
+  <title>Online calculator: Hill cipher</title>
 </head>
 
+<body id="ui_viewer" class="y1 viewer">
+  <div id="main_menu" class="nc w0 g1" tabindex="-1">
+    <ul class="z0" role="menu" aria-hidden="true">
+      <li class="a1" role="menuitem" tabindex="0"
+        onclick="BSAttractShare(false);; return BSPreventDefaultAction(event);"><span class="y0"><i
+            class="material-icons">share</i></span><span class="b1">Share</span></li>
+      <li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/all/';"><span class="y0"><i
+            class="material-icons">apps</i></span><span class="b1">All online calculators</span></li>
+      <li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/personal/requests/new/';"><span
+          class="y0"><i class="material-icons">lightbulb_outline</i></span><span class="b1">Request a calculator</span>
+      </li>
+      <li class="a1" role="menuitem" tabindex="-1"
+        onclick="document.location.href='/todo/translationtask/?id[]=3327&from=en';"><span class="y0"><i
+            class="material-icons">language</i></span><span class="b1">Translation</span></li>
+    </ul>
+  </div>
+  <div class="m1 q7 kb">
+    <div class="q1">
+      <div class="r1 s1 mdc-toolbar__section--shrink-to-fit"><a class="material-icons n1" id="btn_main_menu"
+          href="#">menu</a><a href="/" class="u1 nb" title="Online calculators">
+          <h2 class="u1">PLANETCALC <span class="cc kc">Online calculators</span></h2>
+        </a></div>
+      <div class="r1 t1"><a id="btn_change_language_menu" class="material-icons cc n1" href="#">language</a><a
+          class="material-icons n1" href="/search/">search</a><a href="/personal/" class="cc ob c2 g2"
+          id="planetcalc_login">Login</a></div>
+    </div>
+    <div style="min-height:0;">
+      <div id="change_language_menu" class="nc w0 g1" tabindex="0">
+        <ul class="z0" role="menu" aria-hidden="true">
+          <li>
+            <ul class="c1">
+              <li id="change_language_en" class="a1 f1" role="menuitem" tabindex="0"
+                onclick="; return BSPreventDefaultAction(event);"><span class="e1"><i
+                    class="material-icons">check</i></span><span class="b1">English</span></li>
+              <li id="change_language_es" class="a1" role="menuitem" tabindex="-1"
+                onclick="document.location.href='https://es.planetcalc.com/3327/?language_select=es';"><span
+                  class="e1"><i class="material-icons">check</i></span><span class="b1">Español</span></li>
+              <li id="change_language_fr" class="a1" role="menuitem" tabindex="-1"
+                onclick="document.location.href='https://fr.planetcalc.com/3327/?language_select=fr';"><span
+                  class="e1"><i class="material-icons">check</i></span><span class="b1">Français</span></li>
+              <li id="change_language_ru" class="a1" role="menuitem" tabindex="-1"
+                onclick="document.location.href='https://planetcalc.ru/3327/?language_select=ru';"><span class="e1"><i
+                    class="material-icons">check</i></span><span class="b1">Русский</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="main_div" class="jb">
+    <div class="v_">
+      <div class="w_">
+        <div class="main-column x_ g0" id="left-block">
+          <div class="qb"><a class="material-icons" href="/">home</a><i class="material-icons">chevron_right</i><a
+              href="/search/?tag=1460">Study</a><i class="material-icons">chevron_right</i><a
+              href="/search/?tag=167">Math</a><i class="material-icons">chevron_right</i><a
+              href="/search/?tag=1229">Algebra</a></div>
+          <header>
+            <h1>Hill cipher</h1>
+            <p class="f_">This calculator uses Hill cipher to encrypt/decrypt a block of text</p>
+            <div>
+              <div class="qb author-date v"><i class="material-icons">person_outline</i><a
+                  href="/3327/?thanks=1">Timur</a><i class="material-icons">schedule</i><span
+                  class="nav-created">2014-02-26 09:51:42</span></div>
+            </div>
+          </header>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              var f = new FormatterTimeSpan();
+              $('.nav-created').text(function (i, t) { return f.Format(t); });
+            });
+          </script>
+          <div class="article">
+            <div class="article_body">
+              <p>According to definition in <a href="http://en.wikipedia.org/wiki/Hill_cipher"
+                  rel="nofollow">wikipedia</a>, in classical cryptography, the Hill cipher is a polygraphic substitution
+                cipher based on linear algebra. Invented by Lester S. Hill in 1929, it was the first polygraphic cipher
+                in which it was practical (though barely) to operate on more than three symbols at once. The explanation
+                of cipher which is below the calculator assumes an elementary knowledge of matrices.</p>
+              <p></p>
+              <a id="calculator3283"></a>
+              <div class="ads-inline">
+                <div id="div-gpt-ad-1585824130-1">
+                  <script>googletag.cmd.push(function () { googletag.display("div-gpt-ad-1585824130-1"); });</script>
+                </div>
+              </div>
+              <div class="pc-article-part">
+                <div class="u5">
+                  <div class="w_ f8" id="dialogv5e7324c575973">
+                    <div class="x_ j0">
+                      <div class="s8 t8"><a class="t_" target="_blank"
+                          href="https://planetcalc.com/3283/?license=1"><img src="/img/32x32i.png"
+                            alt="PLANETCALC, Hill cipher"></a>
+                        <h4 class="y9">Hill cipher</h4>
+                      </div>
+                    </div>
+                    <div class="x_ j0">
+                      <div class="j4 g8"><input class="l4" type="text" value="abcdefghijklmnopqrstuvwxyz ,."
+                          value="abcdefghijklmnopqrstuvwxyz ,." name="alphabet"
+                          id="dialogv5e7324c575973_alphabet" /><label class="h3 i3"
+                          for="dialogv5e7324c575973_alphabet">Alphabet</label>
+                        <div class="_3"></div>
+                      </div>
+                      <div class="n4">
+                        <div id="hlp_dialogv5e7324c575973_alphabet" class="e4 c4">All symbols to be encrypted must
+                          belong to alphabet</div>
+                      </div>
+                    </div>
+                    <div class="x_ j0">
+                      <div class="j4 m4 g8 "><textarea class="l4" value="the truth is out there" name="text"
+                          id="dialogv5e7324c575973_text" rows="5" cols="60">the truth is out there</textarea>
+                        <div class="c3 k3">
+                          <div class="e3"></div>
+                          <div class="f3"><label class="h3 i3" for="dialogv5e7324c575973_text">Text</label></div>
+                          <div class="g3"></div>
+                        </div>
+                      </div>
+                      <div class="n4">
+                        <div id="hlp_dialogv5e7324c575973_text" class="e4 c4"></div>
+                      </div>
+                    </div>
+                    <div class="x_ a0">
+                      <div class="j4 g8"><input class="l4" type="text" value="best hill cipher" value="best hill cipher"
+                          name="key" id="dialogv5e7324c575973_key" /><label class="h3 i3"
+                          for="dialogv5e7324c575973_key">Key</label>
+                        <div class="_3"></div>
+                      </div>
+                      <div class="n4">
+                        <div id="hlp_dialogv5e7324c575973_key" class="e4 c4"></div>
+                      </div>
+                    </div>
+                    <div class="x_ f0">
+                      <div class="v8" id="dialogv5e7324c575973_method"><label class="l8 w8">Transformation</label>
+                        <div class="m8">
+                          <div class="h2">
+                            <div class="u2"><input type="radio" class="v2" id="dialogv5e7324c575973_method0"
+                                name="method" value="c" />
+                              <div class="w2">
+                                <div class="x2"></div>
+                                <div class="y2"></div>
+                              </div>
+                            </div><label for="dialogv5e7324c575973_method0">Encrypt</label>
+                          </div>
+                          <div class="h2">
+                            <div class="u2"><input type="radio" class="v2" id="dialogv5e7324c575973_method1"
+                                name="method" value="d" />
+                              <div class="w2">
+                                <div class="x2"></div>
+                                <div class="y2"></div>
+                              </div>
+                            </div><label for="dialogv5e7324c575973_method1">Decrypt</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="n4">
+                        <div id="hlp_dialogv5e7324c575973_method" class="e4 c4"></div>
+                      </div>
+                    </div>
+                    <div class="x_ j0">
+                      <div class="r8"><button type="button" id="dialogv5e7324c575973_calculate"
+                          class="c2 g2 s_ pc-btn-calc"><span
+                            id="dialogv5e7324c575973_button_text">Calculate</span></button></div>
+                    </div>
+                    <div class="x_ j0">
+                      <div class="e8">
+                        <div id="dialogv5e7324c575973__progress_" role="progressbar" class="c8 m0 t0">
+                          <div class="p0"></div>
+                          <div class="q0"></div>
+                          <div class="n0 r0"><span class="o0"></span></div>
+                          <div class="n0 s0"><span class="o0"></span></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="x_ j0">
+                      <div class="o8">Transformed text</div>
+                      <div class="pc-output-value q8" id="dialogv5e7324c575973_transformation">&nbsp;</div>
+                    </div>
+                    <div class="x_ j0">
+                      <div class="b2">
+                        <div class="pc-calc-footer">
+                          <div class="ba u8"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <script>function Dialogv5e7324c575973() { var me = this; me.id = "dialogv5e7324c575973"; me.GetElement = function () { return document.getElementById(me.id); }; me.GetEventHandlerName = function () { return "dialoghandlerv5e7324c575973"; }; this.dialog_controls = [new DialogInput("alphabet", this, 0, new ElementAccessorText()), new DialogInput("text", this, 0, new ElementAccessorText()), new DialogInput("key", this, 0, new ElementAccessorText()), new DialogInput("method", this, 0, new ElementAccessorRadio()), new DialogInput("calculate", this, 0, new ElementAccessorOperation()), new DialogInput("_progress_", this, 0, new ElementAccessorDefault()), new DialogInput("transformation", this, 0, new ElementAccessorOutput())]; me.dialog_controls._all = {}; me.dialog_controls.forEach(function (e) { if (me[e.id] === undefined) me[e.id] = e; me.dialog_controls._all[e.id] = e; }); this.addHandler = function (handler) { this.dialog_controls.forEach(function (c) { c.addHandler(handler); }); }; this.SetValues = function (values) { this.dialog_controls.forEach(function (c) { if (values[c.id] !== undefined) { c.SetValue(values[c.id]); } }); }; this.Clear = function () { this.dialog_controls.forEach(function (c) { c.ResetValue(); }); }; this.SetDefaultValues = function () { this.Clear(); }; this.GetValues = function () { var ret = {}; this.dialog_controls.forEach(function (c) { ret[c.id] = c.GetValue(); }); return ret; }; this.Validate = function () { for (var i = 0; i < me.dialog_controls.length; ++i) if (!me.dialog_controls[i].Validate()) return false; return true; }; this.layout = function () { } }; document.addEventListener("DOMContentLoaded", function (event) {
+                      var dlg = new Dialogv5e7324c575973();
+                      var hd = new CalculatorHandler(new function () {
+                        var me = this;
+                        me.id = 3283;
+                        me.global = 1;
+                        var outputs = {};
+                        me.sinks = { change: [], done: [] };
+                        me.startOnLoad = 1;
+                        me.infinite = 0;
+                        var inputs = {};
+                        var renderers = {};
+                        var recordsets = {};
+                        var diagrams = {};
+                        var handler, dialog, refreshTimer;
+                        var worker; var proxies; var stubs;
+                        var outer = this;
+                        var Planetcalc = new function () {
+                          var inner = this; var Planetcalc = inner; var cpcData = new CalcProgressData(); var Calculate3312_cpc = new CalcProgressControl(cpcData);
+                          var Resources3312errors = { "e": "There is no modular multiplicative inverse for this integer" }; inner.Resources3312errors = Resources3312errors; inner.Calculate3312 = function (___inp___) {
+                            var progressControl = Calculate3312_cpc;
+                            var Calculate3312_result = {}; function __impl__(__inp__) {
 
-<body >
-<div id="page-wrap">
-    
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
+                              var a = __inp__["a"] === undefined ? 3 : __inp__["a"];
+                              var m = __inp__["m"] === undefined ? 26 : __inp__["m"];
+                              var errors = Resources3312errors;
+                              var b = { "SetValue": function (v) { Calculate3312_result["b"] = v; } }; var ta = a;
+                              if (ta > m)
+                                ta = ta % m;
+                              if (ta < 0)
+                                ta = ta + m * (Math.floor(Math.abs(ta) / m) + 1);
+
+                              var result = Planetcalc.Calculate3299({ "first": PCR.integer(ta.valueOf()), "second": PCR.integer(m.valueOf()) });
+                              var res = Number(result.res.toString());
+                              if (res != 1)
+                                throw { "source": "a", "message": errors["e"] };
+                              else {
+                                var c2 = Number(result.coef2.toString());
+                                var tx = (c2 % m + m) % m;
+                                b.SetValue(tx);
+                              }
+
+                            };
+                            __impl__(___inp___); if (progressControl.completed()) { progressControl.context = null; } return Calculate3312_result;
+                          }; var Calculate3299_cpc = new CalcProgressControl(cpcData); inner.Calculate3299 = function (___inp___) {
+                            var progressControl = Calculate3299_cpc;
+                            var Calculate3299_result = {}; function __impl__(__inp__) {
+
+                              var first = __inp__["first"] === undefined ? "180" : __inp__["first"];
+                              var second = __inp__["second"] === undefined ? "150" : __inp__["second"];
+                              var res = { "SetValue": function (v) { Calculate3299_result["res"] = v; } };
+                              var coef1 = { "SetValue": function (v) { Calculate3299_result["coef1"] = v; } };
+                              var coef2 = { "SetValue": function (v) { Calculate3299_result["coef2"] = v; } }; var euklid = {
+                                gcd: PCR.integer(1),
+                                x: PCR.integer(0),
+                                y: PCR.integer(0)
+                              };
+
+                              function gcd(a, b, holder) {
+                                if (a.eq(0)) {
+                                  holder.x = PCR.integer(0);
+                                  holder.y = PCR.integer(1);
+                                  return b;
+                                }
+                                var q = b.divmod(a);
+                                var d = gcd(q.r, a, holder);
+                                var tx = holder.x;
+                                holder.x = holder.y.sub(q.q.mul(holder.x));
+                                holder.y = tx;
+                                return d;
+                              }
+
+                              euklid.gcd = gcd(first.gt(second) ? second : first, first.gt(second) ? first : second, euklid);
+                              res.SetValue(euklid.gcd);
+                              coef1.SetValue(euklid.y);
+                              coef2.SetValue(euklid.x);
+                            };
+                            __impl__(___inp___); if (progressControl.completed()) { progressControl.context = null; } return Calculate3299_result;
+                          }; var Calculate3283_cpc = new CalcProgressControl(cpcData);
+                          var Resources3283errors = { "key_invalid": "Wrong key. Key length should be square of integer.", "key_wrong": "Wrong key. Key should contain only alphabet symbols", "text_wrong": "Wrong text. Text should contain only alphabet symbols", "NonSquare": "Wrong key. Key matrix should be square", "Singular": "Wrong key. Key has degenerate matrix", "key_bad": "Wrong key. Key matrix determinant does not have modular multiplicative inverse", "method": { "c": "Encrypt", "d": "Decrypt" } }; inner.Resources3283errors = Resources3283errors; inner.Calculate3283 = function (___inp___) {
+                            var progressControl = Calculate3283_cpc;
+                            var Calculate3283_result = {}; function __impl__(__inp__) {
+
+                              var alphabet = __inp__["alphabet"] === undefined ? "abcdefghijklmnopqrstuvwxyz ,." : __inp__["alphabet"];
+                              var key = __inp__["key"] === undefined ? "best hill cipher" : __inp__["key"];
+                              var text = __inp__["text"] === undefined ? "the truth is out there" : __inp__["text"];
+                              var errors = Resources3283errors;
+                              var method = __inp__["method"] === undefined ? "0" : __inp__["method"];
+                              var transformation = { "SetValue": function (v) { Calculate3283_result["transformation"] = v; } }; 
+                              function MatrixSolver() {
+                                this.c_valid = 0;
+                                this.c_nonsquare = -1;
+                                this.c_singular = -2;
+                                this.c_wrongdimensions = -3;
+
+                                function get(matrixarray, i, j) {
+                                  var row = matrixarray[i];
+                                  return row[j];
+                                }
+
+                                function columns(matrixarray) {
+                                  var row = matrixarray[0];
+                                  return row.length;
+                                }
+
+                                function rows(matrixarray) {
+                                  return matrixarray.length;
+                                }
+
+                                function show(matrixarray) {
+                                  var s = "";
+                                  for (var i = 0; i < rows(matrixarray); ++i) {
+                                    for (var j = 0; j < columns(matrixarray); ++j) {
+                                      var row = matrixarray[i];
+                                      s += " " + row[j];
+                                    }
+                                    s += "\n\r";
+                                  }
+                                  alert(s);
+                                }
+
+                                function minor(matrixarray, i, j) {
+                                  var m = [];
+                                  for (var k = 0; k < matrixarray.length; ++k) {
+                                    if (k == i)
+                                      continue;
+                                    var row = matrixarray[k];
+                                    var newrow = [];
+                                    for (var l = 0; l < row.length; ++l) {
+                                      if (l == j)
+                                        continue;
+                                      newrow.push(row[l]);
+                                    }
+                                    m.push(newrow);
+                                  }
+                                  return m;
+                                }
+
+                                this.calcMultiplication = function (matrixA, matrixB) {
+                                  var result = [];
+                                  var columnsA = columns(matrixA);
+                                  var rowsA = rows(matrixA);
+                                  var columnsB = columns(matrixB);
+                                  var rowsB = rows(matrixB);
+                                  if (columnsA != rowsB)
+                                    throw this.c_wrongdimensions;
+
+
+                                  for (var i = 0; i < rowsA; ++i) {
+                                    var newrow = [];
+                                    for (var j = 0; j < columnsB; ++j) {
+                                      var value = 0;
+                                      for (var k = 0; k < rowsB; ++k) {
+                                        value += get(matrixA, i, k) * get(matrixB, k, j);
+                                      }
+                                      newrow.push(value);
+                                    }
+                                    result.push(newrow);
+                                  }
+                                  return result;
+                                }
+
+                                this.calcTransponent = function (matrixarray) {
+                                  var transponent = [];
+                                  var cols = columns(matrixarray);
+                                  for (var i = 0; i < cols; ++i) {
+                                    var newrow = [];
+                                    var rowscount = rows(matrixarray);
+                                    for (var j = 0; j < rowscount; ++j) {
+                                      newrow[newrow.length] = get(matrixarray, j, i);
+                                    }
+                                    transponent[transponent.length] = newrow;
+                                  }
+                                  return transponent;
+                                }
+
+                                this.calcScalar = function (matrixarray, scalarValue) {
+                                  var scalar = [];
+                                  var cols = columns(matrixarray);
+                                  for (var i = 0; i < cols; ++i) {
+                                    var newrow = [];
+                                    var rowscount = rows(matrixarray);
+                                    for (var j = 0; j < rowscount; ++j) {
+                                      newrow.push(get(matrixarray, i, j) * scalarValue);
+                                    }
+                                    scalar.push(newrow);
+                                  }
+                                  return scalar;
+                                }
+
+                                this.calcDeterminant = function (matrixarray) {
+                                  var columnsA = columns(matrixarray);
+                                  var rowsA = rows(matrixarray);
+                                  if (columnsA != rowsA)
+                                    throw this.c_nonsquare;
+
+                                  if (matrixarray.length == 1)
+                                    return get(matrixarray, 0, 0);
+                                  else if (matrixarray.length == 2)
+                                    return get(matrixarray, 0, 0) * get(matrixarray, 1, 1) - get(matrixarray, 0, 1) * get(matrixarray, 1, 0);
+                                  else {
+                                    var det = 0;
+                                    var cols = columns(matrixarray);
+                                    for (var i = 0; i < cols; ++i) {
+                                      det += Math.pow(-1, i) * get(matrixarray, 0, i) * this.calcDeterminant(minor(matrixarray, 0, i));
+                                    }
+                                    return det;
+                                  }
+                                }
+
+                                this.calcInverse = function (matrixarray) {
+                                  var columnsA = columns(matrixarray);
+                                  var rowsA = rows(matrixarray);
+                                  if (columnsA != rowsA)
+                                    throw this.c_nonsquare;
+                                  var detA = this.calcDeterminant(matrixarray);
+                                  if (detA == 0)
+                                    throw this.c_singular;
+                                  var minorsmatrix = [];
+                                  for (var i = 0; i < rowsA; ++i) {
+                                    var newrow = [];
+                                    for (var j = 0; j < columnsA; ++j) {
+                                      var val = this.calcDeterminant(minor(matrixarray, i, j));
+                                      val = val * Math.pow(-1, i + j);
+                                      newrow.push(val);
+                                    }
+                                    minorsmatrix.push(newrow);
+                                  }
+                                  var transponentminors = this.calcTransponent(minorsmatrix);
+                                  var scalarresult = this.calcScalar(transponentminors, 1 / detA);
+                                  return scalarresult;
+                                }
+
+                                function norm(ta, m) {
+                                  if (ta > m)
+                                    ta = ta % m;
+                                  if (ta < 0)
+                                    ta = ta + m * (Math.floor(Math.abs(ta) / m) + 1);
+                                  return ta;
+                                }
+
+                                this.calcScalarMod = function (matrixarray, scalarValue, modulus) {
+                                  var scalar = [];
+                                  var cols = columns(matrixarray);
+                                  for (var i = 0; i < cols; ++i) {
+                                    var newrow = [];
+                                    var rowscount = rows(matrixarray);
+                                    for (var j = 0; j < rowscount; ++j) {
+                                      newrow.push(norm(get(matrixarray, i, j) * scalarValue, modulus));
+                                    }
+                                    scalar.push(newrow);
+                                  }
+                                  return scalar;
+                                }
+
+                                this.calcDeterminantMod = function (matrixarray, modulus) {
+                                  var columnsA = columns(matrixarray);
+                                  var rowsA = rows(matrixarray);
+                                  if (columnsA != rowsA)
+                                    throw this.c_nonsquare;
+
+                                  //show(matrixarray);
+
+                                  if (matrixarray.length == 1)
+                                    return norm(get(matrixarray, 0, 0), modulus);
+                                  else if (matrixarray.length == 2) {
+                                    return norm(get(matrixarray, 0, 0) * get(matrixarray, 1, 1) - get(matrixarray, 0, 1) * get(matrixarray, 1, 0), modulus);
+                                  }
+                                  else {
+                                    var det = 0;
+                                    var cols = columns(matrixarray);
+                                    for (var i = 0; i < cols; ++i) {
+                                      det += norm(Math.pow(-1, i) * get(matrixarray, 0, i) * this.calcDeterminantMod(minor(matrixarray, 0, i), modulus), modulus);
+                                    }
+                                    return norm(det, modulus);
+                                  }
+                                }
+
+                                this.calcInverseMod = function (matrixarray, modulus) {
+                                  var columnsA = columns(matrixarray);
+                                  var rowsA = rows(matrixarray);
+                                  if (columnsA != rowsA)
+                                    throw this.c_nonsquare;
+                                  var detA = this.calcDeterminantMod(matrixarray, modulus);
+                                  if (detA == 0)
+                                    throw this.c_singular;
+                                  var minorsmatrix = [];
+                                  for (var i = 0; i < rowsA; ++i) {
+                                    var newrow = [];
+                                    for (var j = 0; j < columnsA; ++j) {
+                                      var val = this.calcDeterminantMod(minor(matrixarray, i, j), modulus);
+                                      val = norm(val * Math.pow(-1, i + j), modulus);
+                                      newrow.push(val);
+                                    }
+                                    minorsmatrix.push(newrow);
+                                  }
+                                  var transponentminors = this.calcTransponent(minorsmatrix);
+
+                                  var result = Planetcalc.Calculate3312({ "a": detA, "m": modulus });
+                                  var scalarresult = this.calcScalarMod(transponentminors, result.b, modulus);
+                                  return scalarresult;
+                                }
+                              }
+
+                              if (!(Math.sqrt(key.length) % 1 === 0))
+                                throw { "source": "key", "message": errors["key_invalid"] };
+                              var patt = new RegExp("[^" + alphabet + "]");
+                              if (patt.test(key))
+                                throw { "source": "key", "message": errors["key_wrong"] };
+                              if (patt.test(text))
+                                throw { "source": "text", "message": errors["text_wrong"] };
+
+                              var alphabet_digital = [];
+                              for (var i = 0; i < alphabet.length; ++i) {
+                                alphabet_digital[alphabet[i]] = i;
+                              }
+
+                              var key_size = Math.sqrt(key.length);
+                              var key_digital = new Array();
+                              for (var i = 0; i < key_size; ++i) {
+                                var inner = new Array();
+                                for (var j = 0; j < key_size; ++j) {
+                                  inner.push(alphabet_digital[key[i * 3 + j]]);
+                                }
+                                key_digital.push(inner);
+                              }
+                              
+                              var solver = new MatrixSolver();
+
+                              var detm = solver.calcDeterminantMod(key_digital, alphabet.length);
+                              try {
+                                Planetcalc.Calculate3312({ "a": detm, "m": alphabet.length });
+                              }
+                              catch (e) {
+                                throw { "source": "key", "message": errors["key_bad"] };
+                              }
+
+                              var transformed_text = "";
+
+                              //showme(key_digital);
+                              if (method == "d")
+                                key_digital = solver.calcInverseMod(key_digital, alphabet.length);
+                              //showme(key_digital);
+                              var vector = new Array();
+                              while (vector.length < key_size) vector.push(new Array());
+
+                              for (var t = 0; t < text.length; ++t) {
+                                if (t > 0 && t % key_size == 0) {
+                                  transformed_text += transform(vector, key_digital);
+                                  vector = new Array();
+                                  while (vector.length < key_size) vector.push(new Array());
+                                }
+                                vector[t % key_size].push(alphabet_digital[text[t]]);
+                              }
+
+                              //padding
+                              if (vector[0].length > 0) {
+                                for (var i = 0; i < key_size; ++i)
+                                  if (vector[i].length == 0) vector[i].push(alphabet_digital[text[text.length - 1]])
+                                transformed_text += transform(vector, key_digital);
+                              }
+
+                              transformation.SetValue(transformed_text);
+
+                              function showme(record) {
+                                var property, propCollection = "";
+
+                                for (property in record) {
+                                  propCollection += (property + ": " + record[property] + "\n");
+                                }
+                                alert(propCollection);
+                              }
+
+                              function transform(part, key_matrix) {
+                                try {
+                                  var res = solver.calcMultiplication(key_matrix, part);
+                                  var s = "";
+                                  for (var i = 0; i < res.length; ++i)
+                                    s += alphabet[res[i] % alphabet.length];
+                                  return s;
+                                }
+                                catch (err) {
+                                  if (err == solver.c_nonsquare)
+                                    throw { "source": "matrixA", "message": errors["NonSquare"] };
+                                  else if (err == solver.c_singular)
+                                    throw { "source": "matrixA", "message": errors["Singular"] };
+                                  else
+                                    alert(err);
+                                }
+
+                              }
+                            };
+                            __impl__(___inp___); if (progressControl.completed()) { progressControl.context = null; } return Calculate3283_result;
+                          }; inner.main = inner.Calculate3283; inner.progressControl = Calculate3283_cpc; inner.init = function () { inner.progressControl.onDataReady(); };
+                        }; me.adapter = null; function startLoad() {
+                          me.progressControl.addEventListener("ready", handler.onReady);
+                          Planetcalc.init();
+                        }
+                        me.timeout = 1500;
+                        me.auto = 1;
+                        me.init = function (h, dlg) { var o; handler = h; dialog = dlg; me.progressControl = Planetcalc.progressControl; var n; var fn; n = 'alphabet'; if (dlg[n]) { inputs[n] = dlg[n]; } n = 'key'; if (dlg[n]) { inputs[n] = dlg[n]; } n = 'text'; if (dlg[n]) { inputs[n] = dlg[n]; } n = 'method'; if (dlg[n]) { inputs[n] = dlg[n]; } o = dlg.transformation; outputs[o.id] = o; o.formatter = new FormatterSame(); startLoad(); };
+                        me.stop = function () {
+                          if (worker) worker.postMessage({ type: "stop" });
+                          else Planetcalc.progressControl.stop();
+                        };
+                        me.start = function () {
+                          handler.onStart();
+                          if (worker) {
+                            me.changeDisplayOptions();
+                            worker.postMessage({ type: "start", inputs: proxies(dialog.GetValues()) });
+                          } else {
+                            inputValues = { "alphabet": inputs.alphabet.GetValue(), "key": inputs.key.GetValue(), "text": inputs.text.GetValue(), "method": inputs.method.GetValue() }; Planetcalc.progressControl.clear();
+                            me.result = null;
+                            me.refresh();
+                          }
+                        }; me.getInputs = function () {
+                          return inputs;
+                        };
+                        function objectValues(a, o) {
+                          for (var n in o) {
+                            a.push(o[n]);
+                          }
+                        }
+                        me.getOutputs = function () {
+                          var ret = [];
+                          objectValues(ret, outputs);
+                          objectValues(ret, diagrams);
+                          objectValues(ret, renderers);
+                          return ret;
+                        }; me.refresh = function () { me.doit(); };
+                        me.setResult = function (res, done) { outputs.transformation.SetValue(res.transformation); if (done) { handler.onStop(); if (PCF.requestFormulaUpdate(false)) { var mjx = window.MathJax; mjx.Hub.Queue(["Typeset", mjx.Hub]); }; } };
+                        function preprocess(p, cb) { cb(p, true); } var inputValues = null; me.doit = function () {
+                          preprocess(inputValues, function (p, sync, cont) {
+                            if (cont) me.progressControl.repeat(); try {
+                              me.changeDisplayOptions();
+                              var res = Planetcalc.Calculate3283(p); if (res) { if (me.result) { for (var n in res) me.result[n] = res[n]; } else me.result = res; } if (me.result) me.setResult(me.result, true);
+                            } catch (e) {
+                              handler.onStop(e);
+                            }
+                          });
+                        }; me.changeDisplayOptions = function () {
+                          me.calculateDisplay(new DisplayWrapperInput(inputs.alphabet), new DisplayWrapperInput(inputs.key), new DisplayWrapperInput(inputs.text), { GetValue: function () { return Planetcalc.Resources3283errors; } }, new DisplayWrapperInput(inputs.method), new DisplayWrapper(outputs.transformation)); dialog.layout();
+                        }
+                        me.calculateDisplay = function (alphabet, key, text, errors, method, transformation) {
+                        };
+                      }, { calculate: "Calculate", stop: "Stop" });;
+                      hd.initdialog(dlg); dlg.addHandler(hd); window.dialoghandlerv5e7324c575973 = hd;
+                    });</script>
+                  <div id="user_data_3283">
+                    <div class="tc" id="ud_note3283"><button class="c2 pc-btn-new"><i class="material-icons">save</i>
+                        Save</button> <button type="button" class="c2 pc-btn-embed-wol"><i
+                          class="material-icons">extension</i> Widget</button></div>
+                    <script>document.addEventListener("DOMContentLoaded", function (event) { window.udh_3283 = new PCUserDataHandler({ calcid: 3283, id: "user_data_3283" }); });</script>
+                  </div>
+                </div>
+              </div>
+              <div class="ads-inline">
+                <div id="div-gpt-ad-1585824130-2">
+                  <script>googletag.cmd.push(function () { googletag.display("div-gpt-ad-1585824130-2"); });</script>
+                </div>
+              </div>
+              <p></p>
+              <h3>How does it work</h3>
+              <p>First, symbols of used alphabet (alphabet as set of symbols, for example, alphabet in the above
+                calculator includes space, comma and dot symbols) are encoded with digits, for example, symbol's order
+                number in the set. Then we choose matrix of n x n size, which will be cipher's key. Text is divided into
+                blocks of size n, and each block forms a vector of size n. Each vector is multiplied by key matrix of n
+                x n. The result, vector of size n is block of encrypted text. Modular arithmetic is used, that is all
+                operations (addition, subtraction, and multiplication) are done in the ring of integers, where modulus
+                is m - the length of the alphabet. This allows us to force results to belong to the same alphabet.</p>
+              <p>Key is the matrix, however, it is convenient to use the key phrase, which is transformed to the digit
+                representation and to the matrix. Obviously, to create matrix of n x n key phrase length should be
+                square of integer, i.e. 4, 9, 16, etc..</p>
+              <p>Additional restrictions to the key are imposed by the need to decrypt encrypted text :)</p>
+              <p>And, for this to happen, we need to have modular inverse of the key matrix in <img
+                  src="/cgi-bin/mimetex.cgi?%7BZ%7D%7D_%7B%7Bm%7D%7D%5E%7Bn%7D" alt="{Z}}_{{m}}^{n}" class="pc-math" />
+                - ring of integers modulo m.</p>
+              <p>Indeed, if source vector B is multiplied by matrix A to get vector C, then to restore vector B from
+                vector C (decrypt text) one need to multiply it by modular inverse of matrix.</p>
+              <p><img src="/cgi-bin/mimetex.cgi?BA%3DC%20%5Cto%20CA%5E%7B-1%7D%3DBAA%5E%7B-1%7D%3DBE%3DB"
+                  alt="BA=C \to CA^{-1}=BAA^{-1}=BE=B" class="pc-math" /></p>
+              <p>Thus the have the following restrictions:<br />
+                Determinant of the matrix should not be equal to zero, and, additionally, determinant of the matrix
+                should have modular multiplicative inverse.</p>
+              <p>The latter is imposed by the formula </p>
+              <p><img
+                  src="/cgi-bin/mimetex.cgi?A%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Cdet%20A%7D%5Ccdot%20C%5E%2A%20%5Cto%20A%5E%7B-1%7D%20%3D%20%28det%20A%29%5E%7B-1%7D%5Ccdot%20C%5E%2A"
+                  alt="A^{-1} = \frac{1}{\det A}\cdot C^* \to A^{-1} = (det A)^{-1}\cdot C^*" class="pc-math" />. </p>
+              <p>where operation of division is substituted by the operation of multiplication by modular multiplicative
+                inverse.</p>
+              <p>In order to have modular multiplicative inverse, determinant and modulo (length of the alphabet) should
+                be coprime integers, refer to <a href="/3311/">Modular Multiplicative Inverse</a>. To increase the
+                probability of this, the alphabet is expanded so its length becomes prime integer. That is why the
+                English alphabet in the calculator above is expanded with space, comma and dot up to 29 symbols, 29 is
+                prime integer.</p>
+              <p>Not every key phrase is qualified to be the key, however, there are still more than enough.</p>
+            </div>
+          </div>
+          <div class="social social-share ee"><a class="pc-social-share oc pc" target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplanetcalc.com%2F3327%2F"
+              rel="noopener nofollow" data-origin="pc"><img src="/img/social/facebook24x24.png" alt="facebook"></a><a
+              class="pc-social-share oc qc" target="_blank"
+              href="https://twitter.com/intent/tweet?text=Online%20calculator%3A%20Hill%20cipher&url=https%3A%2F%2Fplanetcalc.com%2F3327%2F"
+              rel="noopener nofollow" data-origin="qc"><img src="/img/social/twitter24x24.png" alt="twitter"></a><a
+              class="pc-social-share oc r_"
+              href="mailto:?subject=Online%20calculator%3A%20Hill%20cipher&body=https%3A%2F%2Fplanetcalc.com%2F3327%2F"
+              rel="noopener nofollow" data-origin="r_"><img src="/img/social/email24x24.png" alt="email"></a>
+            <div>
+              <div class="t9 share-switch">
+                <div class="x6">
+                  <div class="z6"></div>
+                  <div class="b7">
+                    <div class="_7"><input class="a7" type="checkbox" id="share_data_md" /></div>
+                  </div>
+                </div> <label for="share_data_md">&nbsp;share my calculation</label>
+              </div>
+              <div class="f_"></div>
+            </div>
+          </div>
+          <div class="similar-calc">
+            <h4>Similar calculators</h4>
+            <ul>
+              <li>&bull; <a href="/7984/" title="Substitution Cipher Tool">Substitution Cipher Tool</a></li>
+              <li>&bull; <a href="/7751/" title="Playfair cipher">Playfair cipher</a></li>
+              <li>&bull; <a href="/2468/" title="Vigenère cipher">Vigenère cipher</a></li>
+              <li>&bull; <a href="/1434/" title="Caesar cipher">Caesar cipher</a></li>
+              <li>&bull; <a href="/8567/" title="Automated Vigenère cipher decoder">Automated Vigenère cipher
+                  decoder</a></li>
+              <li>&bull; <a href="/search/?section=1229" class="vc">Algebra section ( 93 calculators )</a></li>
+            </ul>
+          </div>
+          <div class="b"><i class="material-icons">local_offer</i>&nbsp;<a class="vc bc"
+              href="/search/?tag=1229">Algebra</a> <a class="vc yb" href="/search/?tag=1205">cipher</a> <a class="vc zb"
+              href="/search/?tag=1462">Computers</a> <a class="vc yb" href="/search/?tag=1204">cryptography</a> <a
+              class="vc xb" href="/search/?tag=1875">decryption</a> <a class="vc xb"
+              href="/search/?tag=1207">encryption</a> <a class="vc xb" href="/search/?tag=2827">Hill</a> <a
+              class="vc xb" href="/search/?tag=2828">Hill cipher</a> <a class="vc yb"
+              href="/search/?tag=1122">matrix</a> <a class="vc zb" href="/search/?tag=1203">text</a> </div>
+          <div class="b2"><span class="u8"><a href="https://planetcalc.com/3327/?license=1" target=_blank><img
+                  src="/img/lic/by-sa_s.png"
+                  alt="Creative Commons Attribution/Share-Alike License 3.0 (Unported)" /></a></span> PLANETCALC, Hill
+            cipher<div class="ba u8"></div>
+          </div>
+          <script>
+            function showAvInitials(i) {
+              i.style.display = "none";
+              var d = i.parentNode;
+              var bg = d.getAttribute("data-bg");
+              d.style.backgroundColor = bg;
+              var e = d.getElementsByClassName("tb");
+              if (e.length) {
+                e[0].style.display = "inline";
+              }
+            }
+            function CommentAvatarFormatter(formatter) {
+              var colors = ["#D32F2F", "#C2185B", "#7B1FA2", "#512DA8", "#303F9F", "#1976D2", "#0288D1", "#0097A7", "#00796B", "#388E3C", "#689F38", "#AFB42B", "#FBC02D", "#FFA000", "#F57C00", "#E64A19", "#5D4037", "#455A64"];
+              this.Format = function (colname, record) {
+                var ret = '<div class="' + "sb" + '"';
+                var name = record.nickname;
+                if (!name) name = 'Unknown'; else name = name.toString();
+                var hash = 0;
+                for (var i = 0; i < name.length; ++i) {
+                  hash += name.charCodeAt(i);
+                }
+                var color = colors[hash % colors.length];
+                var namearr = name.split(' ');
+                var abbr = '';
+                for (var i = 0; i < namearr.length && i < 2; ++i) {
+                  if (namearr[i].length) {
+                    abbr += namearr[i].substr(0, 1);
+                  }
+                }
+                if (record.photo) {
+                  ret += 'data-bg="' + color + '"><img src="' + record.photo + '" alt="' + (record.nickname && record.nickname.replace ? record.nickname.replace('"', "'") : '') + '" onerror="showAvInitials(this);">';
+                } else {
+                  ret += ' style="background-color:' + color + '">';
+                }
+                ret += '<span class="' + "tb" + '"' + (record.photo ? ' style="display:none;"' : '') + '>' + abbr.toUpperCase() + '</span>';
+                ret += '</div>';
+                return ret;
+              }
+            }</script>
+          <div id="comments">
+            <div class="w_ f8" id="dialogv5e85c18261b50">
+              <div class="x_ j0">
+                <div class="s8">
+                  <h4 class="y9">Comments</h4>
+                </div>
+              </div>
+              <div class="x_ _0">
+                <div id="dialogv5e85c18261b50_group_sofia" class="placeholder"></div>
+              </div>
+              <div class="x_ g0">
+                <div class="w_ f8" id="dialogv5e85c18261b50_group_comments">
+                  <div class="x_ j0">
+                    <div class="j4 m4 g8 "><textarea class="l4" value="" id="dialogv5e85c18261b50_message" rows="5"
+                        cols="80"></textarea>
+                      <div class="c3">
+                        <div class="e3"></div>
+                        <div class="f3"><label class="h3" for="dialogv5e85c18261b50_message">Your message</label></div>
+                        <div class="g3"></div>
+                      </div>
+                    </div>
+                    <div class="n4">
+                      <div id="hlp_dialogv5e85c18261b50_message" class="e4 c4"></div>
+                    </div>
+                  </div>
+                  <div class="x_ j0">
+                    <div class="t9">
+                      <div class="x6">
+                        <div class="z6"></div>
+                        <div class="b7">
+                          <div class="_7"><input class="a7" type="checkbox" id="dialogv5e85c18261b50_notify" /></div>
+                        </div>
+                      </div><label for="dialogv5e85c18261b50_notify"> Subscribe to comments notifications</label>
+                    </div>
+                    <div class="n4">
+                      <div id="hlp_dialogv5e85c18261b50_notify" class="e4 c4"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="x_ j0">
+                <div class="e8">
+                  <div id="dialogv5e85c18261b50_progress" role="progressbar" class="c8 m0 t0">
+                    <div class="p0"></div>
+                    <div class="q0"></div>
+                    <div class="n0 r0"><span class="o0"></span></div>
+                    <div class="n0 s0"><span class="o0"></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="r8 x_ j0"><button class="c2 g2" type="button" id="dialogv5e85c18261b50_send"><span
+                    class="f2 ">Send</span></button>
+              </div>
+              <div class="x_ j0">
+                <div id="dialogv5e85c18261b50_comments" class="placeholder"></div>
+              </div><input type="hidden" value="3434" id="dialogv5e85c18261b50_messagebox" />
+            </div>
+            <script>function Dialogv5e85c18261b50() { var me = this; me.id = "dialogv5e85c18261b50"; me.GetElement = function () { return document.getElementById(me.id); }; me.GetEventHandlerName = function () { return "dialoghandlerv5e85c18261b50"; }; this.dialog_controls = [new DialogInput("group_sofia", this, 0, new ElementAccessorDefault()), new DialogInput("group_comments", this, 0, new ElementAccessorDefault()), new DialogInput("message", this, new ValidatorTextSize(0, 5000), new ElementAccessorText()), new DialogInput("notify", this, 0, new ElementAccessorCheckbox()), new DialogInput("messagebox", this, 0, new ElementAccessorText()), new DialogInput("progress", this, 0, new ElementAccessorDefault()), new DialogInput("send", this, 0, new ElementAccessorOperation()), new DialogInput("comments", this, 0, new ElementAccessorDefault())]; me.dialog_controls._all = {}; me.dialog_controls.forEach(function (e) { if (me[e.id] === undefined) me[e.id] = e; me.dialog_controls._all[e.id] = e; }); this.addHandler = function (handler) { this.dialog_controls.forEach(function (c) { c.addHandler(handler); }); }; this.SetValues = function (values) { this.dialog_controls.forEach(function (c) { if (values[c.id] !== undefined) { c.SetValue(values[c.id]); } }); }; this.Clear = function () { this.dialog_controls.forEach(function (c) { c.ResetValue(); }); }; this.SetDefaultValues = function () { this.Clear(); }; this.GetValues = function () { var ret = {}; this.dialog_controls.forEach(function (c) { ret[c.id] = c.GetValue(); }); return ret; }; this.Validate = function () { for (var i = 0; i < me.dialog_controls.length; ++i) if (!me.dialog_controls[i].Validate()) return false; return true; }; this.layout = function () { } }; document.addEventListener("DOMContentLoaded", function (event) {
+                var dlg = new Dialogv5e85c18261b50();
+                var hd = function () { var dialogv5e85c18261b50_comments_init_data = ""; var dialogv5e85c18261b50_comments = new AjaxSetMessages(dialogv5e85c18261b50_comments_init_data, "/service/comments/", "dialogv5e85c18261b50_comments", "Loading..."); dialogv5e85c18261b50_comments.Renderer.AddColumn("posted", "Created", new RecordFieldFormatter(new FormatterTimeSpan())); dialogv5e85c18261b50_comments.Renderer.AddColumn("avatar", "", new CommentAvatarFormatter()); dialogv5e85c18261b50_comments.Renderer.AddColumn("created", "", new RecordFieldFormatter(new FormatterPrefix("Registered: ", new FormatterDateOnly()))); dialogv5e85c18261b50_comments.Renderer.AddColumn("posts", "", new RecordFieldFormatter(new FormatterPrefix("Posts: ", null))); dialogv5e85c18261b50_comments.Render(); dialogv5e85c18261b50_comments.qc.messagebox = 3434; dialogv5e85c18261b50_comments.qc.language = "en"; dialogv5e85c18261b50_comments.qc.parent = 0; var ch = new CommentFormHandler("https://planetcalc.com/3327/?loginrequirednow=1&language_select=en", false); ch.setTable(dialogv5e85c18261b50_comments); return ch; }();;
+                hd.initdialog(dlg); dlg.addHandler(hd);
+              });</script>
+          </div>
+        </div>
+        <div class="x_ _0">
+          <div id="top-right-card" class="right_fix"></div>
+          <div class="cc right-ads">
+            <div id="div-gpt-ad-1585824130-3">
+              <script>googletag.cmd.push(function () { googletag.display("div-gpt-ad-1585824130-3"); });</script>
+            </div>
+          </div>
+          <div id="bottom-right-anchor"></div>
+          <div id="bottom-right-card">
+            <div class="social social-share ce">
+              <h4 class="share-title">Share <span class="share-subject">this page</span></h4><a
+                class="pc-social-share oc pc" target="_blank"
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplanetcalc.com%2F3327%2F"
+                rel="noopener nofollow" data-origin="pc"><img src="/img/social/facebook24x24.png" alt="facebook"></a><a
+                class="pc-social-share oc qc" target="_blank"
+                href="https://twitter.com/intent/tweet?text=Online%20calculator%3A%20Hill%20cipher&url=https%3A%2F%2Fplanetcalc.com%2F3327%2F"
+                rel="noopener nofollow" data-origin="qc"><img src="/img/social/twitter24x24.png" alt="twitter"></a><a
+                class="pc-social-share oc r_"
+                href="mailto:?subject=Online%20calculator%3A%20Hill%20cipher&body=https%3A%2F%2Fplanetcalc.com%2F3327%2F"
+                rel="noopener nofollow" data-origin="r_"><img src="/img/social/email24x24.png" alt="email"></a>
+              <div>
+                <div class="t9 share-switch">
+                  <div class="x6">
+                    <div class="z6"></div>
+                    <div class="b7">
+                      <div class="_7"><input class="a7" type="checkbox" id="share_data" /></div>
+                    </div>
+                  </div> <label for="share_data">&nbsp;share my calculation</label>
+                </div>
+                <div class="f_"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ads-sticker right-ads">
+            <div id="div-gpt-ad-1585824130-4">
+              <script>googletag.cmd.push(function () { googletag.display("div-gpt-ad-1585824130-4"); });</script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var shiftMax = 0;
+      document.addEventListener('DOMContentLoaded', function () {
+        shiftMax = $('#left-block').offset().top - $('#bottom-right-anchor').offset().top + $('#left-block').height() - $('#bottom-right-card').height();
+        $(window).scroll(sticky_update);
+        sticky_update();
+        showStoreRef();
+
+        var sharer = new PSS.Sharer("my calculation", 'Calculation data size is %1. To share your calculation please <a class="save_data_link" href="#">save the calculation data</a> to our server storage.');
+      });
+
+      function sticky_update() {
+        var window_top = $(window).scrollTop();
+        var off = $('#bottom-right-anchor').offset();
+        var shift = window_top + 56 - off.top;
+        if (shift > 0 && off.left > 400 && shiftMax > 0) {
+          $('#bottom-right-anchor').height(shift < shiftMax ? shift : shiftMax);
+        } else {
+          $('#bottom-right-anchor').height(0);
+        }
+      }
+
+      function getMobileOperatingSystem() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android/i.test(userAgent)) {
+          return "Android";
+        }
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "iOS";
+        }
+        return "unknown";
+      }
+      function showStoreRef() {
+        if ($(".wb").length && !$(".wb").is(":visible")) {
+          switch (getMobileOperatingSystem()) {
+            case 'Android': {
+              $(".pc-storeref-android").removeClass("cc");
+            } break;
+            case 'iOS': {
+              $(".pc-storeref-ios").removeClass("cc");
+            } break;
+          }
+        }
+        var savedData = []; function forEachCalc(func) {
+          if (window.CurrentPageCalculators) {
+            for (var i = 0; i < window.CurrentPageCalculators.length; ++i) {
+              func(window.CurrentPageCalculators[i]);
+            }
+          }
+        }
+
+        forEachCalc(function (calc) {
+          var sd = savedData[calc.CalculatorID];
+          if (sd) {
+            calc.setProfile(sd, false);
+          }
+        });
+
+      }
+    </script>
+  </div><!-- container-->
+  <div class="horizontal_divider"></div>
+  <footer class="t7">
+    <ol>
+      <li>
+        <h4>About</h4>
+      </li>
+      <li><a href="/about/">The project</a></li>
+      <li><a class="inline" href="//twitter.com/planetcalc" rel="nofollow"><img src="/img/social/twitter24x24.png"
+            alt="Twitter" />
+        </a>
+      </li>
+    </ol>
+
+    <ol>
+      <li>
+        <h4>Terms</h4>
+      </li>
+      <li><a href="/terms/">Terms of usage</a></li>
+      <li><a href="/privacy/">Privacy Policy</a></li>
+    </ol>
+    <ol>
+      <li>
+        <h4>Calculators</h4>
+      </li>
+      <li><a href="/all/">All online calculators</a></li>
+    </ol>
+    <ol>
+      <li>
+        <h4>Community</h4>
+      </li>
+      <li><a href="/comments/">All discussions</a></li>
+      <li><a href="/allrequests/">All requests</a></li>
+      <li><a href="/sofia/">Sofia's gallery</a></li>
+      <li><a href="/dev/">For developers</a></li>
+    </ol>
+    <ol>
+      <li>
+        <h4>Language</h4>
+      </li>
+      <li><a href="#" onclick="document.location.href='https://planetcalc.com/3327/?language_select=en'"
+          title="English">English</a></li>
+      <li><a href="#" onclick="document.location.href='https://es.planetcalc.com/3327/?language_select=es'"
+          title="Español">Español</a></li>
+      <li><a href="#" onclick="document.location.href='https://fr.planetcalc.com/3327/?language_select=fr'"
+          title="Français">Français</a></li>
+      <li><a href="#" onclick="document.location.href='https://planetcalc.ru/3327/?language_select=ru'"
+          title="Русский">Русский</a></li>
+    </ol>
+    <ol>
+      <li>
+        <h4>Personal section</h4>
+      </li>
+      <li><a href="/personal/">
+          Login</a>
+      </li>
+    </ol>
+    <div class="pb">Copyright &copy; PlanetCalc Version:
+      3.0.3601.0 </div>
+  </footer>
+  <script>if (PCL === undefined) { var PCL = {}; }
+    PCL.minutes_ago_one = "%1 minute ago"; PCL.minutes_ago_other = "%1 minutes ago"; PCL.hours_ago_one = "%1 hour ago"; PCL.hours_ago_other = "%1 hours ago"; PCL.days_ago_one = "%1 day ago"; PCL.days_ago_other = "%1 days ago"; PCL.months_ago_one = "%1 month ago"; PCL.months_ago_other = "%1 months ago"; PCL.years_ago_one = "%1 year ago"; PCL.years_ago_other = "%1 years ago"; PCL.x_of_y = "%1 of %2"; PCL.items_per_page = "Items per page"; PCL.next_page = "Next page"; PCL.prev_page = "Previous page"; PCL.err_data_too_long = "Calculation data size is %1. Your calculation data is too large. We allow %2 only."; PCL.userdata = "The caclulation has been saved %2 by <a href=\"/personal/authorinfo/?id=%3\" rel=\"nofollow\">%1</a>"; PCL.yes = "yes"; PCL.no = "no"; PCL.parser_error_1 = "Unexpected character %token% (%decorated%). Expected: %expected%."; PCL.parser_error_2 = "Unexpected symbol %token% (%decorated%). Expected: %expected%."; PCL.parser_error_3 = "Expression is incomplete. Expected: %expected%."; PCL.err_must_be_at_least_x_chars_long = "Must be at least %1 characters long."; PCL.err_must_be_less_or_equal_x_chars = "Must be fewer than %1 characters long."; PCL.pluralCodes = ['zero', 'one', 'two', 'few', 'many'];
+    PCL.ordinalIR = function (n) {
+      var i = n, w = 0, f = 0, t = 0, v = 0;
+      if ((n % 10) == 1 && (n % 100) != 11) return PCL.pluralCodes[1]; if ((n % 10) == 2 && (n % 100) != 12) return PCL.pluralCodes[2]; if ((n % 10) == 3 && (n % 100) != 13) return PCL.pluralCodes[3]; return "other";
     }
-  });
-</script>
-
-
-
-    <div class="w3-container">
-
-        <div id="header" class="row" >
-            <div id="title"></div>
-            <div id="logindisplay">
-                
-
-
-
-    [ <a href="https://asecuritysite.com/account/logon">Log On</a> ]
-
-
-
-
-
-
-
-          
-
-
-
-            </div>
-
-            <div id="tabs_container">
-
-
-            <div class="invertedshiftdown">
-                <ul>
-                    <li ><a href="https://asecuritysite.com">Home</a></li>
-                    <li ><a href="/tests">Tst</a></li>
-                    <li ><a href="/challenges">Cha</a></li>
-                    <li class=current><a href="/encryption">Enc</a></li>
-                    <li ><a href="/coding">Code</a></li>
-                    <li ><a href="/ip">IP</a></li>
-
-                    <li ><a href="/fun">Fun</a></li>
-                    <li ><a href="/information">Sub</a></li>
-
-                    <li ><a href="/forensics">DigF</a></li>
-                    <li ><a href="/Cisco">Cis</a></li>
-                    
-                    <li ><a href="/comms">Com</a></li>
-
-                    <li ><a href="/database1">Db</a></li>
-
-                    <li ><a href="/Home/About">About</a></li>
-                    <li ><a href="/networksims">Netsim</a></li>
-                    <li ><a href="/bigdata">Big Data</a></li>
-
-
-                </ul>
-            </div>
-        </div>
-            <p></p>
-        <div id="main" class="row">
-
-            
-<script src="/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
-<script src="/Scripts/jquery.validate.js" type="text/javascript"></script>
-<!--  -->
-
-   <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="whitesmoke">
-
-<tr> 
-        <td valign="top" colspan="2">
-        <h1 id="logo">Diffie-Hellman Example</h1>
-          <p>[<a href="javascript:history.go(-1)">Back</a>] Diffie-Hellman is a standard method of Alice and Bob being able to communicate, 
-              and end up with the same secret encryption key. It is used in many applications, and uses two numbers (G and N) for the first part of the calculation (of which N must be a prime number):</p>
-            [<a href="https://www.youtube.com/watch?v=jISbQarmt6s" target="_blank">Related Lecture</a>] 
-             [<a href="/public/diffie_examples.pdf" target="_blank" >Tutorial</a>]
-             [<a href="http://buchananweb.co.uk/2011_tut_encryption.pdf" target="_blank" >Software Tutorial</a>][<a href="https://youtu.be/iw2bJs3pi-w" target="_blank">Software Lecture</a>]
-              [<a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank" >Theory</a>][<a href="https://www.linkedin.com/pulse/ghost-john-napier-hail-mr-diffie-hellman-william-buchanan" target="_blank">Blog</a>]
-            [<a href="/encryption/pickg" target="_blank">Picking G value</a>]             
-
- <div id="PartialViewGN">
- 
-
-
-              <table style="width:100%">
-
-                  <tr><td>G:</td> <td> <input id="Gvalue" name="Gvalue" style="width:80%" type="text" value="" /></td></tr>
-                  <tr><td>N:</td> <td> <input id="Nvalue" name="Nvalue" style="width:80%" type="text" value="" /></td></tr>     
-                               
- </table>
-
-</div>
-
-                  
-<form action="/encryption/diffie" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#PartialViewGN" id="form0" method="post"> <input type="submit" value="Generate G and N" name="button1" class="defaultbutton red" />
-</form>
-
-
- <div id="PartialViewXY">
- 
-
-<p> Next Bob and Alice will generate two random numbers (X and Y), calculate an X value and a Y value, respectively:</p>
-
- <table style="width: 100%">
-            <tr> 
-              <td style="width: 30%"> <strong>Bob's X Value</strong></td>
-              <td> <input id="Xvalue" name="Xvalue" rows="1" style="width:20%" type="text" value="" /></td>
-              <td style="width: 30%"> <strong>Alice's Y value</strong></td>
-              <td> <input id="Yvalue" name="Yvalue" rows="1" style="width:20%" type="text" value="" /></td>
-            </tr>
-                        <tr> 
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"> Bob's random value</td>
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"> Alice's random value</td>
-            </tr>
-
-            <tr> 
-              <td style="width: 30%"> <strong>Bob's A value</strong></td>
-              <td> <input id="Avalue" name="Avalue" rows="1" style="width:20%" type="text" value="" /></td>
-              <td style="width: 30%"> <strong>Alice's B value</strong></td>
-              <td> <input id="Bvalue" name="Bvalue" rows="1" style="width:20%" type="text" value="" /></td>
-            </tr>
-            <tr> 
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"> A=G^x mod N</td>
-             
-
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"> B=G^y mod N</td>
-              
-            </tr>
-            <tr> 
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"></td>
-             
-
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"></td>
-              
-            </tr>
-
-
-          </table>
-
-
-</div>
-
-<form action="/encryption/diffie" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#PartialViewXY" id="form1" method="post"> <input type="submit" value="Generate X and Y" name="button2"  class="defaultbutton red" />
-</form>
-    
-          <div id="PartialViewGenK">
- 
- <p> and Bob will send his A value to Alice, and Alice will send her 
-            B value to Bob, and they now re-calculate the values to generate the <b>same shared key</b>:</p>
-          <p> </p>
-          <table style="width: 100%">
-            <tr> 
-              <td style="width: 30%"> </td>
-              <td style="width: 20%"> </td>
-              <td style="width: 30%"> </td>
-              <td style="width: 20%"> </td>
-            </tr>
-
-            <tr> 
-              <td style="width: 30%"> <strong>Bob's Key</strong></td>
-              <td> <input id="BobKey" name="BobKey" style="width:80%" type="text" value="" /></td>
-              <td style="width: 20%"> Alice's Key</td>
-              <td> <input id="AliceKey" name="AliceKey" style="width:80%" type="text" value="" /></td>
-            </tr>
-            <tr> 
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;">Key=B^x mod N</td>
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;">Key=A^y mod N</td>
-            </tr>
-            <tr> 
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"></td>
-             
-
-              <td style="width: 30%; height: 47px;"> </td>
-              <td style="width: 20%; height: 47px;"></td>
-              
-            </tr>
-            </table>
-
-            <p></p>
-</div>   
-              
-<form action="/encryption/diffie" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#PartialViewGenK" id="form2" method="post"> <input type="submit" value="Generate Keys" name="button3" class="defaultbutton red" />
-</form>
-
-         
-         </td></tr> </table>
-            <h2>Try an example</h2>                 <ul>
-  
-          <li><strong>x=3, y=4, G=4 and N=7</strong>. <a href="/encryption/diffie?val=3%2C4%2C7%2C4">Try</a></li>
-      <li><strong>x=6, y=15, G=5 and N=23</strong>. <a href="/encryption/diffie?val=6%2C15%2C23%2C5">Try</a> <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank">Refer</a></li>
-  
-                   <li><strong>x=5, y=7, G=10 and N=541</strong>. <a href="/encryption/diffie?val=5%2C7%2C541%2C10">Try</a> <a href="http://www.irongeek.com/diffie-hellman.php" target="_blank">Refer</a></li>
-     <li><strong>x=6, y=15, G=5 and N=23. Share=2</strong>. <a href="/encryption/diffie?val=6%2C15%2C23%2C5">Try</a> <a href="https://www.cs.utexas.edu/~byoung/cs361/lecture52.pdf" target="_blank">Refer</a></li>
- 
-                  <li><strong>x=7, y=7, G=5 and N=11</strong>. <a href="/encryption/diffie?val=7%2C7%2C11%2C5">Try</a> </li>
-     <li><strong>x=7, y=9, G=8 and N=13</strong>. <a href="/encryption/diffie?val=7%2C9%2C13%2C8">Try</a> </li>
-                 <li><strong>x=5, y=4, G=2969 and N=9929. Share=8106</strong>. <a href="/encryption/diffie?val=5%2C4%2C9929%2C2969">Try</a> </li>
-
-                 <li><strong>x=6, y=5, G=3881 and N=125. Share=792</strong>. <a href="/encryption/diffie?val=6%2C5%2C1861%2C3881">Try</a> </li>
- 
-          <li><strong>x=3, y=4, G=3623 and N=1153. Share=939</strong>. <a href="/encryption/diffie?val=3%2C4%2C1153%2C3623">Try</a> </li>
-  
-          
-  
-      </ul>
-<h2>Outline</h2>
-<p>In Diffie-Hellman, Bob and Alice agree on G (a generator) and N (a prime number), and then Bob picks a random value of x, and Alice picks a random value of y:</p>
-<table>
-<tr><td>Bob (x)</td><td>Alice (y)</td></tr>
-<tr><td>\(b=G^x \mod N\)</td><td>\(a=G^y \mod N\)</td></tr>
-<tr><td>Bob sends Alice the value of <i>b</i></td><td>Alice sends Bob the value of <i>a</i></td></tr>
-<tr><td>\(Key=a^x \mod N\)</td><td>\(Key=b^y \mod N\)</td></tr>
-</table>
-<h2>Presention</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wyNPhNAsmJ0?rel=0" frameborder="0" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-TjSuch3VGU?rel=0" frameborder="0" allowfullscreen></iframe>
-         <h2>Code Used</h2>
-<!-- code formatted by http://manoli.net/csharpformat/ -->
-<style type="text/css">
-.csharpcode, .csharpcode pre
-{
-	font-size: small;
-	color: black;
-	font-family: Consolas, "Courier New", Courier, Monospace;
-	background-color: #ffffff;
-	/*white-space: pre;*/
-}
-
-.csharpcode pre { margin: 0em; }
-
-.csharpcode .rem { color: #008000; }
-
-.csharpcode .kwrd { color: #0000ff; }
-
-.csharpcode .str { color: #a31515; }
-
-.csharpcode .op { color: #0000c0; }
-
-.csharpcode .preproc { color: #cc6633; }
-
-.csharpcode .asp { background-color: #ffff00; }
-
-.csharpcode .html { color: #800000; }
-
-.csharpcode .attr { color: #ff0000; }
-
-.csharpcode .alt 
-{
-	background-color: #f4f4f4;
-	width: 100%;
-	margin: 0em;
-}
-
-.csharpcode .lnum { color: #606060; }
-</style>
-<pre class="csharpcode">
-        <span class="kwrd">public</span> ActionResult diffie(hashing h, <span class="kwrd">string</span> button1, <span class="kwrd">string</span> button2, <span class="kwrd">string</span> button3)
-        {
-            <span class="kwrd">if</span> (button1 != <span class="kwrd">null</span>)
-            {
-
-                SecureRandom random = <span class="kwrd">new</span> SecureRandom();
-                <span class="kwrd">int</span> x = Global.random(20) + 2;
-                <span class="kwrd">int</span> y = Global.random(20) + 2;
-
-                <span class="kwrd">int</span> G = getPrime();
-                <span class="kwrd">int</span> N = getPrime();
-
-                BigInteger g = <span class="kwrd">new</span> BigInteger(Convert.ToString(G));
-                BigInteger n = <span class="kwrd">new</span> BigInteger(Convert.ToString(N));
-
-
-                BigInteger A = g.Pow(x).Mod(n);
-                BigInteger B = g.Pow(y).Mod(n);
-
-                ViewData[<span class="str">"GValue"</span>] = g.ToString();
-                ViewData[<span class="str">"Nvalue"</span>] = n.ToString();
-                ViewData[<span class="str">"XValue"</span>] = Convert.ToString(x);
-                ViewData[<span class="str">"Yvalue"</span>] = Convert.ToString(y);
-
-
-                BigInteger k1 = B.Pow(x).Mod(n);
-                BigInteger k2 = A.Pow(y).Mod(n);
-
-
-                ViewData[<span class="str">"Avalue"</span>] = A.ToString();
-                ViewData[<span class="str">"Bvalue"</span>] = B.ToString();
-
-                ViewData[<span class="str">"BobKey"</span>] = k1.ToString();
-                ViewData[<span class="str">"AliceKey"</span>] = k2.ToString();
-
-
-
-
-
-
-                Session[<span class="str">"GValue"</span>] = ViewData[<span class="str">"GValue"</span>];
-                Session[<span class="str">"Nvalue"</span>] = ViewData[<span class="str">"NValue"</span>];
-                Session[<span class="str">"XValue"</span>] = ViewData[<span class="str">"XValue"</span>];
-                Session[<span class="str">"Yvalue"</span>] = ViewData[<span class="str">"YValue"</span>];
-                Session[<span class="str">"AValue"</span>] = ViewData[<span class="str">"AValue"</span>];
-                Session[<span class="str">"Bvalue"</span>] = ViewData[<span class="str">"BValue"</span>];
-                Session[<span class="str">"BobKey"</span>] = ViewData[<span class="str">"BobKey"</span>];
-                Session[<span class="str">"AliceKey"</span>] = ViewData[<span class="str">"AliceKey"</span>];
-
-
-                <span class="kwrd">if</span> (k1.ToString() == k2.ToString()) h.message = <span class="str">"Success ... the keys match!!!"</span>;
-                <span class="kwrd">else</span> h.message = <span class="str">"Failed ... probably due to math overload"</span>;
-
-                Session[<span class="str">"Message"</span>] = h.message;
-
-                <span class="kwrd">return</span> PartialView(<span class="str">"PartialViewGN"</span>);
-            }
-
-            <span class="kwrd">if</span> (button2 != <span class="kwrd">null</span>)
-            {
-
-                ViewData[<span class="str">"GValue"</span>] = Session[<span class="str">"GValue"</span>];
-                ViewData[<span class="str">"Nvalue"</span>] = Session[<span class="str">"NValue"</span>];
-                ViewData[<span class="str">"XValue"</span>] = Session[<span class="str">"XValue"</span>];
-                ViewData[<span class="str">"Yvalue"</span>] = Session[<span class="str">"YValue"</span>];
-                ViewData[<span class="str">"AValue"</span>] = Session[<span class="str">"AValue"</span>];
-                ViewData[<span class="str">"Bvalue"</span>] = Session[<span class="str">"BValue"</span>];
-                <span class="kwrd">return</span> PartialView(<span class="str">"PartialViewXY"</span>);
-            }
-            <span class="kwrd">if</span> (button3 != <span class="kwrd">null</span>)
-            {
-
-                ViewData[<span class="str">"GValue"</span>] = Session[<span class="str">"GValue"</span>];
-                ViewData[<span class="str">"Nvalue"</span>] = Session[<span class="str">"NValue"</span>];
-                ViewData[<span class="str">"XValue"</span>] = Session[<span class="str">"XValue"</span>];
-                ViewData[<span class="str">"Yvalue"</span>] = Session[<span class="str">"YValue"</span>];
-                ViewData[<span class="str">"AValue"</span>] = Session[<span class="str">"AValue"</span>];
-                ViewData[<span class="str">"Bvalue"</span>] = Session[<span class="str">"BValue"</span>];
-                ViewData[<span class="str">"BobKey"</span>] = Session[<span class="str">"BobKey"</span>];
-                ViewData[<span class="str">"AliceKey"</span>] = Session[<span class="str">"AliceKey"</span>];
-                ViewBag.Message = Session[<span class="str">"Message"</span>];
-                <span class="kwrd">return</span> PartialView(<span class="str">"PartialViewGenK"</span>);
-
-            }
-
-            <span class="kwrd">return</span> View();
-
-
-        }</pre>
-       <table><tr><td>
-        <h2>Diagram</h2>
-<p><img src="/content/dh.png" align="left" alt="Pigpen" class="has-border" /> </p>
-</td></tr></table>
-        </div>
-
-  <!-- end post-entry -->
-        </div>
-
- </div>
-  </div> 
+    PCL.cardinalIR = function (n) {
+      var i = n, w = 0, f = 0, t = 0, v = 0;
+      if (v == 0 && i == 1) return PCL.pluralCodes[1]; return "other";
+    }
+    PCL.getOrdinal = function (n) {
+      return PCL['ordinal_' + PCL.ordinalIR(n)];
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="/lib/min/3597/pla_m_3597.js"></script>
+  <script>
+    PLANETCALC.init();
+  </script>
 </body>
+
 </html>
