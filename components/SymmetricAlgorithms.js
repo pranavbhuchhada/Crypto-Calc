@@ -12,7 +12,7 @@ import {
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Table, Rows} from 'react-native-table-component';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
-import {MatrixSolver} from './UtilityFunctions';
+import {MatrixSolver, modInverse} from './UtilityFunctions';
 
 class CeaserCipher extends React.Component{
   constructor(props){
@@ -50,9 +50,6 @@ class CeaserCipher extends React.Component{
   }
   toCipher = (PlainText,Key)=>{
     this.setState({plaintext: PlainText});
-    this.setState({key: Key});
-    if (Key < 0)
-      return caesarShift(PlainText, Key + 26);
     var output = '';
     for (var i = 0; i < PlainText.length; i ++) {
       var c = PlainText[i];
@@ -69,9 +66,6 @@ class CeaserCipher extends React.Component{
   }
   toPlain = (CipherText,Key)=>{
     this.setState({ciphertext: CipherText});
-    this.setState({key: Key});
-    if (Key < 0)
-      return caesarShift(CipherText, Key + 26);
     var output = '';
     for (var i = 0; i < CipherText.length; i ++) {
       var c = CipherText[i];
@@ -88,14 +82,14 @@ class CeaserCipher extends React.Component{
     this.setState({plaintext:output});
   }
   onSliderChange = (Key)=>{
-    if(this.state.isOnPlain){
-      // this.toPlain(this.state.ciphertext,Key);
-      this.toCipher(this.state.plaintext,Key);
-    }
-    else{
-      // this.toCipher(this.state.plaintext,Key);
-      this.toPlain(this.state.ciphertext,Key);
-    }
+    this.setState({key:Key},()=>{
+      if(this.state.isOnPlain){
+        this.toCipher(this.state.plaintext,Key);
+      }
+      else{
+        this.toPlain(this.state.ciphertext,Key);
+      }
+    });    
   }
 
   render(){
@@ -108,7 +102,6 @@ class CeaserCipher extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
               value={this.state.plaintext}
               onFocus={()=>this.setState({isOnPlain:true})}
@@ -171,18 +164,11 @@ class MultiplicativeCipher extends React.Component{
         fontSize:responsiveFontSize(2.5),
         color:"#909090"
       },
-      slider:{
-        marginTop:responsiveHeight(2.5),
-        marginBottom:responsiveHeight(2.5),
-        width:responsiveWidth(85)
-      }
     });
   }
-  toCipher = (PlainText,Key)=>{
+  toCipher = (PlainText)=>{
+    var Key = this.state.Key;
     this.setState({plaintext: PlainText});
-    this.setState({key: Key});
-    if (Key < 0)
-      return caesarShift(PlainText, Key + 26);
     var output = '';
     for (var i = 0; i < PlainText.length; i ++) {
       var c = PlainText[i];
@@ -197,56 +183,25 @@ class MultiplicativeCipher extends React.Component{
     }
     this.setState({ciphertext:output});
   }
-  toPlain = (CipherText,Key)=>{
+  toPlain = (CipherText)=>{
     this.scroll.scrollToEnd({animated:true});
+    var Key = modInverse(this.state.Key,26);
     this.setState({ciphertext: CipherText});
-    this.setState({key: Key});
-    this.state={
-      Key2:15
-    }
-    switch(Key){
-      case 1:
-        this.setState({Key2: 1});
-        break;
-      case 3:
-        this.setState({Key2: 1});
-        break;
-      case 5:
-        this.setState({Key2: 1});
-        break;
-      case 7:
-        this.setState({Key2: 1});
-        break;
-      case 9:
-        break;
-      case 11:
-        this.setState({Key2: 1});
-        break;
-      case 15:
-        this.setState({Key2: 1});
-        break;
-      case 17:
-        this.setState({Key2: 1});
-        break;
-    }
-    
     var output = '';
     for (var i = 0; i < CipherText.length; i ++) {
       var c = CipherText[i];
       if (c.match(/[a-z]/i)) {
         var code = CipherText.charCodeAt(i);
-        if ((code >= 65) && (code <= 90)){
-          c = String.fromCharCode((((code - 65) * Key2) % 26) + 65);
-        }
+        if ((code >= 65) && (code <= 90))
+          c = String.fromCharCode((((code - 65) * Key) % 26) + 65);
         else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode((((code - 97) * Key2) % 26) + 97);
+          c = String.fromCharCode((((code - 97) * Key) % 26) + 97);
       }
       output += c;
     }
     this.setState({plaintext:output});
   }
   
-
   render(){
       return(
         <ScrollView ref={ref => this.scroll = ref}>
@@ -257,15 +212,22 @@ class MultiplicativeCipher extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
-              onChangeText={PlainText => this.toCipher(PlainText,this.state.Key)}
+              onChangeText={text => this.toCipher(text)}
               value={this.state.plaintext}
               onFocus={()=>this.setState({isOnPlain:true})}
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>Key :</Text>
             <Picker
               selectedValue={this.state.Key}
-              onValueChange={(itemValue, itemIndex) => this.setState({Key: itemValue})} >
+              onValueChange={(itemValue, itemIndex) => {
+                this.setState({Key: itemValue},()=>{
+                  if(this.state.isOnPlain){
+                    this.toCipher(this.state.plaintext);
+                  }else{
+                    this.toPlain(this.state.ciphertext);
+                  }
+                });
+              }} >
               <Picker.Item label="1" value={1} />
               <Picker.Item label="3" value={3} />
               <Picker.Item label="5" value={5} />
@@ -281,7 +243,7 @@ class MultiplicativeCipher extends React.Component{
               placeholder={"Type Cipher text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
+              onChangeText={text => this.toPlain(text)}
               value={this.state.ciphertext}
               onFocus={()=>this.setState({isOnPlain:false})}
             />
@@ -328,7 +290,6 @@ class AffineCipher extends React.Component{
   }
   toCipher = (PlainText,Key,key2)=>{
     this.setState({plaintext: PlainText});
-    this.setState({key: Key});
     var output = '';
     for (var i = 0; i < PlainText.length; i ++) {
       var c = PlainText[i];
@@ -337,42 +298,40 @@ class AffineCipher extends React.Component{
         if ((code >= 65) && (code <= 90))
           c = String.fromCharCode((((((code - 65) * key2)% 26)+Key)%26) + 65);
         else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode(((((code - 97)*key2)%26+ Key) % 26) + 97);
+          c = String.fromCharCode((((((code - 97) * key2)% 26)+Key)%26) + 97);
       }
       output += c;
     }
     this.setState({ciphertext:output});
   }
-  toPlain = (CipherText,Key)=>{
+  toPlain = (CipherText,Key,key2)=>{
+    key2 = modInverse(key2);
     this.scroll.scrollToEnd({animated:true});
     this.setState({ciphertext: CipherText});
-    this.setState({key: Key});
-    if (Key < 0)
-      return caesarShift(CipherText, Key + 26);
     var output = '';
     for (var i = 0; i < CipherText.length; i ++) {
       var c = CipherText[i];
       if (c.match(/[a-z]/i)) {
         var code = CipherText.charCodeAt(i);
         if ((code >= 65) && (code <= 90)){
-          c = String.fromCharCode((((code - 65 - Key) %26) +26)%26 + 65);
+          c = String.fromCharCode((((code - 65 - Key) %26) + 26)*key2%26 + 65);
         }
         else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode((((code - 97 - Key) % 26)+26)%26 + 97);
+          c = String.fromCharCode((((code - 97 - Key) % 26) + 26)*key2%26 + 97);
       }
       output += c;
     }
     this.setState({plaintext:output});
   }
   onSliderChange = (Key)=>{
-    if(this.state.isOnPlain){
-      this.toPlain(this.state.ciphertext,Key);
-      this.toCipher(this.state.plaintext,Key);
-    }
-    else{
-      this.toCipher(this.state.plaintext,Key);
-      this.toPlain(this.state.ciphertext,Key);
-    }
+    this.setState({key:Key},()=>{
+      if(this.state.isOnPlain){
+        this.toCipher(this.state.plaintext,Key,this.state.key2);
+      }
+      else{
+        this.toPlain(this.state.ciphertext,Key,this.state.key2);
+      }
+    });
   }
 
   render(){
@@ -385,14 +344,12 @@ class AffineCipher extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.key,this.state.key2)}
               value={this.state.plaintext}
               onFocus={()=>this.state.isOnPlain=true}
             />
-                        <Text style={{fontSize:responsiveFontSize(3),}}>Key 1:</Text>
+            <Text style={{fontSize:responsiveFontSize(3),}}>Key 1:</Text>
             <View style={{flexDirection:"row"}}>
-
               <Slider
                 style={this.styles.slider}
                 minimumValue={0}
@@ -405,11 +362,19 @@ class AffineCipher extends React.Component{
               />
               <Text style={{marginTop:responsiveWidth(5),fontSize:responsiveFontSize(2.3)}}>{this.state.key}</Text>
             </View>
-            <View>
             <Text style={{fontSize:responsiveFontSize(3),}}>Key 2:</Text>  
             <Picker
               selectedValue={this.state.key2}
-              onValueChange={(itemValue, itemIndex) => this.setState({key2: itemValue})} >
+              onValueChange={(itemValue, itemIndex) => {
+                this.setState({key2: itemValue},()=>{
+                  if(this.state.isOnPlain){
+                    this.toCipher(this.state.plaintext,this.state.key,itemValue);
+                  }
+                  else{
+                    this.toPlain(this.state.ciphertext,this.state.key,itemValue);
+                  }
+                });
+                }} >
               <Picker.Item label="1" value={1} />
               <Picker.Item label="3" value={3} />
               <Picker.Item label="5" value={5} />
@@ -419,7 +384,6 @@ class AffineCipher extends React.Component{
               <Picker.Item label="15" value={15} />
               <Picker.Item label="17" value={17} />
             </Picker>
-            </View>
             <Text style={{fontSize:responsiveFontSize(3),}}>Cipher Text:</Text>
             <TextInput
               style={this.styles.textarea}
@@ -571,7 +535,6 @@ class AutoKeyCipher extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
               value={this.state.plaintext}
               onFocus={()=>{this.setState({isOnPlain:true});}}
@@ -870,7 +833,7 @@ class VigenereCipher extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      key:"",
+      key:"crypto",
       plaintext:"",
       ciphertext:"",
       isOnPlain:true
@@ -914,71 +877,59 @@ class VigenereCipher extends React.Component{
   }
   toCipher = (PlainText,key)=>{
     this.setState({plaintext: PlainText});
-    this.setState({key: key});
     var output = "";
     for (var i = 0, j = 0; i < PlainText.length; i++) {
-      if (PlainText[i].match(/[a-z]/i)){
       var c = PlainText.charCodeAt(i);
-      var temp=j%(key.length);
-   
+      var temp=key.charCodeAt(j%(key.length));
       if ((c >= 65) && (c <= 90)) {        
-        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
-        output += String.fromCharCode((c - 65 + key.charCodeAt(temp)-65) % 26 + 65);
+        if((temp>=65) && (temp<=90)){
+          output += String.fromCharCode((c - 65 + temp-65) % 26 + 65);
         }
-        else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
-          output += String.fromCharCode((c - 65 + key.charCodeAt(temp)-97) % 26 + 65);
+        else if((temp>=97) && (temp<=122)){
+          output += String.fromCharCode((c - 65 + temp-97) % 26 + 65);
         }
         j++;
       } else if ((c >= 97) && (c <= 122)) {
-        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
-          output += String.fromCharCode((c - 97 + key.charCodeAt(temp)-65) % 26 + 97);
+        if((temp>=65) && (temp<=90)){
+          output += String.fromCharCode((c - 97 + temp-65) % 26 + 97);
           }
-          else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
-            output += String.fromCharCode((c - 97 + key.charCodeAt(temp)-97) % 26 +97);
+          else if((temp>=97) && (temp<=122)){
+            output += String.fromCharCode((c - 97 + temp-97) % 26 +97);
           }
           j++;
       } else {
-        output += input.charAt(i);
+        output += PlainText.charAt(i);
       }
     }
-  }
     this.setState({ciphertext:output});
-
   }
   toPlain = (CipherText,key)=>{
-    this.scroll.scrollToEnd({animated:true});
     this.setState({ciphertext: CipherText});
-    this.setState({key: key});
     var output = "";
     for (var i = 0, j = 0; i < CipherText.length; i++) {
-      if (CipherText[i].match(/[a-z]/i)){
       var c = CipherText.charCodeAt(i);
-      var temp=j%(key.length);
+      var temp=key.charCodeAt(j%(key.length));
       if ((c >= 65) && (c <= 90)) {        
-        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
-        output += String.fromCharCode((c - 65 - key.charCodeAt(temp)+65) % 26 + 65);
+        if((temp>=65) && (temp<=90)){
+          output += String.fromCharCode((c - 65 + 26 - (temp-65)) % 26 + 65);
         }
-        else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
-          output += String.fromCharCode((c - 65 - key.charCodeAt(temp)+97) % 26 + 65);
+        else if((temp>=97) && (temp<=122)){
+          output += String.fromCharCode((c - 65 + 26 - (temp-97)) % 26 + 65);
         }
         j++;
       } else if ((c >= 97) && (c <= 122)) {
-        if((key.charCodeAt(temp)>=65) && (key.charCodeAt(temp)<=90)){
-          output += String.fromCharCode((c - 97 - key.charCodeAt(temp)+65) % 26 + 97);
+        if((temp>=65) && (temp<=90)){
+          output += String.fromCharCode((c - 97 + 26 - (temp-65)) % 26 + 97);
           }
-          else if((key.charCodeAt(temp)>=97) && (key.charCodeAt(temp)<=122)){
-            output += String.fromCharCode((c - 97 - key.charCodeAt(temp)+97) % 26 +97);
+          else if((temp>=97) && (temp<=122)){
+            output += String.fromCharCode((c - 97 + 26 - (temp-97)) % 26 +97);
           }
           j++;
       } else {
-        output += input.charAt(i);
+        output += CipherText.charAt(i);
       }
     }
-    else{
-      output +=CipherText[i];
-    }
-  }
-  this.setState({plaintext:output});
+    this.setState({plaintext:output});
   }
   render(){
       return(
@@ -990,16 +941,23 @@ class VigenereCipher extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
               onChangeText={PlainText => this.toCipher(PlainText,this.state.key)}
               value={this.state.plaintext}
-              onFocus={()=>{this.setState({isOnPlain:true});}}
-            />
+              onFocus={()=>{this.setState({isOnPlain:true});}} />
             <Text style={{fontSize:responsiveFontSize(3),}}>Key:</Text>
             <TextInput
               style={this.styles.fullinput}
-              onChangeText={(key)=>this.toCipher(this.state.plaintext,key)}
-              placeholder={"Enter a key"}/>
+              placeholder={"Enter a key"}
+              onChangeText={(Key)=>{
+                this.setState({key:Key},()=>{
+                  if(this.state.isOnPlain){
+                    this.toCipher(this.plaintext,Key);
+                  }else{
+                    this.toPlain(this.state.ciphertext,Key);
+                  }
+                });
+              }}
+              value={this.state.key} />
             <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
             <TextInput
               style={this.styles.textarea}

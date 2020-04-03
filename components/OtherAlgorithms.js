@@ -72,7 +72,7 @@ class GCD extends React.Component{
               onChangeText={N => this.setState({Numbers:this.filterNumber(N)})}
               value={this.state.Numbers}
             />
-            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateGCD();}} underlayColor = {"#0ba82f"}>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateGCD();}} underlayColor = {"#3c5a78"}>
                 <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate GCD</Text>
             </TouchableHighlight>
             <Text style={{
@@ -81,7 +81,7 @@ class GCD extends React.Component{
                 marginTop:responsiveHeight(5),
             }}>Numbers :{"\n"}{this.state.numbers.join(", ")}</Text>
             <Text style={{
-                color:"blue",
+                color:"#1e3d59",
                 fontSize:responsiveFontSize(4),
                 textAlign:"center",
                 marginTop:responsiveHeight(5),
@@ -128,7 +128,7 @@ class Modulas extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || ttext.match(/^[^0-9]/g)||text=="")
+    if(text == "" || text.match(/^[^0-9]/g)||text=="")
       return text;
     return Number(text.replace(/[^0-9-]/g, ''));
   }
@@ -152,11 +152,11 @@ class Modulas extends React.Component{
               keyboardType={"numeric"}
               value={this.state.Num2.toString()}
               onChangeText={N=>this.setState({Num2:this.filterNumber(N)})}/>
-            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateMOD()}} underlayColor = {"#0ba82f"}>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateMOD()}} underlayColor = {"#3c5a78"}>
                 <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
             </TouchableHighlight>
             <Text style={{
-                color:"blue",
+                color:"#1e3d59",
                 fontSize:responsiveFontSize(4),
                 textAlign:"center",
                 marginTop:responsiveHeight(5),
@@ -203,7 +203,7 @@ class ModularInverse extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || ttext.match(/^[^0-9]/g)||text=="")
+    if(text == "" || text.match(/^[^0-9]/g)||text=="")
       return text;
     return Number(text.replace(/[^0-9-]/g, ''));
   }
@@ -231,11 +231,11 @@ class ModularInverse extends React.Component{
               keyboardType={"numeric"}
               value={this.state.num.toString()}
               onChangeText={N=>this.setState({num:this.filterNumber(N)})}/>
-            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateInverse()}} underlayColor = {"#0ba82f"}>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateInverse()}} underlayColor = {"#3c5a78"}>
                 <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
             </TouchableHighlight>
             <Text style={{
-                color:"blue",
+                color:"#1e3d59",
                 fontSize:responsiveFontSize(4),
                 textAlign:"center",
                 marginTop:responsiveHeight(5),
@@ -299,7 +299,7 @@ class PrimeTest extends React.Component{
             value={this.state.Num.toString()}
             onChangeText={N=>this.setState({Num:this.filterNumber(N)},()=>{this.checkPrime();})}/>
           <Text style={{
-              color:"blue",
+              color:"#1e3d59",
               fontSize:responsiveFontSize(4),
               textAlign:"center",
               marginTop:responsiveHeight(5),
@@ -345,7 +345,7 @@ class PrimitiveRoots extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || ttext.match(/^[^0-9]/g)||text=="")
+    if(text == "" || text.match(/^[^0-9]/g)||text=="")
       return text;
     return Number(text.replace(/[^0-9-]/g, ''));
   }
@@ -369,11 +369,11 @@ class PrimitiveRoots extends React.Component{
               value={this.state.num.toString()}
               autoFocus={true}
               onChangeText={N=>this.setState({num:this.filterNumber(N)})}/>
-            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateRoot()}} underlayColor = {"#0ba82f"}>
+            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateRoot()}} underlayColor = {"#3c5a78"}>
                 <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
             </TouchableHighlight>
             <Text style={{
-                color:"blue",
+                color:"#1e3d59",
                 fontSize:responsiveFontSize(4),
                 textAlign:"center",
                 marginTop:responsiveHeight(5),
@@ -510,18 +510,18 @@ class CRT extends React.Component{
           {this.getEle(2)}
           {Arr}
           <View style={{flexDirection:"row",justifyContent:"center"}}>
-          <TouchableHighlight style={this.styles.button} onPress={()=>{this.addEle()}} underlayColor = {"#0ba82f"}>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.addEle()}} underlayColor = {"#3c5a78"}>
               <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Add</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={this.styles.button} onPress={()=>{this.delEle()}} underlayColor = {"#0ba82f"}>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.delEle()}} underlayColor = {"#3c5a78"}>
               <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Remove</Text>
           </TouchableHighlight>
           </View>
-          <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateCRT()}} underlayColor = {"#0ba82f"}>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateCRT()}} underlayColor = {"#3c5a78"}>
               <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
           </TouchableHighlight>
           <Text style={{
-              color:"blue",
+              color:"#1e3d59",
               fontSize:responsiveFontSize(4),
               textAlign:"center",
               marginTop:responsiveHeight(5),
