@@ -128,7 +128,7 @@ class CeaserCipher extends React.Component{
               multiline={true}
               onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
               value={this.state.ciphertext}
-              onFocus={()=>{this.setState({isOnPlain:false});this.scroll.scrollToEnd({animated:true});}}
+              onFocus={()=>{this.setState({isOnPlain:false});}}
             />
             <KeyboardSpacer/>
           </View>
@@ -184,7 +184,7 @@ class MultiplicativeCipher extends React.Component{
     this.setState({ciphertext:output});
   }
   toPlain = (CipherText)=>{
-    this.scroll.scrollToEnd({animated:true});
+    
     var Key = modInverse(this.state.Key,26);
     this.setState({ciphertext: CipherText});
     var output = '';
@@ -477,7 +477,7 @@ class AutoKeyCipher extends React.Component{
     });
   }
   toPlain = (CipherText,Key)=>{
-    this.scroll.scrollToEnd({animated:true});
+    
     this.setState({ciphertext: this.filterAlpha(CipherText)},()=>{
     this.setState({key: Key});
     var output = '';
@@ -749,7 +749,7 @@ class PlayfairCipher extends React.Component{
     return transform;
   }
   toCipher = (text)=>{
-    // this.scroll.scrollToEnd({animated:true});
+    // 
     this.setState({plaintext:text});
     if(this.state.isOnPlain){
       var letters = text.toUpperCase().split('').filter(function(item){ return item.match(/[a-z]/i);}).map(function(item){ return item == 'J' ? 'I' : item; });
@@ -768,7 +768,7 @@ class PlayfairCipher extends React.Component{
     }
   }
   toPlain = (text)=>{
-    // this.scroll.scrollToEnd({animated:true});
+    // 
     this.setState({ciphertext:text});
     if(!this.state.isOnPlain){
       var letters = text.toUpperCase().split('').filter(function(item){ return item.match(/[a-z]/i);}).map(function(item){ return item == 'J' ? 'I' : item; });

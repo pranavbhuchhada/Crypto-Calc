@@ -4,7 +4,7 @@
     "slug": "Crypto-Calc",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "version": "1.0.17",
+    "version": "1.0.22",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "android": {
