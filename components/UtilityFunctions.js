@@ -219,7 +219,7 @@ class MatrixSolver {
           var det = 0;
           var cols = this.columns(matrixarray);
           for (var i = 0; i < cols; ++i) {
-              this.det += Math.pow(-1, i) * this.get(matrixarray, 0, i) * this.calcDeterminant(this.minor(matrixarray, 0, i));
+            det += Math.pow(-1, i) * this.get(matrixarray, 0, i) * this.calcDeterminant(this.minor(matrixarray, 0, i));
           }
           return det;
       }

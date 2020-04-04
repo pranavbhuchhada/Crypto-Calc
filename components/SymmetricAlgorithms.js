@@ -15,6 +15,9 @@ import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-
 import {MatrixSolver, modInverse} from './UtilityFunctions';
 
 class CeaserCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Ceaser Cipher',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -137,6 +140,9 @@ class CeaserCipher extends React.Component{
   }
 }
 class MultiplicativeCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Multiplicative Cipher',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -254,6 +260,9 @@ class MultiplicativeCipher extends React.Component{
   }
 }
 class AffineCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Affine Cipher',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -400,6 +409,9 @@ class AffineCipher extends React.Component{
   }
 }
 class AutoKeyCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Auto-Key Cipher',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -569,6 +581,9 @@ class AutoKeyCipher extends React.Component{
   }
 }
 class PlayfairCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Playfair Cipher',
+  };
   constructor(props){
     super(props);
     Alert.alert("Discalimer","1. 'J' is replaced with 'I' to fit 5x5 square\n2. 'X' is used as substitution in case you need to fill second letter in the digram, or split two identical letters")
@@ -829,6 +844,9 @@ class PlayfairCipher extends React.Component{
   }
 }
 class VigenereCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Vigenère Cipher',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -949,11 +967,15 @@ class VigenereCipher extends React.Component{
               placeholder={"Enter a key"}
               onChangeText={(Key)=>{
                 this.setState({key:Key},()=>{
+                if(Key != ""){
                   if(this.state.isOnPlain){
-                    this.toCipher(this.plaintext,Key);
+                    this.toCipher(this.state.plaintext,Key);
                   }else{
                     this.toPlain(this.state.ciphertext,Key);
                   }
+                }else{
+                  this.setState({plaintext:"",ciphertext:""});
+                }
                 });
               }}
               value={this.state.key} />
@@ -974,6 +996,9 @@ class VigenereCipher extends React.Component{
   }
 }
 class HillCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Hill Cipher',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -981,7 +1006,9 @@ class HillCipher extends React.Component{
       plaintext:"",
       ciphertext:"",
       alphabet:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.",
-      isOnPlain:true
+      isOnPlain:true,
+      isCheckKey:true,
+      key_digital:[[1,4,18,19],[62,7,8,11],[11,62,2,8],[15,7,4,17]]
     };
     this.styles = StyleSheet.create({
       container:{
@@ -1035,35 +1062,64 @@ class HillCipher extends React.Component{
     }
 
   }
+  checkKey = (Key)=>{
+    if(Key.length == 0){ 
+      alert("Enter a valid key");
+      this.key.focus();
+      return false;
+    }
+    var patt = new RegExp("[^" + this.state.alphabet + "]");
+    if (!(Math.sqrt(Key.length) % 1 === 0)){
+      alert("Wrong key. Key length should be square of integer.");
+      this.key.focus();
+      return false;
+    }
+    if (patt.test(Key)){
+      alert("Wrong key. Key should contain only alphabet symbols.");
+      this.key.focus();
+      return false;
+    }
+    let solver = new MatrixSolver;
+    var alphabet = this.state.alphabet;
+    var alphabet_digital = {};
+    for (var i = 0; i < alphabet.length; ++i) {
+      alphabet_digital[alphabet[i]] = i;
+    }
+    var key_size = Math.sqrt(Key.length);
+    var key_digital = new Array();
+    for (var i = 0; i < key_size; ++i) {
+      var inner = new Array();
+      for (var j = 0; j < key_size; ++j) {
+        inner.push(alphabet_digital[Key[i * (key_size) + j]]);
+      }
+      key_digital.push(inner);
+    }
+    if(!solver.calcDeterminant(key_digital)){ 
+      alert("Key inverse does not exists");
+      this.key.focus();
+      return false;
+    };
+    this.setState({key_digital:key_digital,isCheckKey:true},()=>{return true;});
+  }
   toCipher = (text)=>{
     let key = this.state.key;
+    if(!this.state.isCheckKey){
+      if(!this.checkKey(key)){
+        return;
+      }
+    }
+    let key_digital = this.state.key_digital;
     let alphabet = this.state.alphabet;
-    if (!(Math.sqrt(key.length) % 1 === 0)){
-      alert("Wrong key. Key length should be square of integer.");
-      return;
-    }
     var patt = new RegExp("[^" + alphabet + "]");
-    if (patt.test(key)){
-      alert("Wrong key. Key should contain only alphabet symbols.");
-      return;
-    }
     if (patt.test(text)){
       alert("Wrong text. Text should contain only alphabet symbols.");
       return;
     }
     this.setState({plaintext:text});
     var alphabet_digital = {};
+    var key_size = Math.sqrt(key.length);
     for (var i = 0; i < alphabet.length; ++i) {
       alphabet_digital[alphabet[i]] = i;
-    }
-    var key_size = Math.sqrt(key.length);
-    var key_digital = new Array();
-    for (var i = 0; i < key_size; ++i) {
-      var inner = new Array();
-      for (var j = 0; j < key_size; ++j) {
-        inner.push(alphabet_digital[key[i * 3 + j]]);
-      }
-      key_digital.push(inner);
     }
     var transformed_text = "";
     var vector = new Array();
@@ -1078,23 +1134,21 @@ class HillCipher extends React.Component{
     }
     if (vector[0].length > 0) {
       for (var i = 0; i < key_size; ++i)
-        if (vector[i].length == 0) vector[i].push(alphabet_digital[" "]);
+        if (vector[i].length == 0) vector[i].push(alphabet_digital[text[text.length -1]]);
       transformed_text += this.transform(vector, key_digital);
     }
     this.setState({ciphertext:transformed_text});
   }
   toPlain = (text)=>{
     let key = this.state.key;
+    if(!this.state.isCheckKey){
+      if(!this.checkKey(key)){
+        return;
+      }
+    }
+    let key_digital = this.state.key_digital;
     let alphabet = this.state.alphabet;
-    if (!(Math.sqrt(key.length) % 1 === 0)){
-      alert("Wrong key. Key length should be square of integer.");
-      return;
-    }
     var patt = new RegExp("[^" + alphabet + "]");
-    if (patt.test(key)){
-      alert("Wrong key. Key should contain only alphabet symbols.");
-      return;
-    }
     if (patt.test(text)){
       alert("Wrong text. Text should contain only alphabet symbols.");
       return;
@@ -1105,14 +1159,6 @@ class HillCipher extends React.Component{
       alphabet_digital[alphabet[i]] = i;
     }
     var key_size = Math.sqrt(key.length);
-    var key_digital = new Array();
-    for (var i = 0; i < key_size; ++i) {
-      var inner = new Array();
-      for (var j = 0; j < key_size; ++j) {
-        inner.push(alphabet_digital[key[i * 3 + j]]);
-      }
-      key_digital.push(inner);
-    }
     var transformed_text = "";
     var solver = new MatrixSolver();
     try{
@@ -1137,7 +1183,7 @@ class HillCipher extends React.Component{
     }
     if (vector[0].length > 0) {
       for (var i = 0; i < key_size; ++i)
-        if (vector[i].length == 0) vector[i].push(alphabet_digital[" "]);
+        if (vector[i].length == 0) vector[i].push(alphabet_digital[text[text.length -1]]);
       transformed_text += this.transform(vector, key_digital);
     }
     this.setState({plaintext:transformed_text});
@@ -1164,17 +1210,11 @@ class HillCipher extends React.Component{
               value={this.state.alphabet}/>
             <Text style={{fontSize:responsiveFontSize(3),}}>Key:</Text>
             <TextInput
+              ref = {ref => this.key = ref}
               style={this.styles.fullinput}
-              onChangeText={K => {
-                this.setState({key:K},()=>{
-                  if(this.state.isOnPlain){
-                    this.toCipher(this.state.plaintext);
-                  }else{
-                    this.toPlain(this.state.ciphertext);
-                  }
-                });
-              }}
+              onChangeText={K => this.setState({key:K,plaintext:"",ciphertext:""})}
               placeholder={"Enter a key"}
+              onBlur={()=>{this.checkKey(this.state.key)}}
               value={this.state.key}/>
             <Text style={{fontSize:responsiveFontSize(3)}}>Cipher Text:</Text>
             <TextInput
@@ -1201,3 +1241,4 @@ export{
     VigenereCipher,
     HillCipher
 }
+              

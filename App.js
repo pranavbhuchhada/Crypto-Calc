@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet,
   View,
   ScrollView} from 'react-native';
-import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
+import {responsiveFontSize,} from 'react-native-responsive-dimensions';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
@@ -22,7 +22,7 @@ class SymmetricAlgorithm extends React.Component{
       <View style={styles.container}>
         <ScrollView style={styles.sroller}>
           <View style={styles.cRow}>
-            <Card name="Additive Cipher" onPress = {() => this.props.navigation.navigate('CeaserCipher')}/>
+            <Card name="Ceaser Cipher" onPress = {() => this.props.navigation.navigate('CeaserCipher')}/>
             <Card name="Multiplicative Cipher" onPress = {() => this.props.navigation.navigate('MultiplicativeCipher')}/>
           </View>
           <View style={styles.cRow}>
@@ -31,7 +31,7 @@ class SymmetricAlgorithm extends React.Component{
           </View>
           <View style={styles.cRow}>
             <Card name="PlayFair Cipher" onPress = {() => this.props.navigation.navigate('PlayfairCipher')}/>
-            <Card name="Vigenere Cipher" onPress = {() => this.props.navigation.navigate('VigenereCipher')}/>
+            <Card name="Vigenère Cipher" onPress = {() => this.props.navigation.navigate('VigenereCipher')}/>
           </View>
           <View style={styles.cRow}>
             <Card name="Hill Cipher" onPress = {() => this.props.navigation.navigate('HillCipher')}/>

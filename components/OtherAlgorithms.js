@@ -12,6 +12,9 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import {gcd,isPrime,modInverse,primitiveRoots,cal_CRT} from './UtilityFunctions.js';
 
 class GCD extends React.Component{
+  static navigationOptions = {
+    title: 'Greatest Common Divisor',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -73,7 +76,7 @@ class GCD extends React.Component{
               value={this.state.Numbers}
             />
             <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateGCD();}} underlayColor = {"#3c5a78"}>
-                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate GCD</Text>
+                <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate GCD</Text>
             </TouchableHighlight>
             <Text style={{
                 fontSize:responsiveFontSize(2),
@@ -92,6 +95,9 @@ class GCD extends React.Component{
   }
 }
 class Modulas extends React.Component{
+  static navigationOptions = {
+    title: 'Modulas Operator',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -153,7 +159,7 @@ class Modulas extends React.Component{
             value={this.state.Num2.toString()}
             onChangeText={N=>this.setState({Num2:this.filterNumber(N)})}/>
           <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateMOD()}} underlayColor = {"#3c5a78"}>
-              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
+              <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
           </TouchableHighlight>
           <Text style={{
               color:"#1e3d59",
@@ -167,6 +173,9 @@ class Modulas extends React.Component{
   }
 }
 class ModularInverse extends React.Component{
+  static navigationOptions = {
+    title: 'Modular Inverse',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -232,7 +241,7 @@ class ModularInverse extends React.Component{
               value={this.state.num.toString()}
               onChangeText={N=>this.setState({num:this.filterNumber(N)})}/>
             <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateInverse()}} underlayColor = {"#3c5a78"}>
-                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
+                <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
             </TouchableHighlight>
             <Text style={{
                 color:"#1e3d59",
@@ -246,6 +255,9 @@ class ModularInverse extends React.Component{
   }
 }
 class PrimeTest extends React.Component{
+  static navigationOptions = {
+    title: 'Prime Test',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -310,6 +322,9 @@ class PrimeTest extends React.Component{
   }
 }
 class PrimitiveRoots extends React.Component{
+  static navigationOptions = {
+    title: 'Primitive Roots',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -370,7 +385,7 @@ class PrimitiveRoots extends React.Component{
               autoFocus={true}
               onChangeText={N=>this.setState({num:this.filterNumber(N)})}/>
             <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateRoot()}} underlayColor = {"#3c5a78"}>
-                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
+                <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
             </TouchableHighlight>
             <Text style={{
                 color:"#1e3d59",
@@ -384,6 +399,9 @@ class PrimitiveRoots extends React.Component{
   }
 }
 class CRT extends React.Component{
+  static navigationOptions = {
+    title: 'Chinese Remainder Theorem',
+  };
   constructor(props){
     super(props);
     this.state={
@@ -511,14 +529,14 @@ class CRT extends React.Component{
           {Arr}
           <View style={{flexDirection:"row",justifyContent:"center"}}>
           <TouchableHighlight style={this.styles.button} onPress={()=>{this.addEle()}} underlayColor = {"#3c5a78"}>
-              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Add</Text>
+              <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Add</Text>
           </TouchableHighlight>
           <TouchableHighlight style={this.styles.button} onPress={()=>{this.delEle()}} underlayColor = {"#3c5a78"}>
-              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Remove</Text>
+              <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Remove</Text>
           </TouchableHighlight>
           </View>
           <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateCRT()}} underlayColor = {"#3c5a78"}>
-              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
+              <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
           </TouchableHighlight>
           <Text style={{
               color:"#1e3d59",

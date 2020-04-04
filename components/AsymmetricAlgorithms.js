@@ -13,6 +13,9 @@ import {isPrime,randPrime,gcd,modInverse,powerMod,randNum,primitiveRoot, primiti
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class RSACipher extends React.Component{
+  static navigationOptions = {
+    title: 'RSA',
+  };
   constructor(props){
     super(props);
     Alert.alert("Disclaimer","This is not actual implementation of RSA. This for demo purpose only.");
@@ -209,7 +212,7 @@ class RSACipher extends React.Component{
           />
         </View>
         <TouchableHighlight style={this.styles.button} onPress={()=>{this.generatePQ()}} underlayColor = {"#3c5a78"}>
-           <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate p and q</Text>
+           <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate p and q</Text>
         </TouchableHighlight>
         <TextInput 
           style={this.styles.fullinput}
@@ -238,7 +241,7 @@ class RSACipher extends React.Component{
           }}
           />
         <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateE()}} underlayColor = {"#3c5a78"}>
-           <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate e</Text>
+           <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate e</Text>
         </TouchableHighlight>
         <TextInput
           ref={ref => this.dtext = ref}
@@ -258,7 +261,7 @@ class RSACipher extends React.Component{
           }}
           />
         <TouchableHighlight style={this.styles.button} onPress={()=>{this.generateD()}} underlayColor = {"#3c5a78"}>
-           <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate d</Text>
+           <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate d</Text>
         </TouchableHighlight>
         <Text style={{fontSize:responsiveFontSize(3)}}>Plain Text:</Text>
         <TextInput
@@ -289,6 +292,9 @@ class RSACipher extends React.Component{
   }
 }
 class DiffieHellmanCipher extends React.Component{
+  static navigationOptions = {
+    title: 'Diffie Hellman Key Exchange',
+  };
   constructor(props){
     super(props);
     Alert.alert("Discalimer","Diffie–Hellman key exchange is a method of securely exchanging cryptographic keys over a public channel and was one of the first public-key protocols as conceived by Ralph Merkle and named after Whitfield Diffie and Martin Hellman. Here Diffie hellman is explained as key exchange between 2 parties Bob and Alice.");
@@ -323,8 +329,6 @@ class DiffieHellmanCipher extends React.Component{
       label:{
         textAlign:"left",
         fontSize:responsiveFontSize(2.5),
-        textAlignVertical:"center",
-        height:responsiveHeight(7),
         width:responsiveWidth(9),
       },
       button:{
@@ -378,7 +382,7 @@ class DiffieHellmanCipher extends React.Component{
      <View style={this.styles.container}>
       <ScrollView ref={ref => this.scroll = ref}>
         <Text style={{fontSize:responsiveFontSize(3),}}>Public Keys:</Text>
-        <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"row",alignItems:"center"}}>
           <Text style={this.styles.label}>N = </Text>
           <TextInput 
             ref={ref => this.ntext = ref}
@@ -423,14 +427,14 @@ class DiffieHellmanCipher extends React.Component{
             this.setState({g:primitiveRoot(this.state.n)});
           });
         }} underlayColor = {"#3c5a78"}>
-           <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate N and G</Text>
+           <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate N and G</Text>
         </TouchableHighlight>
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
           <Text style={{fontSize:responsiveFontSize(3),}}>Bob's Side</Text>
           <Text style={{fontSize:responsiveFontSize(3),}}>|</Text>
           <Text style={{fontSize:responsiveFontSize(3),}}>Alice's Side</Text>
         </View>
-        <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"row",alignItems:"center"}}>
         <Text style={this.styles.label}>X = </Text>
          <TextInput 
             style={this.styles.halfinput}
@@ -450,7 +454,7 @@ class DiffieHellmanCipher extends React.Component{
             value={this.state.y.toString()} />
         </View>
         <View style={{height:responsiveWidth(2)}}></View>
-        <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"row",alignItems:"center"}}>
           <Text style={this.styles.label}>A = </Text>
           <TextInput 
             style={this.styles.halfinput}
@@ -475,9 +479,9 @@ class DiffieHellmanCipher extends React.Component{
           <Text style={{fontSize:responsiveFontSize(3),}}>B = G^y mod N</Text>
         </View>
         <TouchableHighlight style={this.styles.button} onPress={()=>{this.xChanged(randNum(99).toString());this.yChanged(randNum(99).toString());}} underlayColor = {"#3c5a78"}>
-          <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate X and Y</Text>
+          <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate X and Y</Text>
         </TouchableHighlight>
-        <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"row",alignItems:"center"}}>
           <Text style={this.styles.label}>K1=</Text>
           <TextInput 
             style={this.styles.halfinput}
@@ -500,7 +504,7 @@ class DiffieHellmanCipher extends React.Component{
           <Text style={{fontSize:responsiveFontSize(3),}}>K2=A^y mod N</Text>
         </View>
         <TouchableHighlight style={this.styles.button} onPress={()=>{this.calKeys()}} underlayColor = {"#3c5a78"}>
-          <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate Keys</Text>
+          <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Generate Keys</Text>
         </TouchableHighlight>
         <KeyboardSpacer/>
       </ScrollView>
