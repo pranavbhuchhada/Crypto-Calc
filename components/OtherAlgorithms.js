@@ -44,7 +44,7 @@ class GCD extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text.match(/^[^0-9]/g)||text=="")
+    if(text.match(/^[^0-9]/g) || text=="")
       return "";
     return String(text.replace(/[^0-9 ,]/g, ''));
   }
@@ -128,42 +128,42 @@ class Modulas extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || text.match(/^[^0-9]/g)||text=="")
-      return text;
+    if(text.match(/^[^0-9]/g)||text=="")
+      return "";
     return Number(text.replace(/[^0-9-]/g, ''));
   }
   calculateMOD = ()=>{
-    this.setState({output:this.filterNumber((this.state.Num1%this.state.Num2 + this.state.Num2)%this.state.Num2)});
+    this.setState({output:this.filterNumber(((this.state.Num1%this.state.Num2 + this.state.Num2)%this.state.Num2).toString())});
   }
   render(){
-      return(
-        <ScrollView ref={ref => this.scroll = ref}>
-          <View style={this.styles.container}>
-            <TextInput 
-              style={this.styles.fullinput}
-              placeholder={"Dividend"}
-              keyboardType={"numeric"}
-              value={this.state.Num1.toString()}
-              onChangeText={N=>this.setState({Num1:this.filterNumber(N)})}/>
-            <Text style={{alignSelf:"center",fontSize:responsiveFontSize(4),padding:responsiveWidth(5)}}>MOD</Text>
-            <TextInput 
-              style={this.styles.fullinput}
-              placeholder={"Divider"}
-              keyboardType={"numeric"}
-              value={this.state.Num2.toString()}
-              onChangeText={N=>this.setState({Num2:this.filterNumber(N)})}/>
-            <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateMOD()}} underlayColor = {"#3c5a78"}>
-                <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
-            </TouchableHighlight>
-            <Text style={{
-                color:"#1e3d59",
-                fontSize:responsiveFontSize(4),
-                textAlign:"center",
-                marginTop:responsiveHeight(5),
-            }}>Remainder = {this.state.output.toString()}</Text>
-          </View>
-        </ScrollView>
-      );
+    return(
+      <ScrollView ref={ref => this.scroll = ref}>
+        <View style={this.styles.container}>
+          <TextInput 
+            style={this.styles.fullinput}
+            placeholder={"Dividend"}
+            keyboardType={"numeric"}
+            value={this.state.Num1.toString()}
+            onChangeText={N=>this.setState({Num1:this.filterNumber(N)})}/>
+          <Text style={{alignSelf:"center",fontSize:responsiveFontSize(4),padding:responsiveWidth(5)}}>MOD</Text>
+          <TextInput 
+            style={this.styles.fullinput}
+            placeholder={"Divider"}
+            keyboardType={"numeric"}
+            value={this.state.Num2.toString()}
+            onChangeText={N=>this.setState({Num2:this.filterNumber(N)})}/>
+          <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateMOD()}} underlayColor = {"#3c5a78"}>
+              <Text style={{textAlign:"center",textAlignVertical:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
+          </TouchableHighlight>
+          <Text style={{
+              color:"#1e3d59",
+              fontSize:responsiveFontSize(4),
+              textAlign:"center",
+              marginTop:responsiveHeight(5),
+          }}>Remainder = {this.state.output.toString()}</Text>
+        </View>
+      </ScrollView>
+    );
   }
 }
 class ModularInverse extends React.Component{
@@ -203,14 +203,14 @@ class ModularInverse extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || text.match(/^[^0-9]/g)||text=="")
-      return text;
+    if(text.match(/^[^0-9]/g)||text=="")
+      return "";
     return Number(text.replace(/[^0-9-]/g, ''));
   }
   calculateInverse = ()=>{
     let x = modInverse(this.state.num,this.state.domain);
     if(x){
-      this.setState({output:this.filterNumber(x)});
+      this.setState({output:x});
     }else{
       this.setState({output:"Not Possible"});
     }
@@ -282,7 +282,7 @@ class PrimeTest extends React.Component{
   }
   filterNumber = (text)=>{
     if(text.match(/^[^0-9]/g)||text=="")
-      return text;
+      return "";
     return Number(text.replace(/[^0-9]/g, ''));
   }
   checkPrime = ()=>{
@@ -345,8 +345,8 @@ class PrimitiveRoots extends React.Component{
     });
   }
   filterNumber = (text)=>{
-    if(text == "" || text.match(/^[^0-9]/g)||text=="")
-      return text;
+    if(text.match(/^[^0-9]/g)||text=="")
+      return "";
     return Number(text.replace(/[^0-9-]/g, ''));
   }
   calculateRoot = ()=>{

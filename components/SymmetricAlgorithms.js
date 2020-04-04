@@ -305,8 +305,7 @@ class AffineCipher extends React.Component{
     this.setState({ciphertext:output});
   }
   toPlain = (CipherText,Key,key2)=>{
-    key2 = modInverse(key2);
-    this.scroll.scrollToEnd({animated:true});
+    key2 = modInverse(key2,26);
     this.setState({ciphertext: CipherText});
     var output = '';
     for (var i = 0; i < CipherText.length; i ++) {
@@ -390,7 +389,7 @@ class AffineCipher extends React.Component{
               placeholder={"Type Cipher text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              onChangeText={CipherText => this.toPlain(CipherText,this.state.key)}
+              onChangeText={CipherText => this.toPlain(CipherText,this.state.key,this.state.key2)}
               value={this.state.ciphertext}
               onFocus={()=>this.state.isOnPlain=false}
             />

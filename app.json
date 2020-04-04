@@ -4,16 +4,16 @@
     "slug": "Crypto-Calc",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "version": "1.0.0",
+    "version": "1.0.17",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "android": {
-      "package": "com.prabhu.cryptocalc",
+      "package": "com.scryptosoft.cryptocalc",
       "versionCode": 1
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.prabhu.calc",
+      "bundleIdentifier": "com.scryptosoft.calc",
       "buildNumber": "1.0.0"
     },
     "splash": {
