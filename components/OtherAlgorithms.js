@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {responsiveFontSize,responsiveHeight,responsiveWidth} from 'react-native-responsive-dimensions';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import { Table, Rows} from 'react-native-table-component';
 import {gcd,isPrime,modInverse,primitiveRoots,cal_CRT} from './UtilityFunctions.js';
 
 class GCD extends React.Component{
@@ -370,6 +371,18 @@ class PrimitiveRoots extends React.Component{
         marginBottom:responsiveWidth(1),
         padding:responsiveWidth(2),
       },
+      tcell:{
+        color:"#555",
+        textAlign:"center",
+        fontSize:responsiveFontSize(3),
+        fontStyle:"italic"
+      },
+      table:{
+        marginLeft:responsiveWidth(8),
+        marginRight:responsiveWidth(8),
+        marginTop:responsiveWidth(4),
+        marginBottom:responsiveWidth(4),
+      }
     });
   }
   filterNumber = (text)=>{
@@ -379,8 +392,10 @@ class PrimitiveRoots extends React.Component{
   }
   calculateRoot = ()=>{
     if(isPrime(this.state.num)){
-      this.setState({output:("Primitive root(s) of " + this.state.num + " are :\n\n" + primitiveRoots(this.state.num))});
-      
+      let arr= primitiveRoots(this.state.num);
+      var newArr = [];
+      while(arr.length) newArr.push(arr.splice(0,5));
+      this.setState({output:newArr});
     }else{
       this.setState({output:""});
       alert("Please enter a prime number");
@@ -405,7 +420,10 @@ class PrimitiveRoots extends React.Component{
                 fontSize:responsiveFontSize(4),
                 textAlign:"center",
                 marginTop:responsiveHeight(5),
-            }}>{this.state.output.toString()}</Text>
+            }}>Primitive Root(s) :</Text>
+            <Table style={this.styles.table}>
+              <Rows data={this.state.output} textStyle={this.styles.tcell}/>
+            </Table>
           </View>
         </ScrollView>
       );
@@ -562,7 +580,6 @@ class CRT extends React.Component{
     );
   }
 }
-
 export{
     GCD,
     Modulas,

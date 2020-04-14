@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet,View,ScrollView,Text} from 'react-native';
-import {responsiveFontSize,} from 'react-native-responsive-dimensions';
+import { StyleSheet,View,ScrollView,Text, Alert} from 'react-native';
+import {responsiveFontSize, responsiveWidth,} from 'react-native-responsive-dimensions';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
 import Card from './components/Card'; // Card Class import
@@ -8,7 +8,6 @@ import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, Playfair
 import {RSACipher,DiffieHellmanCipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
 import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots,CRT} from './components/OtherAlgorithms';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
@@ -91,6 +90,11 @@ class OtherAlgorithm extends React.Component{
 class CryptoCalc extends React.Component{
   static navigationOptions = {
     title: 'Crypto Calc',
+    headerRight: () => (
+      <Text
+        style={{color:"#FFF",marginRight:responsiveWidth(5)}}
+        onPress={()=>{Alert.alert("About","The app is made available only for learning purposes.\n\nDeveloped by:\n\nPranav Bhuchhada\n  pranavbhuchhada@gmail.com\nStavan Adhyaru\n  stavanadhyaru@gmail.com")}}>About</Text>
+    ),
   };
   render() {
     return (
