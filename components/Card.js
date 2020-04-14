@@ -19,12 +19,12 @@ export default class Card extends React.Component {
         width:"100%",
         backgroundColor:"#1e3d59",
         justifyContent:"center",
-        padding:responsiveWidth(2)
+        padding:responsiveWidth(2),
+        borderRadius:responsiveWidth(5)
       },
       card_text:{
         textAlign:"center",
         textShadowColor:"black",
-        textTransform:"uppercase",
         fontSize: responsiveFontSize(2.5),
         color:"#e0e0e0"
       }

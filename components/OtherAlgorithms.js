@@ -31,6 +31,7 @@ class GCD extends React.Component{
         textAlign:"center",
         height: responsiveHeight(33),
         borderWidth: 1,
+        borderRadius:5,
         borderColor: '#9E9E9E',
         backgroundColor : "#FFFFFF",
         fontSize:responsiveFontSize(2.5)
@@ -301,6 +302,22 @@ class PrimeTest extends React.Component{
     this.setState({output:isPrime(this.state.Num)});
   }
   render(){
+      let primetext = (
+        <Text style={{
+          color:"#008000",
+          fontSize:responsiveFontSize(4),
+          textAlign:"center",
+          marginTop:responsiveHeight(5),
+        }}>Prime</Text>
+      );
+      let comptext = (
+        <Text style={{
+          color:"#DC143C",
+          fontSize:responsiveFontSize(4),
+          textAlign:"center",
+          marginTop:responsiveHeight(5),
+        }}>Composite</Text>
+      );
     return(
       <ScrollView ref={ref => this.scroll = ref}>
         <View style={this.styles.container}>
@@ -310,12 +327,8 @@ class PrimeTest extends React.Component{
             keyboardType={"numeric"}
             value={this.state.Num.toString()}
             onChangeText={N=>this.setState({Num:this.filterNumber(N)},()=>{this.checkPrime();})}/>
-          <Text style={{
-              color:"#1e3d59",
-              fontSize:responsiveFontSize(4),
-              textAlign:"center",
-              marginTop:responsiveHeight(5),
-            }}>{this.state.Num == 0?"":(this.state.output?"Prime":"Composite")}</Text>
+            
+        {this.state.Num == 0?(<Text></Text>):(this.state.output?primetext:comptext)}
         </View>
       </ScrollView>
     );
@@ -379,7 +392,7 @@ class PrimitiveRoots extends React.Component{
           <View style={this.styles.container}>
             <TextInput 
               style={this.styles.fullinput}
-              placeholder={"Number"}
+              placeholder={"Enter a Prime Number"}
               keyboardType={"numeric"}
               value={this.state.num.toString()}
               autoFocus={true}
@@ -400,7 +413,7 @@ class PrimitiveRoots extends React.Component{
 }
 class CRT extends React.Component{
   static navigationOptions = {
-    title: 'Chinese Remainder Theorem',
+    title: 'C R T',
   };
   constructor(props){
     super(props);
@@ -425,7 +438,7 @@ class CRT extends React.Component{
         backgroundColor:"#1e3d59",
         padding:responsiveWidth(3),
         marginTop:responsiveWidth(8),
-        marginLeft:responsiveWidth(8),
+        marginHorizontal:responsiveWidth(2),
         marginBottom:responsiveWidth(2),
         alignSelf:"center",
         borderRadius:5,
@@ -479,7 +492,7 @@ class CRT extends React.Component{
       this.setState({ele_arr:my_arr});
     });
   }else{
-    alert("Maximum 5 Equtions can be solved.")
+    alert("Maximum 5 Equtions can be solved here.")
   }
   }
   delEle = ()=>{
@@ -492,7 +505,7 @@ class CRT extends React.Component{
         this.setState({ele_arr:my_arr});
       });
     }else{
-      alert("Minimum 2 Equtions are require.")
+      alert("Minimum 2 Equtions are required.")
     }
   }
   checkNumber = (text)=>{
@@ -536,7 +549,7 @@ class CRT extends React.Component{
           </TouchableHighlight>
           </View>
           <TouchableHighlight style={this.styles.button} onPress={()=>{this.calculateCRT()}} underlayColor = {"#3c5a78"}>
-              <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate Primitive Roots</Text>
+              <Text style={{textAlign:"center",color:"#e0e0e0",fontSize:responsiveFontSize(3)}}>Calculate</Text>
           </TouchableHighlight>
           <Text style={{
               color:"#1e3d59",

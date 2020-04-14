@@ -32,6 +32,7 @@ class HashingAlgorithm extends React.Component{
         textAlign:"center",
         height: responsiveHeight(33),
         borderWidth: 1,
+        borderRadius:5,
         borderColor: '#9E9E9E',
         backgroundColor : "#FFFFFF",
         padding:responsiveWidth(2),
@@ -48,31 +49,32 @@ class HashingAlgorithm extends React.Component{
     });
   }
   toHash = (PlainText)=>{
-      this.setState({plaintext:PlainText},()=>{
-        switch(this.state.algo){
-          case 1:
-            this.setState({hashtext:md5(PlainText)});
-            break;
-          case 2:
-            this.setState({hashtext:hash.sha1().update(PlainText).digest("hex")});
-            break;
-          case 3:
-            this.setState({hashtext:hash.sha224().update(PlainText).digest("hex")});
-            break;
-          case 4:
-            this.setState({hashtext:hash.sha256().update(PlainText).digest("hex")});
-            break;
-          case 5:
-            this.setState({hashtext:hash.sha384().update(PlainText).digest("hex")});
-            break;
-          case 6:
-            this.setState({hashtext:hash.sha512().update(PlainText).digest("hex")});
-            break;
-        }
-      });
-  }
-  temp = ()=>{
-    alert("Hello");
+    if(PlainText == ""){
+      this.setState({plaintext:"",hashtext:""});
+      return;
+    }
+    this.setState({plaintext:PlainText},()=>{
+      switch(this.state.algo){
+        case 1:
+          this.setState({hashtext:md5(PlainText)});
+          break;
+        case 2:
+          this.setState({hashtext:hash.sha1().update(PlainText).digest("hex")});
+          break;
+        case 3:
+          this.setState({hashtext:hash.sha224().update(PlainText).digest("hex")});
+          break;
+        case 4:
+          this.setState({hashtext:hash.sha256().update(PlainText).digest("hex")});
+          break;
+        case 5:
+          this.setState({hashtext:hash.sha384().update(PlainText).digest("hex")});
+          break;
+        case 6:
+          this.setState({hashtext:hash.sha512().update(PlainText).digest("hex")});
+          break;
+      }
+    });
   }
   render(){
       return(
@@ -84,11 +86,10 @@ class HashingAlgorithm extends React.Component{
               placeholder={"Type Plain text in here"}
               placeholderTextColor={"#e0e0e0"}
               multiline={true}
-              autoFocus={true}
               onChangeText={(PlainText)=>{this.toHash(PlainText)}}
               value={this.state.plaintext}
             />
-            <View style={{flexDirection:"row",justifyContent:"space-around",alignItems:"center"}}>
+            <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
                 <Text style={{fontSize:responsiveFontSize(2.25)}}>Hashing Algorithm : </Text>
                 <Picker
                     selectedValue={this.state.algo}
@@ -102,7 +103,7 @@ class HashingAlgorithm extends React.Component{
                     <Picker.Item label="SHA-512" value={6} />
                 </Picker>
             </View>
-            <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
+            <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
               <Text style={{fontSize:responsiveFontSize(3),}}>Hashed Output:</Text>
               <TouchableHighlight onPress={()=>{alert("Copied to clipboard");Clipboard.setString(this.state.hashtext);}} underlayColor = {"#FFF"}><Text>Copy to clipboard</Text></TouchableHighlight>
             </View>

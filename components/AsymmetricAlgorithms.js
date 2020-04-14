@@ -18,7 +18,7 @@ class RSACipher extends React.Component{
   };
   constructor(props){
     super(props);
-    Alert.alert("Disclaimer","This is not actual implementation of RSA. This for demo purpose only.");
+    Alert.alert("Disclaimer","This for demo purpose only.\n\nThe algorithm implemented here is different than actual RSA this gives you basic idea of RSA algorithm.");
     this.state = {
       p:"",
       q:"",
@@ -293,7 +293,7 @@ class RSACipher extends React.Component{
 }
 class DiffieHellmanCipher extends React.Component{
   static navigationOptions = {
-    title: 'Diffie Hellman Key Exchange',
+    title: 'Diffie Hellman',
   };
   constructor(props){
     super(props);
@@ -335,8 +335,8 @@ class DiffieHellmanCipher extends React.Component{
         backgroundColor:"#1e3d59",
         height:responsiveHeight(7),
         width:responsiveWidth(90),
-        marginTop:responsiveWidth(1),
-        marginBottom:responsiveWidth(1),
+        marginTop:responsiveWidth(2),
+        marginBottom:responsiveWidth(2),
         alignSelf:"center",
         borderRadius:5,
         justifyContent:"center",
@@ -473,7 +473,7 @@ class DiffieHellmanCipher extends React.Component{
             editable={false}
             value={this.state.b.toString()} />
         </View>
-        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:responsiveWidth(2)}}>
           <Text style={{fontSize:responsiveFontSize(3),}}>A = G^x mod N</Text>
           <Text style={{fontSize:responsiveFontSize(3),}}>|</Text>
           <Text style={{fontSize:responsiveFontSize(3),}}>B = G^y mod N</Text>
@@ -498,7 +498,7 @@ class DiffieHellmanCipher extends React.Component{
             editable={false}
             value={this.state.keya.toString()} />
         </View>
-        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:responsiveWidth(2)}}>
           <Text style={{fontSize:responsiveFontSize(3),}}>K1=B^x mod N</Text>
           <Text style={{fontSize:responsiveFontSize(3),}}>|</Text>
           <Text style={{fontSize:responsiveFontSize(3),}}>K2=A^y mod N</Text>

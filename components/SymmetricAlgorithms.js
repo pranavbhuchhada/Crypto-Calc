@@ -29,7 +29,7 @@ class CeaserCipher extends React.Component{
     this.styles = StyleSheet.create({
       container:{
         flex:1,
-        margin:responsiveWidth(5)
+        margin:responsiveWidth(5),
       },
       textarea:{
         textAlign:"center",
@@ -116,9 +116,10 @@ class CeaserCipher extends React.Component{
                 minimumValue={0}
                 maximumValue={25}
                 step={1}
+                thumbTintColor="#000"
                 value={7}
-                minimumTrackTintColor="#FFFFFF"
-                maximumTrackTintColor="#000000"
+                minimumTrackTintColor="#1e3d59"
+                maximumTrackTintColor="#000"
                 onValueChange={(Key)=>{this.onSliderChange(Key)}}
               />
               <Text style={{marginTop:responsiveWidth(5),fontSize:responsiveFontSize(2.3)}}>{this.state.key}</Text>
@@ -356,21 +357,7 @@ class AffineCipher extends React.Component{
               value={this.state.plaintext}
               onFocus={()=>this.state.isOnPlain=true}
             />
-            <Text style={{fontSize:responsiveFontSize(3),}}>Key 1:</Text>
-            <View style={{flexDirection:"row"}}>
-              <Slider
-                style={this.styles.slider}
-                minimumValue={0}
-                maximumValue={25}
-                step={1}
-                value={7}
-                minimumTrackTintColor="#FFFFFF"
-                maximumTrackTintColor="#000000"
-                onValueChange={(Key)=>{this.onSliderChange(Key)}}
-              />
-              <Text style={{marginTop:responsiveWidth(5),fontSize:responsiveFontSize(2.3)}}>{this.state.key}</Text>
-            </View>
-            <Text style={{fontSize:responsiveFontSize(3),}}>Key 2:</Text>  
+            <Text style={{fontSize:responsiveFontSize(3),}}>Slope / A:</Text>  
             <Picker
               selectedValue={this.state.key2}
               onValueChange={(itemValue, itemIndex) => {
@@ -392,6 +379,21 @@ class AffineCipher extends React.Component{
               <Picker.Item label="15" value={15} />
               <Picker.Item label="17" value={17} />
             </Picker>
+            <Text style={{fontSize:responsiveFontSize(3),}}>Intercept / B:</Text>
+            <View style={{flexDirection:"row"}}>
+              <Slider
+                style={this.styles.slider}
+                minimumValue={0}
+                maximumValue={25}
+                thumbTintColor="#000"
+                step={1}
+                value={7}
+                minimumTrackTintColor="#1e3d59"
+                maximumTrackTintColor="#000000"
+                onValueChange={(Key)=>{this.onSliderChange(Key)}}
+              />
+              <Text style={{marginTop:responsiveWidth(5),fontSize:responsiveFontSize(2.3)}}>{this.state.key}</Text>
+            </View>
             <Text style={{fontSize:responsiveFontSize(3),}}>Cipher Text:</Text>
             <TextInput
               style={this.styles.textarea}
@@ -556,9 +558,10 @@ class AutoKeyCipher extends React.Component{
                 style={this.styles.slider}
                 minimumValue={0}
                 maximumValue={25}
+                thumbTintColor="#000"
                 step={1}
                 value={7}
-                minimumTrackTintColor="#FFFFFF"
+                minimumTrackTintColor="#1e3d59"
                 maximumTrackTintColor="#000000"
                 onValueChange={(Key)=>{this.onSliderChange(Key)}}
               />
@@ -586,7 +589,7 @@ class PlayfairCipher extends React.Component{
   };
   constructor(props){
     super(props);
-    Alert.alert("Discalimer","1. 'J' is replaced with 'I' to fit 5x5 square\n2. 'X' is used as substitution in case you need to fill second letter in the digram, or split two identical letters")
+    Alert.alert("Discalimer","1. 'J' is replaced with 'I' to fit 5x5 square matrix\n\n2. 'X' is used as substitution in case you need to fill second letter in the digram, or split two identical letters")
     this.state={
       key:"",
       plaintext:"",
@@ -1039,6 +1042,17 @@ class HillCipher extends React.Component{
         marginTop:responsiveWidth(1),
         marginBottom:responsiveWidth(1),
         padding:responsiveWidth(2),
+      },
+      alpha:{
+        fontSize:responsiveFontSize(2.5),
+        width:responsiveWidth(90),
+        borderWidth:1,
+        borderRadius:5,
+        borderColor: '#9E9E9E',
+        backgroundColor : "#FFFFFF",
+        marginTop:responsiveWidth(1),
+        marginBottom:responsiveWidth(1),
+        padding:responsiveWidth(2),
       }
     });
   }
@@ -1204,7 +1218,8 @@ class HillCipher extends React.Component{
             />
             <Text style={{fontSize:responsiveFontSize(3),}}>alphabet:</Text>
             <TextInput
-              style={this.styles.fullinput}
+              style={this.styles.alpha}
+              multiline={true}
               onChangeText={A => this.setState({alphabet:A})}
               placeholder={"Alaphabets"}
               value={this.state.alphabet}/>

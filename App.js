@@ -1,7 +1,5 @@
 import React from 'react';
-import { StyleSheet,
-  View,
-  ScrollView} from 'react-native';
+import { StyleSheet,View,ScrollView,Text} from 'react-native';
 import {responsiveFontSize,} from 'react-native-responsive-dimensions';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator,TransitionPresets} from 'react-navigation-stack';
@@ -10,6 +8,7 @@ import {CeaserCipher,MultiplicativeCipher, AffineCipher, AutoKeyCipher, Playfair
 import {RSACipher,DiffieHellmanCipher} from './components/AsymmetricAlgorithms'; 
 import {HashingAlgorithm} from './components/HashingAlgorithm';
 import {GCD,Modulas,PrimeTest,ModularInverse,PrimitiveRoots,CRT} from './components/OtherAlgorithms';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 class SymmetricAlgorithm extends React.Component{
   static navigationOptions = {
     title: 'Symmetric Algorithm',
@@ -63,7 +62,7 @@ class AsymmetricAlgorithm extends React.Component{
 }
 class OtherAlgorithm extends React.Component{
   static navigationOptions = {
-      title: 'Other Algorithms',
+      title: 'Mathematics',
   };
   constructor(props){
       super(props);
@@ -103,7 +102,7 @@ class CryptoCalc extends React.Component{
           </View>
           <View style={styles.cRow}>
             <Card name="Hashing Algorithms" onPress = {() => this.props.navigation.navigate('HashingAlgorithm')}/>
-            <Card name="Other Algorithms" onPress = {() => this.props.navigation.navigate('OtherAlgorithm')}/>
+            <Card name="Mathematics" onPress = {() => this.props.navigation.navigate('OtherAlgorithm')}/>
           </View>
         </ScrollView>
       </View>
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   sroller:{
-    flex:0.85,
+    flex:1,
     width:"100%"
   },
   cRow:{
