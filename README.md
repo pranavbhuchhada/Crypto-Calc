@@ -1,6 +1,6 @@
 # Crypto-Calc
 
-A calculator for cryptographic calculation.
+CryptoCalc helps to learn, understand and practice cryptographic algorithms.
 
 ##  Features
 * Encryption
